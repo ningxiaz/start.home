@@ -1,0 +1,14 @@
+@media all and (min-width: 769px) {
+    body {
+        /* styles for desktop or landscape */
+        font-family: 'Lato', sans-serif;
+    }
+
+    h1{
+    	font-size: 64px;
+    	position: absolute;
+    	top: 36%;
+    	left: 40%;
+    	font-weight: 300;
+    }
+}
