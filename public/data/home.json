@@ -1,0 +1,32 @@
+{
+	"name": "start.home",
+	"children":[
+		{"name": "HVAC", "size": 400},
+		{
+			"name": "Outlets",
+			"children": [
+				{"name": "Office Outlets (2)", "size": 77.81496770987955},
+				{"name": "Bedroom Outlets", "size": 5},
+				{"name": "Kitchen Outlets", "size": 10},
+				{"name": "Bathroom Outlets", "size": 40}
+			]
+		},
+		{
+			"name": "Lights",
+			"children": [
+				{"name": "Kitchen Lights", "size": 7.92},
+				{"name": "Exterior Lights", "size": 4},
+				{"name": "Office Lights", "size": 3.8},
+				{"name": "Livingroom Lights", "size": 9}
+			]
+		},
+		{
+			"name": "Appliances",
+			"children": [
+				{"name": "Car Charger", "size": 417},
+				{"name": "Water Heater", "size": 26},
+				{"name": "Refrigerator", "size": 177}
+			]
+		}
+	]
+}

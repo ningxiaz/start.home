@@ -11,4 +11,23 @@
     	left: 40%;
     	font-weight: 300;
     }
+
+    .treemap{
+        margin: auto;
+        position: relative;
+        width: 100%;
+    }
+
+    .treemap .node {
+      border: solid 1px white;
+      font: 10px;
+      line-height: 12px;
+      font-weight: 300;
+      overflow: hidden;
+      position: absolute;
+      text-indent: 2px;
+      color: white;
+    }
+
+
 }
