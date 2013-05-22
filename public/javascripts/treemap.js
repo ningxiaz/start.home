@@ -4,7 +4,7 @@ var Treemap = {
 	height: 0,
 
 	draw: function(){
-		this.margin = {top: 5, right: 5, bottom: 5, left: 5};
+		this.margin = {top: 0, right: 0, bottom: 0, left: 0};
 		this.width = 1024 - this.margin.left - this.margin.right;
 		this.height = 748 - this.margin.top - this.margin.bottom;
 
@@ -29,7 +29,8 @@ var Treemap = {
 		      .attr("class", "node")
 		      .call(position)
 		      .style("background", function(d) { return d.children ? color(d.name) : null; })
-		      .text(function(d) { return d.children ? null : d.name; });
+		      .text(function(d) { return d.children ? null : d.name; })
+		      .on("click", transition_to_clock);
 		});
 
 		function position() {

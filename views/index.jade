@@ -2,17 +2,24 @@ doctype 5
 html
 	head
 		title= title
+		link(rel='stylesheet', href='/stylesheets/base.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/treemap.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
-		link(href='http://fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
-
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
-		h1 START
-		.treemap
+		.start
+			h1 START
+		.treemap.hidden
+		.clock.hidden
+			.nav
+				.item.hvac HVAC
+				.item.lights Lights
+				.item.outlets Outlets
+				.item.water Water
+				.item.appliances Appliances
