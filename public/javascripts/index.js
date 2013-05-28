@@ -1,13 +1,9 @@
 $(document).ready(function(){
 	setTimeout(function(){
 		$('.start').hide();
-		$('.treemap').show();
-		Treemap.draw();
-	}, 3000);
+		$('.ambient').show();
+		Ambient.init();
+		Ambient.draw();
+		DataManager.init();
+	}, 500);
 });
-
-function transition_to_clock(){
-	console.log("here!");
-	$('.treemap').fadeOut("fast");
-	$('.clock').fadeIn("fast");
-}

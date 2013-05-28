@@ -12,7 +12,7 @@
 
     body {
         /* styles for desktop or landscape */
-        font-family: 'Lato', sans-serif;
+        font-family: 'Neutra', sans-serif;
     }
 
     .hidden{
@@ -28,57 +28,9 @@
         color: #A0DC3F;
     }
 
-    .treemap{
-        margin: auto;
-        position: relative;
-        width: 100%;
-    }
-
-    .treemap .node {
-      border: solid 1px white;
-      font: 10px;
-      line-height: 12px;
-      font-weight: 300;
-      overflow: hidden;
-      position: absolute;
-      text-indent: 2px;
-      color: white;
-      padding-left: 20px;
-      padding-top: 20px;
-    }
-
-    .nav{
-        position: absolute;
-        top: 10px;
-        left: 15px;
-    }
-
-    .item{
-        margin: 5px 0;
-    }   
-    
-    .hvac{
-        color: #e27d29;
-        font-size: 74px;
-    } 
-
-    .lights{
-        color: #f1e411;
-        font-size: 46px;
-    }
-
-    .outlets{
-        color: #a564b1;
-        font-size: 24px;
-    }
-
-    .water{
-        color: #4074d3;
-        font-size: 18px;
-    }
-
-    .appliances{
-        color: #51cf8c;
-        font-size: 14px;
-    }
+    /* Ambient */
+    .vis_circles{
+      shape-rendering: geometricPrecision;
+      opacity: 0.8;
+    }    
 }
