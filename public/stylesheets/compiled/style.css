@@ -1,0 +1,93 @@
+@media all and (min-width: 769px) {
+  @font-face {
+    font-family: 'Neutra';
+    src: url("NeutraTextTF-Book.otf");
+    /* everyone else take this */ }
+
+  body {
+    font-family: 'Neutra', sans-serif; }
+
+  .ambient, .main {
+    display: none; }
+
+  .start h1 {
+    font-size: 64px;
+    position: absolute;
+    top: 36%;
+    left: 40%;
+    font-weight: 300;
+    color: #A0DC3F; }
+
+  /* Ambient */
+  .vis_circles {
+    shape-rendering: geometricPrecision;
+    opacity: 0.5; }
+
+  /* Main view */
+  .main .center {
+    width: 100%;
+    min-height: 748px; }
+  .main .resources {
+    min-height: 748px;
+    width: 100%;
+    position: absolute;
+    top: -688px;
+    left: 0;
+    z-index: 8;
+    border-bottom: 1px #eee solid;
+    background-color: white;
+    opacity: 0.9; }
+    .main .resources .arrow {
+      background: url(../../images/arrow_upper.png) no-repeat;
+      background-size: 20px 20px;
+      position: absolute;
+      z-index: 5;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      left: 482px;
+      bottom: 10px; }
+  .main .info {
+    width: 921.6px;
+    height: 748px;
+    position: absolute;
+    top: 0;
+    left: -861.6px;
+    z-index: 3;
+    border-right: 1px #eee solid; }
+    .main .info .arrow {
+      background: url(../../images/arrow_left.png) no-repeat;
+      background-size: 20px 20px;
+      position: absolute;
+      z-index: 5;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      top: 344px;
+      right: 10px; }
+  .main .controls {
+    width: 921.6px;
+    height: 748px;
+    position: absolute;
+    top: 0;
+    right: -861.6px;
+    z-index: 3;
+    border-left: 1px #eee solid; }
+    .main .controls .arrow {
+      background: url(../../images/arrow_right.png) no-repeat;
+      background-size: 20px 20px;
+      position: absolute;
+      z-index: 5;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      top: 344px;
+      left: 10px; }
+  .main .goals {
+    min-height: 748px;
+    width: 100%;
+    background-color: #eee;
+    position: absolute;
+    bottom: -548px;
+    left: 0;
+    z-index: 5; } }

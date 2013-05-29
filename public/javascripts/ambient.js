@@ -7,30 +7,31 @@ var Ambient = {
 	padding: 80,
 	init: function(){
 		//two big circles in the background
-		this.circles.push(new Circle(0, 0, 800, "none", "#84c7c7", 5));
-		this.circles.push(new Circle(10, 10, 600, "none", "#91cd5b", 5));
+		this.circles.push(new Circle(0, 0, 800, "#49ac82", "none", 3));
+		this.circles.push(new Circle(0, 0, 500, "#36edf2", "#caf958", 3));
 
 		//categorical circles
 		//hvac
-		this.circles.push(new Circle(-0.3*this.width, 180, 300, "#ee854b", "none", 5));
+		this.circles.push(new Circle(-0.3*this.width, 180, 300, "#ffa733", "none", 3));
 		//lights
-		this.circles.push(new Circle(0.28*this.width, 100, 250, "#fae200", "none", 5));
+		this.circles.push(new Circle(0.28*this.width, 100, 250, "#fae200", "none", 3));
 		//outlets
-		this.circles.push(new Circle(0.25*this.width, -200, 150, "#7368e5", "none", 5));
+		this.circles.push(new Circle(0.25*this.width, -200, 190, "#77bbed", "none", 3));
 		//appliances
-		this.circles.push(new Circle(-0.2*this.width, -300, 120, "#e3797e", "none", 5));
+		this.circles.push(new Circle(-0.2*this.width, -300, 140, "#cc66cc", "none", 3));
 		//Misc
-		this.circles.push(new Circle(-0.4*this.width, -200, 80, "#e39ab3", "none", 5));
+		this.circles.push(new Circle(-0.4*this.width, -200, 80, "#36edf2", "none", 3));
 
 		//appliance circles of hvac
-		this.circles.push(new Circle(-0.3*this.width + 80, 180 - 80 , 50, "none", "#ee854b", 5));
-		this.circles.push(new Circle(-0.3*this.width - 80, 180 + 80 , 120, "none", "#ee854b", 5));
+		this.circles.push(new Circle(-0.3*this.width + 80, 180 - 80 , 50, "#f7286c", "#ffa733", 2));
+		this.circles.push(new Circle(-0.3*this.width - 80, 180 + 80 , 120, "#f7286c", "#ffa733", 2));
 
 		//appliance circles of lights
-		this.circles.push(new Circle(0.28*this.width + 60, 250 - 80 , 30, "none", "#fae200", 5, "bedroom_lights"));
-		this.circles.push(new Circle(0.28*this.width - 40, 250 - 240 , 80, "none", "#fae200", 5, "living_lights"));
-		this.circles.push(new Circle(0.28*this.width + 20, 250 - 60 , 60, "none", "#fae200", 5, "kitchen_lights"));
+		this.circles.push(new Circle(0.28*this.width + 60, 250 - 80 , 30, "#ffa733", "#fae200", 2, "bedroom_lights"));
+		this.circles.push(new Circle(0.28*this.width - 40, 250 - 240 , 80, "#ffa733", "#fae200", 2, "living_lights"));
+		this.circles.push(new Circle(0.28*this.width + 20, 250 - 60 , 60, "#ffa733", "#fae200", 2, "kitchen_lights"));
 
+		//
 
 		this.rScale = d3.scale.linear()
 						.domain([0, 800])
@@ -60,8 +61,10 @@ var Ambient = {
         				.attr("class", function(d){
         					if(d.selector != undefined) return (d.selector+' vis_circles');
         					return 'vis_circles';
+        				})
+        				.on("click", function(){
+        					console.log("clicked!");
         				});
-
 
 	}
 };
