@@ -3,6 +3,8 @@ $(document).ready(function(){
 		$('.ambient').fadeOut();
 		$('.main').fadeIn();
 		event.stopPropagation();
+		Clock.init();
+		Clock.draw();
 	});
 
 	setTimeout(function(){
@@ -10,15 +12,9 @@ $(document).ready(function(){
 		$('.ambient').fadeIn();
 		Ambient.init();
 		Ambient.draw();
-		DataManager.init();
+		//DataManager.init();
 	}, 500);
 
 	//prevent the document from scrolling
 	$(document).bind('touchmove', false);
-
-	$('.resources .arrow').bind('click', function(){
-		$('.resources').animate({
-			top: -40
-		}, 500);
-	});
 });

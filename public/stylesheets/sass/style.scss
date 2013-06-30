@@ -1,7 +1,6 @@
 @media all and (min-width: 769px) {
     $screen-height: 748px;
     $screen-width: 1024px;
-    $drag-height: 60px;
 
     @font-face{
       font-family:'Neutra';
@@ -34,82 +33,17 @@
     }  
 
     /* Main view */
-    @mixin arrows{
-      background-size: 20px 20px;
+    #clock{
       position: absolute;
-      z-index: 5;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
+      top: 20px;
+      left: 20px;
 
-    .main{
-      .center{
-        width: 100%;
-        min-height: $screen-height;
-      }
-
-      .resources{
-        min-height: $screen-height;
-        width: 100%;
-        position: absolute;
-        top: - $screen-height + $drag-height;
-        left: 0;
-        z-index: 8;
-        border-bottom: 1px #eee solid;
+      .arc{
+        stroke: #eee;
         background-color: white;
-        opacity: 0.9;
-
-        .arrow{
-          background: url(../../images/arrow_upper.png) no-repeat;
-          @include arrows;
-          left: 0.5 * $screen-width - 30px;
-          bottom: 10px;
-        }
+        opacity: 0.8;
       }
+    }
+    
 
-      .info{
-        width: $screen-width*0.9;
-        height: $screen-height;
-        position: absolute;
-        top: 0;
-        left: - $screen-width*0.9 + $drag-height;
-        z-index: 3;
-        border-right: 1px #eee solid;
-
-        .arrow{
-          background: url(../../images/arrow_left.png) no-repeat;
-          @include arrows;
-          top: 0.5 * $screen-height - 30px;
-          right: 10px;
-        }
-      }
-
-      .controls{
-        width: $screen-width*0.9;
-        height: $screen-height;
-        position: absolute;
-        top: 0;
-        right: - $screen-width*0.9 + $drag-height;
-        z-index: 3;
-        border-left: 1px #eee solid;
-
-        .arrow{
-          background: url(../../images/arrow_right.png) no-repeat;
-          @include arrows;
-          top: 0.5 * $screen-height - 30px;
-          left: 10px;
-        }
-      }
-
-      .goals{
-        min-height: $screen-height;
-        width: 100%;
-        background-color: #eee;
-        position: absolute;
-        bottom: - $screen-height + 200px;
-        left: 0;
-        z-index: 5;
-      }
-    }  
 }
