@@ -1,0 +1,45 @@
+// Interaction.styl
+// ----------------
+// Not entirely sure what this file's purpose is yet, but it should probably
+// handle all of the interactive/animated bits of the UI.
+
+.hidden
+	opacity 0
+	display none
+
+// hide webkit tap highlight
+a
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+// IDLE MODE
+// When the screen goes idle, non-essential UI elements should disappear.
+.hide-when-idle
+	opacity 1
+	-webkit-transition opacity 10s
+
+body.idle .hide-when-idle
+	opacity 0
+
+// MODALS
+// When a modal is displayed, blur panes below it
+// TODO: Evaluate performance of -webkit-filter on real device
+.pane
+	-webkit-transition -webkit-filter .2s
+
+body.displaying-modal .pane
+	// -webkit-filter: blur(6px);
+
+// NAVIGATION
+.animate
+	-webkit-transition -webkit-transform .5s cubic-bezier(1.000, 0.000, 0.310, 1.000)
+	
+#grid-container
+	-webkit-backface-visibility hidden
+    -webkit-transform translate3d(0,0,0) scale3d(1,1,1)
+    -webkit-transform-style preserve-3d
+
+
+.pane
+	-webkit-backface-visibility hidden
+	-webkit-transform translate3d(0,0,0)
+	-webkit-transform-style preserve-3d

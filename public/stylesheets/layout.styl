@@ -1,0 +1,84 @@
+// Layout.styl
+// -----------
+// Styles that determine the position and size of things on the screen.
+
+*
+	box-sizing border-box // border-box ftw!
+
+body, html
+	width 100%
+	height 100%
+	overflow hidden
+
+.scroll-wrap
+	width 100%
+	height 100%
+	position relative
+	overflow hidden
+
+#grid-container
+	width 100%
+	height 100%
+
+#control-shortcuts
+	z-index 100 // place them on top always
+	height button-height
+
+	ul li
+		display inline-block
+		margin-right 10px // spacing between control buttons
+
+		&:last-of-type
+			margin 0 // don't need spacing on last one
+
+.pane
+	position absolute
+	width 100%
+	height 100%
+
+	padding all-margins
+
+	*
+		-webkit-transform translate3d(0,0,0)
+
+// little arrow hints for swiping/scrolling/panning/etc.
+.hint-right, .hint-left
+	position absolute
+	top 50% // gets it almost center
+	margin-top -1*button-circle-diameter * .5 // pops it back up to center
+
+.hint-right
+	right right-margin
+
+.hint-left
+	left left-margin
+
+.hint-up, .hint-down
+	position absolute
+	left 50%
+	margin-left -1*button-circle-diameter * .5 // pops it back up to center
+
+.hint-up
+	top top-margin
+
+.hint-down
+	bottom bottom-margin
+
+.bottom-right
+	position absolute
+	right right-margin
+	bottom bottom-margin
+
+	div
+		float left
+		margin-right 15px
+
+.bottom-left
+	position absolute
+	bottom bottom-margin
+	left left-margin
+
+// Responsive media query because I don't want to rule out an iPhone interface yet
+@media screen and (max-width: 650px)
+	html
+		font-size: 80%;

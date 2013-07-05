@@ -1,0 +1,53 @@
+.button, button
+	display inline-block
+
+	text-align center
+	text-decoration none
+	color dark-brown
+	border 1px solid dark-brown
+
+	&:hover
+		background blue
+		border-color blue
+		color white
+
+	&:active, &.active
+		border-color dark-brown
+		background dark-brown
+		color white
+
+	&.disabled
+		cursor default
+		opacity .2
+
+		&:active, &.active
+			background none
+			color dark-brown
+			border-color none
+	
+	width button-height
+	height button-height
+	line-height button-height - 14px
+	font-size 40px
+
+.button-group
+	.button, button
+		display block
+		float left
+		border-right none
+
+		&:first-of-type
+			border-radius left 5px
+
+		&:last-of-type
+			border-radius right 5px
+			border-right 1px solid black
+
+.circle-buttons button, .circle-buttons .button, .button.circle, button.circle
+	width button-circle-diameter
+	height button-circle-diameter
+	border-radius 100%
+	overflow hidden
+
+	font-size 40px
+	line-height 50px // FIXME: circle button line-height needs to change with different base fonts -- why?

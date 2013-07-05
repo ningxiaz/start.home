@@ -4,12 +4,21 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path');
+  , stylus  = require('stylus')
+  , nib     = require('nib')
+  , routes  = require('./routes')
+  , user    = require('./routes/user')
+  , http    = require('http')
+  , path    = require('path');
 
 var app = express();
+
+// Stylus compiler
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .use(nib())
+}
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -20,6 +29,11 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
+  app.use(stylus.middleware(
+    { src: __dirname + '/public'
+      , compile: compile
+    }
+  ))
   app.use(express.static(path.join(__dirname, 'public')));
 });
 

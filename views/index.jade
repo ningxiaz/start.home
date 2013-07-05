@@ -2,10 +2,14 @@ doctype 5
 html
 	head
 		title= title
-		link(rel='stylesheet', href='/stylesheets/compiled/base.css')
-		link(rel='stylesheet', href='/stylesheets/compiled/style.css')
+		link(rel='stylesheet', href='/stylesheets/start.home.css')
+
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
+		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
+
+		script(type='text/javascript', src='javascripts/grid.js')
+		script(type='text/javascript', src='javascripts/touch-events.js')
 		script(type='text/javascript', src='javascripts/ambient.js')
 		script(type='text/javascript', src='javascripts/clock.js')
 		script(type='text/javascript', src='javascripts/index.js')
@@ -14,10 +18,34 @@ html
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
-		.start
-			h1 START
-		.ambient
-		.main
-			#clock
+		//- Navigation
+		nav#control-shortcuts.fixed.bottom-left
+			ul.circle-buttons
+				li: a(href="#").button: i.entypo-list
+				li: a(href="#").button: i.entypo-light-bulb
+				li: a(href="#").button: i.entypo-thermometer
+
+		//- #scroll-wrap fixes a bug with how iOS handles scrolling with the grid
+		div#scroll-wrap 
+			div#grid-container
+				section#resource-view.pane
+					h1 Resources!
+
+				section#overview.pane
+					h1 Overview
+					.start
+						h1 Start
+					.ambient
+					.main
+						#clock
+
+				section#past-view.pane
+					h1 This is the past
+
+				section#goal-view.pane
+					h1 Gooooaaallllll
+
+
+
 			
 

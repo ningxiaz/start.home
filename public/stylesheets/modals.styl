@@ -1,0 +1,110 @@
+.modal
+	z-index 250
+
+	position absolute
+	top 0
+	left 0
+	right 0
+	bottom 0
+
+	padding all-margins
+
+	background rgba(0,0,0,.8)
+
+	header
+		margin 0
+		background rgba(255,255,255,1)
+		height modal-header-height
+		line-height 50px
+
+		.left-col, .right-col
+			float left
+			margin 0
+			height 100%
+
+		.left-col
+			width modal-left-col-width
+
+		.right-col
+			width modal-right-col-width
+			padding 15px
+
+		.modal-title, .icon, .mode-title
+			float left
+			height 100%
+
+		.modal-title
+			line-height 90px
+			margin 0
+			padding 0
+
+		.mode-title
+			line-height 70px
+
+		.icon
+			line-height 75px
+			margin-right 15px
+			width 60px
+			text-align center
+			font-size 60px
+			background rgba(0,0,0,.3)
+			color white
+
+		.submit, .save
+			display inline-block
+			margin-left 15px
+			float right
+
+	.content
+		position absolute
+		top all-margins + modal-header-height
+		left left-margin
+		right right-margin
+		bottom bottom-margin * 2 + button-circle-diameter
+
+		background rgba(255,255,255,1)
+		border-top 1px solid rgba(0,0,0,.3)
+
+		.left-col, .right-col
+			float left
+			margin 0
+			height 100%
+
+		.left-col
+			border-right 1px solid rgba(0,0,0,.3)
+			height 100%
+			width modal-left-col-width
+			overflow-y scroll
+			-webkit-overflow-scrolling touch
+
+		.right-col
+			width modal-right-col-width
+			height 100%
+
+			padding 15px
+
+		// TODO: Consider refactoring menu code out of modal for more flexibility
+		menu
+			margin 0
+			padding 0
+
+			list-style-type none
+
+			li a
+				padding 0 15px
+				display block
+				min-height 60px
+				line-height 60px
+
+				text-decoration none
+				border-bottom 1px solid rgba(0,0,0,.1)
+				color blue
+
+				&:active
+					background blue
+					color white
+
+		.add
+			display block
+			margin 20px auto
+
