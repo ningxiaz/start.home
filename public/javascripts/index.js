@@ -8,7 +8,7 @@ $(document).ready(function(){
 		["#past-view", "#overview",      "#goal-view"]
 	]
 
-	Grid.init("#grid-container", panes, "#overview")
+	Grid.init("#grid-container", panes, "#past-view")
 
 	var h = $('.pane').hammer({ drag_lock_to_axis: true })
 
@@ -31,6 +31,8 @@ $(document).ready(function(){
 		Ambient.draw();
 		//DataManager.init();
 	}, 500);
+
+	PastGoalChart.init();
 
 	//prevent the document from scrolling
 	$(document).bind('touchmove', false);

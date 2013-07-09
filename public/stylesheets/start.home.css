@@ -1060,23 +1060,21 @@ button {
   text-align: center;
   text-decoration: none;
   color: #312d2c;
-  border: 1px solid #312d2c;
+  border: 2px solid rgba(0,0,0,0.4);
   width: 60px;
   height: 60px;
-  line-height: 46px;
+  line-height: 50px;
   font-size: 40px;
 }
 .button:hover,
 button:hover {
   background: #6483a3;
-  border-color: #6483a3;
   color: #fff;
 }
 .button:active,
 button:active,
 .button.active,
 button.active {
-  border-color: #312d2c;
   background: #312d2c;
   color: #fff;
 }
@@ -1092,14 +1090,14 @@ button.disabled:active,
 .button.disabled.active,
 button.disabled.active {
   background: none;
-  color: #000;
+  color: #312d2c;
   border-color: none;
 }
 .button-group .button,
 .button-group button {
   display: block;
   float: left;
-  border-right: none;
+  border-right-width: 0;
 }
 .button-group .button:first-of-type,
 .button-group button:first-of-type {
@@ -1114,7 +1112,7 @@ button.disabled.active {
   border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  border-right: 1px solid #000;
+  border-right-width: 2px;
 }
 .circle-buttons button,
 .circle-buttons .button,
@@ -1122,14 +1120,14 @@ button.disabled.active {
 button.circle {
   width: 60px;
   height: 60px;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
   overflow: hidden;
   font-size: 40px;
-  line-height: 50px;
+  line-height: 51px;
 }
 html {
-  font-family: Avenir;
+  font-family: Proxima Nova;
 }
 p,
 .p,
@@ -1208,8 +1206,12 @@ html {
   height: 100%;
   padding: 30px;
 }
-.pane * {
-  -webkit-transform: translate3d(0, 0, 0);
+.vis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 .hint-right,
 .hint-left {
@@ -1248,6 +1250,12 @@ html {
   position: absolute;
   bottom: 30px;
   left: 30px;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
 @media screen and (max-width: 650px) {
   html {
@@ -1400,4 +1408,43 @@ body.idle .hide-when-idle {
 .modal .content .add {
   display: block;
   margin: 20px auto;
+}
+.vis {
+  text-align: center;
+}
+.ambient {
+  margin: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 20;
+}
+.context {
+  background: #97b5c9;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  width: 1024px !important;
+  margin: 0 auto;
+}
+.context .line {
+  stroke: #fff;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+.line {
+  fill: none;
+  stroke: #4682b4;
+  stroke-width: 1.5px;
+}
+.brush .extent {
+  stroke: #fff;
+  fill: #4dd35e;
+  fill-opacity: 0.5;
+  shape-rendering: crispEdges;
 }

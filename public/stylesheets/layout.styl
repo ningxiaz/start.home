@@ -38,8 +38,13 @@ body, html
 
 	padding all-margins
 
-	*
-		-webkit-transform translate3d(0,0,0)
+.vis
+	position absolute
+	top 0
+	left 0
+	bottom 0
+	right 0
+
 
 // little arrow hints for swiping/scrolling/panning/etc.
 .hint-right, .hint-left
@@ -78,7 +83,15 @@ body, html
 	bottom bottom-margin
 	left left-margin
 
+// Helper classes
+.left
+	float left
+
+.right
+	float right
+
 // Responsive media query because I don't want to rule out an iPhone interface yet
+// Except everything looks like crap on the iPhone at this point, so this is pointless
 @media screen and (max-width: 650px)
 	html
 		font-size: 80%;

@@ -12,6 +12,7 @@ html
 		script(type='text/javascript', src='javascripts/touch-events.js')
 		script(type='text/javascript', src='javascripts/ambient.js')
 		script(type='text/javascript', src='javascripts/clock.js')
+		script(type='text/javascript', src='javascripts/past-goal.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
@@ -19,11 +20,13 @@ html
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
 		//- Navigation
-		nav#control-shortcuts.fixed.bottom-left
-			ul.circle-buttons
-				li: a(href="#").button: i.entypo-list
-				li: a(href="#").button: i.entypo-light-bulb
-				li: a(href="#").button: i.entypo-thermometer
+		//- nav#control-shortcuts.fixed.bottom-left
+		//- 	ul.circle-buttons
+		//- 		li: a(href="#").button: i.entypo-list
+		//- 		li: a(href="#").button: i.entypo-light-bulb
+		//- 		li: a(href="#").button: i.entypo-thermometer
+
+		figure.vis.ambient
 
 		//- #scroll-wrap fixes a bug with how iOS handles scrolling with the grid
 		div#scroll-wrap 
@@ -32,15 +35,23 @@ html
 					h1 Resources!
 
 				section#overview.pane
-					h1 Overview
-					.start
-						h1 Start
-					.ambient
-					.main
+					figure.vis.main
 						#clock
 
 				section#past-view.pane
-					h1 This is the past
+					figure.vis#past-goal-view
+						div.context
+						div.focus
+					nav.bottom-left
+						div.button-group.left
+							a(href="#").button: i.entypo-flash
+							a(href="#").button: i.entypo-thermometer
+							a(href="#").button: i.entypo-water
+							
+						div.button-group.left
+							a(href="#").button: i.entypo-flash
+							a(href="#").button: i.entypo-thermometer
+							a(href="#").button: i.entypo-water
 
 				section#goal-view.pane
 					h1 Gooooaaallllll

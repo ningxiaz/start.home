@@ -1,0 +1,41 @@
+.vis
+	text-align center
+
+.ambient
+	margin 0
+	width 100%
+	background white
+	z-index 20
+
+.context
+	background light-blue
+	border-radius 3px
+	width 1024px !important
+	margin 0 auto
+	
+	.line
+		stroke white
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill green
+  fill-opacity: .5;
+  shape-rendering: crispEdges;
+}

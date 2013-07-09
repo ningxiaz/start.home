@@ -4,15 +4,15 @@
 	text-align center
 	text-decoration none
 	color dark-brown
-	border 1px solid dark-brown
+	border 2px solid rgba(0,0,0,.4)
 
 	&:hover
 		background blue
-		border-color blue
+		// border-color blue
 		color white
 
 	&:active, &.active
-		border-color dark-brown
+		// border-color dark-brown
 		background dark-brown
 		color white
 
@@ -27,27 +27,27 @@
 	
 	width button-height
 	height button-height
-	line-height button-height - 14px
+	line-height button-height - 10px // FIXME: this also depends on the base font... ugh! might as well hardcode it
 	font-size 40px
 
 .button-group
 	.button, button
 		display block
 		float left
-		border-right none
+		border-right-width 0
 
 		&:first-of-type
 			border-radius left 5px
 
 		&:last-of-type
 			border-radius right 5px
-			border-right 1px solid black
+			border-right-width 2px
 
 .circle-buttons button, .circle-buttons .button, .button.circle, button.circle
 	width button-circle-diameter
 	height button-circle-diameter
-	border-radius 100%
+	border-radius 30px
 	overflow hidden
 
 	font-size 40px
-	line-height 50px // FIXME: circle button line-height needs to change with different base fonts -- why?
+	line-height 51px // FIXME: circle button line-height needs to change with different base fonts -- why?
