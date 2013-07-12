@@ -4,11 +4,11 @@ $('.pane').on("touchmove", function(e) {
 
 $(document).ready(function(){
 	var panes = [
-		[null,         "#resource-view", null        ],
-		["#past-view", "#overview",      "#goal-view"]
+		[null,null,null],
+		["#past-view", "#overview", "#goal-view"],
 	]
 
-	Grid.init("#grid-container", panes, "#past-view")
+	Grid.init("#grid-container", panes, "#overview")
 
 	var h = $('.pane').hammer({ drag_lock_to_axis: true })
 
