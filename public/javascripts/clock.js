@@ -3,7 +3,7 @@ var Clock = {
 	height: 550,
 	radius: this.width/2 - 25,
 	vis: null,
-	data: [{time: 1, usage: 0.87}, {time: 2, usage: 0.45}, {time: 3, usage: 0.26}, {time: 4, usage: 0.37}, {time: 5, usage: 0.47}, {time: 6, usage: 0.25}, {time: 7, usage: 0.48}, {time: 8, usage: 0.21}, {time: 9, usage: 0.59}],
+	data: [{time: 1, usage: 0.87}, {time: 2, usage: 0.65}, {time: 3, usage: 0.56}, {time: 4, usage: 0.87}, {time: 5, usage: 0.77}, {time: 6, usage: 0.55}, {time: 7, usage: 0.88}, {time: 8, usage: 0.71}, {time: 9, usage: 0.79}],
 	
 	init: function(){
 		vis = d3.select("#clock").append("svg")
@@ -24,7 +24,7 @@ var Clock = {
         	return d.time*angle;
         })
         .innerRadius(function(d, i){
-        	return 0;
+        	return 80;
         })
         .outerRadius(function(d, i){
         	return 250*(d.usage / 1);

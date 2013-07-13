@@ -2,48 +2,28 @@
     $screen-height: 748px;
     $screen-width: 1024px;
 
-    @font-face{
-      font-family:'Neutra';
-      src: url('NeutraTextTF-Book.otf'); /* everyone else take this */
-    }
-
     body {
-        font-family: 'Neutra', sans-serif;
+        font-family: 'Open Sans', sans-serif;
     }
 
-    .ambient, .main{
+    .hidden{
       display: none;
     }
-
-    .start{
-      h1{
-        font-size: 64px;
-        position: absolute;
-        top: 36%;
-        left: 40%;
-        font-weight: 300;
-        color: #A0DC3F;
-      }
-    }
-
-    /* Ambient */
-    .vis_circles{
-      shape-rendering: geometricPrecision;
-      opacity: 0.5;
-    }  
 
     /* Main view */
     #clock{
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 55px;
+      left: 160px;
 
       .arc{
-        stroke: #eee;
         background-color: white;
-        opacity: 0.8;
+        opacity: 0.9;
+      }
+
+      .water_arc{
+        background-color: white;
+        opacity: 0.9;
       }
     }
-    
-
 }

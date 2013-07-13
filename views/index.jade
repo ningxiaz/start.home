@@ -2,21 +2,20 @@ doctype 5
 html
 	head
 		title= title
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700', rel='stylesheet', type='text/css')
 		link(rel='stylesheet', href='/stylesheets/compiled/base.css')
 		link(rel='stylesheet', href='/stylesheets/compiled/style.css')
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/ambient.js')
 		script(type='text/javascript', src='javascripts/clock.js')
+		script(type='text/javascript', src='javascripts/clock_water.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
-		.start
-			h1 START
-		.ambient
 		.main
 			#clock
 			
