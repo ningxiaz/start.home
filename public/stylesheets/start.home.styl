@@ -20,3 +20,62 @@ i[class*="entypo"]
 @import "interaction"
 @import "modals"
 @import "visualizations"
+
+// quick styles for prototyping... I should organize these
+
+.vertical-line
+	width 1px
+	height 100px
+	border-right 1px solid white
+
+.center
+	margin 0 auto
+
+#timeline
+	clearfix()
+	width 200%
+	padding 30px
+
+	h1
+		color white
+
+	-webkit-transform translate3d(0,0,0)
+
+	.past, .future
+		float left
+		margin 0
+		height 60px
+		line-height 60px
+		text-align center
+
+	.past
+		width 60%
+		background blue
+
+		border-radius left 3px
+
+		svg
+			.line
+				stroke #fff
+
+	.future
+		width 40%
+		background light-blue
+
+		border-radius right 3px
+
+		svg
+			.line
+				stroke #fff
+				stroke-dasharray 10px
+
+// these styles should probably be done through javascript, but it might be faster to just hardcode them in the CSS instead of waiting for $(document).ready?
+
+#grid-container
+	-webkit-transform translate3d(0,0,0)
+
+#overview
+	-webkit-transform translate3d(100%,0,0)
+
+#goals
+	-webkit-transform translate3d(200%,0,0)

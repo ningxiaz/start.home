@@ -8,11 +8,9 @@ html
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
 
-		script(type='text/javascript', src='javascripts/grid.js')
-		script(type='text/javascript', src='javascripts/touch-events.js')
-		script(type='text/javascript', src='javascripts/ambient.js')
-		script(type='text/javascript', src='javascripts/clock.js')
-		script(type='text/javascript', src='javascripts/past-goal.js')
+		script(type='text/javascript', src='javascripts/segue.js')
+		script(type='text/javascript', src='javascripts/past-timeline.js')
+		script(type='text/javascript', src='javascripts/future-timeline.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
@@ -26,37 +24,27 @@ html
 		//- 		li: a(href="#").button: i.entypo-light-bulb
 		//- 		li: a(href="#").button: i.entypo-thermometer
 
-		figure.vis.ambient
+		//- figure.vis.ambient
 
 		//- #scroll-wrap fixes a bug with how iOS handles scrolling with the grid
-		div#scroll-wrap 
-			div#grid-container
-				//- section#resource-view.pane
-				//- 	h1 Resources!
+		section#timeline
+			figure.past
+				svg#past-timeline
+			figure.future
+				svg#future-timeline
+
+		div#grid-container
 
 				section#overview.pane
-					figure.vis.main
-						#clock
+					h2 Overview
+					p Floorplan visualization could go here...
 
-				section#past-view.pane
-					figure.vis#past-goal-view
-						div.context
-						div.focus
-					nav.bottom-left
-						div.button-group.left
-							a(href="#").button: i.entypo-flash
-							a(href="#").button: i.entypo-thermometer
-							a(href="#").button: i.entypo-water
-							
-						div.button-group.left
-							a(href="#").button: i.entypo-flash
-							a(href="#").button: i.entypo-thermometer
-							a(href="#").button: i.entypo-water
+				section#past.pane
+					h2 Past
+					p Here we can allow brushing on the timeline and some nice in-depth visualizations as prototyped
 
-				section#goal-view.pane
-					h1 Gooooaaallllll
-
-
+				section#goals.pane
+					h2 Goals
 
 			
 

@@ -1,40 +1,51 @@
-$('.pane').on("touchmove", function(e) {
-	e.preventDefault()
+$(document).ready(function() {
+	var container = document.getElementById('grid-container');
+	var past = document.getElementById('past-timeline')
+
+	// general panning
+	Segue(container, {
+		max: window.innerWidth,
+		states: 3,
+		initial_state: 1,
+		reverse: true,
+		elasticity: .4,
+		manipulator: navWindow
+	})
+
+	// really rough scrolling through past... probably not ideal
+	Segue(past, {
+		max: 400,
+		complete: false,
+		reverse: true,
+		manipulator: navPast
+	})
+
+	// percent = how far into the transition we are
+	// offset = which step we're on
+	// animate = whether or not the transition should be animated
+	// element = the element Segue is watching for gestures
+	function navWindow(percent, offset, animate, element) {
+		$('#grid-container').removeClass('animate');
+		if (animate) $('#grid-container').addClass('animate');
+
+		$('#timeline').removeClass('animate');
+		if (animate) $('#timeline').addClass('animate');
+
+		$('#grid-container').css('-webkit-transform', 'translate3d('+ -1*(percent+offset)*100 +'%,0,0)')
+
+		$('#timeline').css('-webkit-transform', 'translate3d('+ -.25*(percent+offset)*100 +'%,0,0)')
+	}
+
+	function navPast(percent, offset, animate, element) {
+		$('#past-timeline').removeClass('animate');
+		if (animate) $('#past-timeline').addClass('animate');
+
+		$('#past-timeline').css('-webkit-transform', 'translate3d('+-1*(percent+offset)*100 +'%,0,0)')
+	}
+
+	past_timeline.init();
+	past_timeline.draw();
+
+	future_timeline.init();
+	future_timeline.draw();
 })
-
-$(document).ready(function(){
-	var panes = [
-		[null,null,null],
-		["#past-view", "#overview", "#goal-view"],
-	]
-
-	Grid.init("#grid-container", panes, "#overview")
-
-	var h = $('.pane').hammer({ drag_lock_to_axis: true })
-
-	// switch these lines to enable dragging... very buggy right now
-	// h.on("swipeup swipedown swipeleft swiperight dragright dragleft dragup dragdown release", handleGesture)
-	h.on("swipeup swipedown swipeleft swiperight", handleGesture)
-
-	$('.ambient').click(function(event){
-		$('.ambient').fadeOut();
-		$('.main').fadeIn();
-		event.stopPropagation();
-		Clock.init();
-		Clock.draw();
-	});
-
-	setTimeout(function(){
-		$('.start').fadeOut();
-		$('.ambient').fadeIn();
-		Ambient.init();
-		Ambient.draw();
-		//DataManager.init();
-	}, 500);
-
-	PastGoalChart.init();
-
-	//prevent the document from scrolling
-	$(document).bind('touchmove', false);
-});
-
