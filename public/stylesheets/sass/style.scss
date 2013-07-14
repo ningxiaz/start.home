@@ -16,14 +16,15 @@
       top: 55px;
       left: 160px;
 
-      .arc{
-        background-color: white;
-        opacity: 0.9;
+      .area {
+        fill: lightsteelblue;
       }
 
-      .water_arc{
-        background-color: white;
-        opacity: 0.9;
+      .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
       }
     }
+
 }

@@ -10,9 +10,9 @@
     position: absolute;
     top: 55px;
     left: 160px; }
-    #clock .arc {
-      background-color: white;
-      opacity: 0.9; }
-    #clock .water_arc {
-      background-color: white;
-      opacity: 0.9; } }
+    #clock .area {
+      fill: lightsteelblue; }
+    #clock .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px; } }
