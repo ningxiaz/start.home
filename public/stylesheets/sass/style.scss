@@ -12,18 +12,37 @@
 
     /* Main view */
     #clock{
-      position: absolute;
-      top: 55px;
-      left: 160px;
+      width: $screen-height;
+      margin: 0 auto;
 
-      .area {
+      .area{
         fill: lightsteelblue;
       }
 
-      .line {
+      .line{
         fill: none;
         stroke: steelblue;
+        stroke-width: 1px;
+      }
+
+      .min_line{
+        stroke: #e377c2;
         stroke-width: 1.5px;
+        stroke-dasharray: (3, 3);
+        fill: none;
+      }
+
+      .max_line{
+        stroke: #e6550d;
+        stroke-width: 1.5px;
+        stroke-dasharray: (3, 3);
+        fill: none;
+      }
+
+      .daytime_arc{
+        fill: yellow;
+        stroke: none;
+        opacity: 0.8;
       }
     }
 

@@ -7,12 +7,25 @@
 
   /* Main view */
   #clock {
-    position: absolute;
-    top: 55px;
-    left: 160px; }
+    width: 748px;
+    margin: 0 auto; }
     #clock .area {
       fill: lightsteelblue; }
     #clock .line {
       fill: none;
       stroke: steelblue;
-      stroke-width: 1.5px; } }
+      stroke-width: 1px; }
+    #clock .min_line {
+      stroke: #e377c2;
+      stroke-width: 1.5px;
+      stroke-dasharray: 3, 3;
+      fill: none; }
+    #clock .max_line {
+      stroke: #e6550d;
+      stroke-width: 1.5px;
+      stroke-dasharray: 3, 3;
+      fill: none; }
+    #clock .daytime_arc {
+      fill: yellow;
+      stroke: none;
+      opacity: 0.8; } }
