@@ -1,4 +1,6 @@
 var Clock = {
+	vis: null,
+
 	draw: function(){
 		var width = 748,
 			height = 748,
@@ -126,32 +128,47 @@ var Clock = {
 			sunset: 19
 		}
 
+		var coordinates = [];
+		var temp = [];
+		for(var i = 0; i < 24; i++){
+			temp = [i, i];
+			coordinates.push(temp);
+		}
+
+
+		console.log(coordinates);
+
 		var angle = d3.time.scale().range([0, 2 * Math.PI]).domain([0, 24]);
 		var radius = d3.scale.linear().range([inner_radius, outer_radius]).domain([0, 1]);
 		var p_radius = d3.scale.linear().range([inner_radius, inner_radius - 60]).domain([0, 1]);
 
+		//generator of curve lines outside the ring
 		var line = d3.svg.line.radial()
 		    .interpolate("basis")
 		    .angle(function(d) { return (angle(d.time) - Math.PI); })
 		    .radius(function(d) { return radius(d.amount); });
 
-		var p_line = d3.svg.line.radial()
+		//generator of curve lines inside the ring
+		var in_line = d3.svg.line.radial()
 		    .interpolate("basis")
 		    .angle(function(d) { return (angle(d.time) - Math.PI); })
 		    .radius(function(d) { return p_radius(d.amount); });
 
+		//generator of area outside the ring
 		var area = d3.svg.area.radial()
 		    .interpolate("basis")
 		    .angle(function(d) { return (angle(d.time) - Math.PI); })
 		    .innerRadius(inner_radius)
     		.outerRadius(function(d) { return radius(d.amount); });
 
-		var p_area = d3.svg.area.radial()
+    	//generator of area inside the ring
+		var in_area = d3.svg.area.radial()
 		    .interpolate("basis")
 		    .angle(function(d) { return (angle(d.time) - Math.PI); })
 		    .innerRadius(function(d) { return p_radius(d.amount); })
     		.outerRadius(inner_radius);
 
+    	//generator of daytime arc
     	var arc = d3.svg.arc()
 	        .startAngle(function(d, i){
 	        	return (angle(d.sunrise) - Math.PI);
@@ -162,7 +179,17 @@ var Clock = {
 	        .innerRadius(outer_radius)
 	        .outerRadius(outer_radius + 25);
 
-    	var vis = d3.select("#clock").append("svg")
+	    //generator of coordinates
+	    var coor = d3.svg.line()
+	    	.x(function(d, i){
+	    		return Math.cos(angle(d))*(inner_radius+i*160);
+	    	})
+	    	.y(function(d, i){
+	    		return Math.sin(angle(d))*(inner_radius+i*160);
+	    	})
+	    	.interpolate('linear');
+
+    	vis = d3.select("#clock").append("svg")
                      .attr("width", width)
                      .attr("height", height)
                   .append("svg:g")
@@ -180,17 +207,17 @@ var Clock = {
 		      .attr("class", "line")
 		      .attr("d", line);
 
-		vis.selectAll(".p_area")
+		vis.selectAll(".in_area")
 		      .data([production])
 		    .enter().append("path")
-		      .attr("class", "p_area")
-		      .attr("d", p_area);
+		      .attr("class", "in_area")
+		      .attr("d", in_area);
 
-		vis.selectAll(".p_line")
+		vis.selectAll(".in_line")
 		      .data([production])
 		    .enter().append("path")
-		      .attr("class", "p_line")
-		      .attr("d", p_line);
+		      .attr("class", "in_line")
+		      .attr("d", in_line);
 
 		vis.selectAll(".min_line")
 			  .data([min])
@@ -210,5 +237,68 @@ var Clock = {
 		      .attr("class", "daytime_arc")
 		      .attr("d", arc);
 
+		vis.selectAll(".coordinates")
+			  .data(coordinates)
+		    .enter().append("svg:g").append("path")
+		      .attr("class", "coordinates")
+		      .attr("d", coor);
+
+	},
+
+	to_linear: function(){
+		vis.selectAll(".coordinates").remove();
+		vis.selectAll(".daytime_arc").remove();
+
+		var linear_angle = d3.time.scale().range([0, 374]).domain([19, 0]);
+		var linear_height = d3.scale.linear().range([0, 114]).domain([0, 1]);
+
+		var linear_area = d3.svg.area()
+			.x(function(d, i){
+				return (0 - linear_angle(d.time));
+			})
+			.y0(function(d){
+				return (0 - linear_height(d.amount));
+			})
+			.y1(0)
+			.interpolate("basis");
+
+		var linear_line = d3.svg.line()
+			.x(function(d, i){
+				return (0 - linear_angle(d.time));
+			})
+			.y(function(d, i){
+				return (0 - linear_height(d.amount));
+			})
+			.interpolate("basis");
+
+		vis.selectAll(".area")
+			.transition()
+			.duration(2000)
+			.attr("d", linear_area);
+
+		vis.selectAll(".line")
+			.transition()
+			.duration(2000)
+			.attr("d", linear_line);
+
+		vis.selectAll(".in_line")
+			.transition()
+			.duration(2000)
+			.attr("d", linear_line);
+
+		vis.selectAll(".min_line")
+			.transition()
+			.duration(2000)
+			.attr("d", linear_line);
+
+		vis.selectAll(".max_line")
+			.transition()
+			.duration(2000)
+			.attr("d", linear_line);
+
+		vis.selectAll(".in_area")
+			.transition()
+			.duration(2000)
+			.attr("d", linear_area);
 	}
 };
