@@ -2,9 +2,9 @@ var Clock = {
 	vis: null,
 
 	draw: function(){
-		var width = 748,
+		var width = 1024,
 			height = 748,
-			outer_radius = width/2 -80,
+			outer_radius = 748/2 - 80,
 			inner_radius = 180;
 
 		var consumption = [
@@ -135,9 +135,6 @@ var Clock = {
 			coordinates.push(temp);
 		}
 
-
-		console.log(coordinates);
-
 		var angle = d3.time.scale().range([0, 2 * Math.PI]).domain([0, 24]);
 		var radius = d3.scale.linear().range([inner_radius, outer_radius]).domain([0, 1]);
 		var p_radius = d3.scale.linear().range([inner_radius, inner_radius - 60]).domain([0, 1]);
@@ -182,10 +179,10 @@ var Clock = {
 	    //generator of coordinates
 	    var coor = d3.svg.line()
 	    	.x(function(d, i){
-	    		return Math.cos(angle(d))*(inner_radius+i*160);
+	    		return Math.cos(angle(d))*(inner_radius+i*150);
 	    	})
 	    	.y(function(d, i){
-	    		return Math.sin(angle(d))*(inner_radius+i*160);
+	    		return Math.sin(angle(d))*(inner_radius+i*150);
 	    	})
 	    	.interpolate('linear');
 
@@ -245,11 +242,11 @@ var Clock = {
 
 	},
 
-	to_linear: function(){
+	to_linear: function(callback){
 		vis.selectAll(".coordinates").remove();
 		vis.selectAll(".daytime_arc").remove();
 
-		var linear_angle = d3.time.scale().range([0, 374]).domain([19, 0]);
+		var linear_angle = d3.time.scale().range([0, 512]).domain([19, 0]);
 		var linear_height = d3.scale.linear().range([0, 114]).domain([0, 1]);
 
 		var linear_area = d3.svg.area()
@@ -258,6 +255,16 @@ var Clock = {
 			})
 			.y0(function(d){
 				return (0 - linear_height(d.amount));
+			})
+			.y1(0)
+			.interpolate("basis");
+
+		var under_linear_area = d3.svg.area()
+			.x(function(d, i){
+				return (0 - linear_angle(d.time));
+			})
+			.y0(function(d){
+				return linear_height(d.amount);
 			})
 			.y1(0)
 			.interpolate("basis");
@@ -271,34 +278,67 @@ var Clock = {
 			})
 			.interpolate("basis");
 
+		var under_linear_line = d3.svg.line()
+			.x(function(d, i){
+				return (0 - linear_angle(d.time));
+			})
+			.y(function(d, i){
+				return linear_height(d.amount);
+			})
+			.interpolate("basis");
+
+		var unroll_duration = 1600;
+		var shift = -240;
+		var shift_duration = 1000;
+
 		vis.selectAll(".area")
 			.transition()
-			.duration(2000)
-			.attr("d", linear_area);
+			.duration(unroll_duration)
+			.attr("d", linear_area)
+			.transition()
+			.duration(shift_duration)
+			.attr("transform", "translate(" + 0 + "," + shift + ")");
 
 		vis.selectAll(".line")
 			.transition()
-			.duration(2000)
-			.attr("d", linear_line);
+			.duration(unroll_duration)
+			.attr("d", linear_line)
+			.transition()
+			.duration(shift_duration)
+			.attr("transform", "translate(" + 0 + "," + shift + ")");
 
 		vis.selectAll(".in_line")
 			.transition()
-			.duration(2000)
-			.attr("d", linear_line);
+			.duration(unroll_duration)
+			.attr("d", under_linear_line)
+			.transition()
+			.duration(shift_duration)
+			.attr("transform", "translate(" + 0 + "," + shift + ")");
 
 		vis.selectAll(".min_line")
 			.transition()
-			.duration(2000)
-			.attr("d", linear_line);
+			.duration(unroll_duration)
+			.attr("d", linear_line)
+			.transition()
+			.duration(shift_duration)
+			.attr("transform", "translate(" + 0 + "," + shift + ")");
 
 		vis.selectAll(".max_line")
 			.transition()
-			.duration(2000)
-			.attr("d", linear_line);
+			.duration(unroll_duration)
+			.attr("d", linear_line)
+			.transition()
+			.duration(shift_duration)
+			.attr("transform", "translate(" + 0 + "," + shift + ")");
 
 		vis.selectAll(".in_area")
 			.transition()
-			.duration(2000)
-			.attr("d", linear_area);
+			.duration(unroll_duration)
+			.attr("d", under_linear_area)
+			.transition()
+			.duration(shift_duration)
+			.attr("transform", "translate(" + 0 + "," + shift + ")");
+
+		setTimeout(callback, unroll_duration + shift_duration);
 	}
 };

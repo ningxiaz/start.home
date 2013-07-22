@@ -13,11 +13,12 @@
     color: #444;
     position: absolute;
     top: 5px;
-    left: 10px; }
+    left: 10px;
+    z-index: 5; }
 
   #clock {
-    width: 748px;
-    margin: 0 auto; }
+    width: 1024px;
+    margin: 0; }
     #clock .area {
       fill: #ffbb78;
       opacity: 0.5; }
@@ -47,4 +48,10 @@
       stroke: none;
       opacity: 0.7; }
     #clock .coordinates {
-      stroke: #ccc; } }
+      stroke: #ccc; }
+
+  #floorplan {
+    position: absolute;
+    z-index: 5;
+    top: 240px;
+    left: 342px; } }

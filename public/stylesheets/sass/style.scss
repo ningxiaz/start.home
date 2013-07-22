@@ -19,11 +19,12 @@
       position: absolute;
       top: 5px;
       left: 10px;
+      z-index: 5;
     }
 
     #clock{
-      width: $screen-height;
-      margin: 0 auto;
+      width: $screen-width;
+      margin: 0;
 
       .area{
         fill: #ffbb78;
@@ -70,6 +71,13 @@
       .coordinates{
          stroke: #ccc;
       }
+    }
+
+    #floorplan{
+      position: absolute;
+      z-index: 5;
+      top: 240px;
+      left: 342px;
     }
 
 }
