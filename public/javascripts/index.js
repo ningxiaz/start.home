@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	var container = document.getElementById('grid-container');
-	var past = document.getElementById('past-timeline')
 
 	// general panning
 	Segue(container, {
@@ -8,44 +7,64 @@ $(document).ready(function() {
 		states: 3,
 		initial_state: 1,
 		reverse: true,
-		elasticity: .4,
-		manipulator: navWindow
+		elasticity: .2,
+		manipulator: navPanes
 	})
 
-	// really rough scrolling through past... probably not ideal
-	Segue(past, {
-		max: 400,
-		complete: false,
+	Segue(container, {
+		max: window.innerWidth,
+		states: 3,
+		initial_state: 1,
 		reverse: true,
-		manipulator: navPast
+		elasticity: .2,
+		manipulator: navTimeline
 	})
 
 	// percent = how far into the transition we are
 	// offset = which step we're on
 	// animate = whether or not the transition should be animated
 	// element = the element Segue is watching for gestures
-	function navWindow(percent, offset, animate, element) {
+	function navPanes(percent, offset, animate, element) {
 		$('#grid-container').removeClass('animate');
 		if (animate) $('#grid-container').addClass('animate');
 
-		$('#timeline').removeClass('animate');
-		if (animate) $('#timeline').addClass('animate');
-
 		$('#grid-container').css('-webkit-transform', 'translate3d('+ -1*(percent+offset)*100 +'%,0,0)')
-
-		$('#timeline').css('-webkit-transform', 'translate3d('+ -.25*(percent+offset)*100 +'%,0,0)')
 	}
 
-	function navPast(percent, offset, animate, element) {
-		$('#past-timeline').removeClass('animate');
-		if (animate) $('#past-timeline').addClass('animate');
+	function navTimeline(percent, offset, animate, element) {
+		$('#timeline figure').removeClass('animate');
+		if (animate) $('#timeline figure').addClass('animate');
 
-		$('#past-timeline').css('-webkit-transform', 'translate3d('+-1*(percent+offset)*100 +'%,0,0)')
+		$('#timeline figure').css('-webkit-transform', 'translate3d('+ -0.16666667*(percent+offset)*100 +'%,0,0)')
 	}
 
-	past_timeline.init();
-	past_timeline.draw();
+	data_manager.on('init', function(d) {
+		timeline.init(d);
+		timeline.draw();
+	})
 
-	future_timeline.init();
-	future_timeline.draw();
+	data_manager.on("update", function(d) {
+		timeline.update(d);
+	})
+
+	$('body').on('touchstart', function(e) {
+		$('#grid-container').addClass('touched')
+	})
+
+	$('body').on('touchend', function(e) {
+		$('#grid-container').removeClass('touched')
+	})
 })
+
+$(document).on('statechange', function(e, state) {
+	$('.past-visible, .present-visible, .future-visible').removeClass('visible')
+
+	if (state == 0) $('.past-visible').addClass('visible');
+	if (state == 1) $('.present-visible').addClass('visible');
+	if (state == 2) $('.future-visible').addClass('visible');
+})
+
+var socket = io.connect('http://10.0.1.45');
+socket.on('init',   function (data) { data_manager.init(data); });
+socket.on('update', function (data) { data_manager.update(data); });
+

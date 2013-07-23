@@ -8,9 +8,12 @@ html
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
 
+		script(type="text/javascript", src="/socket.io/socket.io.js")
+
 		script(type='text/javascript', src='javascripts/segue.js')
-		script(type='text/javascript', src='javascripts/past-timeline.js')
-		script(type='text/javascript', src='javascripts/future-timeline.js')
+		script(type='text/javascript', src='javascripts/sample_data.js')
+		script(type='text/javascript', src='javascripts/data-manager.js')
+		script(type='text/javascript', src='javascripts/timeline-brush.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
@@ -28,23 +31,28 @@ html
 
 		//- #scroll-wrap fixes a bug with how iOS handles scrolling with the grid
 		section#timeline
-			figure.past
-				svg#past-timeline
-			figure.future
-				svg#future-timeline
+			figure
+				svg
+			
+			//- div#pane-helpers
+			//- 	div.past-helper.past-visible
+			//- 		h1 Past
+			//- 	div.present-helper.present-visible
+			//- 		//- figure#present-focus
+			//- 	div.future-helper.future-visible
+			//- 		h1 Future
+
 
 		div#grid-container
+			section#overview.pane
+				h2 Overview
+				p Floorplan visualization could go here...
 
-				section#overview.pane
-					h2 Overview
-					p Floorplan visualization could go here...
+			section#past.pane
+				h1 Past
+				figure.line-graph
 
-				section#past.pane
-					h2 Past
-					p Here we can allow brushing on the timeline and some nice in-depth visualizations as prototyped
-
-				section#goals.pane
-					h2 Goals
-
+			section#goals.pane
+				h1 Goals
 			
 

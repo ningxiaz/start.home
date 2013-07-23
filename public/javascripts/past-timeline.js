@@ -1,15 +1,15 @@
 var past_timeline = {
 	data: [
-		{time: 0, usage: 1},
-		{time: 1, usage: 2},
-		{time: 2, usage: 3},
-		{time: 3, usage: 2},
-		{time: 4, usage: 4},
-		{time: 5, usage: 1},
-		{time: 6, usage: 6},
-		{time: 7, usage: 2},
-		{time: 8, usage: 3},
-		{time: 9, usage: 3},
+		{time: 00, usage: 1},
+		{time: 01, usage: 2},
+		{time: 02, usage: 3},
+		{time: 03, usage: 2},
+		{time: 04, usage: 4},
+		{time: 05, usage: 1},
+		{time: 06, usage: 6},
+		{time: 07, usage: 2},
+		{time: 08, usage: 3},
+		{time: 09, usage: 3},
 		{time: 10, usage: 2},
 		{time: 11, usage: 3},
 		{time: 12, usage: 4},
@@ -23,20 +23,23 @@ var past_timeline = {
 	],
 
 	width: 0,
-	height: 60,
-	x: d3.time.scale(),
-	y: d3.time.scale(),
+	height: 30,
+	x: d3.scale.linear(),
+	y: d3.scale.linear(),
 	line: d3.svg.line(),
+	xAxis: d3.svg.axis(),
 
 	init: function() {
-		height = 60;
-		width = $('#timeline .past').width();
+		this.height = 60;
+		this.width = $('#timeline .past').width();
 
-		x = d3.time.scale()
-    		.range([0, width]);
+		x = d3.scale.linear()
+    		.range([0, this.width]);
 
 		y = d3.scale.linear()
-    		.range([height, 0]);
+    		.range([this.height, 0]);
+
+    	this.xAxis.scale(x).tickValues([2,6,10,14])
 	},
 
 	draw: function() {
@@ -54,5 +57,9 @@ var past_timeline = {
 			.datum(this.data)
 			.attr("class", "line")
 			.attr("d", line);
+
+		svg.append("g")
+    		.attr("transform", "translate(0,35)")
+    		.call(this.xAxis);
 	}
 }

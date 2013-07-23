@@ -137,6 +137,7 @@ function Segue(element, options) {
     }
 
     manipulator(state, 0, true, element);
+    $(element).trigger('statechange', state)
   }
 
   function handleToggle() {

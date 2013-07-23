@@ -31,47 +31,79 @@ i[class*="entypo"]
 .center
 	margin 0 auto
 
-#timeline
-	clearfix()
-	width 200%
-	padding 30px
+.past-visible, .present-visible, .future-visible
+	-webkit-transition opacity .3s
+	-webkit-transform translate3d(0,0,0)
+	opacity 0
 
-	h1
-		color white
+.visible
+	opacity 1
+
+#timeline
+
+	clearfix()
+	width 150%
+	// padding 30p
 
 	-webkit-transform translate3d(0,0,0)
+	background light-blue
+	height 70px
 
-	.past, .future
-		float left
+	figure
 		margin 0
-		height 60px
-		line-height 60px
-		text-align center
-
-	.past
-		width 60%
-		background blue
-
-		border-radius left 3px
+		height 70px
 
 		svg
+			height 70px
+
 			.line
-				stroke #fff
+				z-index 30
+				stroke white
+				stroke-width 2px
+				stroke-linecap round !important
 
-	.future
-		width 40%
-		background light-blue
+			.axis.x
+				transform translate(0,42px)
 
-		border-radius right 3px
+				line
+					display none
 
-		svg
-			.line
-				stroke #fff
-				stroke-dasharray 10px
+				text
+					fill rgba(255,255,255,.5)
+					text-transform lowercase
+					font-size 11px
+
+			.brush
+				stroke-width 2px
+
+
+	.past-helper, .present-helper, .future-helper
+		position absolute
+		top 60px
+		margin 0
+		padding 0
+		width 100%
+
+	.present-helper
+		-webkit-transform translate3d(16.66666666%,0,0)
+
+		figure
+			height 60px
+			margin 0
+			background blue
+
+			svg
+				.line
+					stroke white
+
+	.future-helper
+		-webkit-transform translate3d(33.33333333%,0,0)
 
 // these styles should probably be done through javascript, but it might be faster to just hardcode them in the CSS instead of waiting for $(document).ready?
 
 #grid-container
+	z-index 0
+	// padding-top 60px
 	-webkit-transform translate3d(0,0,0)
 
 #overview
