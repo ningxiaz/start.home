@@ -1,0 +1,1582 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+* {
+  -webkit-font-smoothing: antialiased;
+}
+.entypo-phone:before {
+  font-family: Entypo;
+  content: "📞";
+}
+.entypo-mobile:before {
+  font-family: Entypo;
+  content: "📱";
+}
+.entypo-mouse:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-address:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-mail:before {
+  font-family: Entypo;
+  content: "✉";
+}
+.entypo-paper-plane:before {
+  font-family: Entypo;
+  content: "🔿";
+}
+.entypo-pencil:before {
+  font-family: Entypo;
+  content: "✎";
+}
+.entypo-feather:before {
+  font-family: Entypo;
+  content: "✒";
+}
+.entypo-attach:before {
+  font-family: Entypo;
+  content: "📎";
+}
+.entypo-inbox:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-reply:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-reply-all:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-forward:before {
+  font-family: Entypo;
+  content: "➦";
+}
+.entypo-user:before {
+  font-family: Entypo;
+  content: "👤";
+}
+.entypo-users:before {
+  font-family: Entypo;
+  content: "👥";
+}
+.entypo-add-user:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-vcard:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-export:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-location:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-map:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-compass:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-direction:before {
+  font-family: Entypo;
+  content: "➢";
+}
+.entypo-hair-cross:before {
+  font-family: Entypo;
+  content: "🎯";
+}
+.entypo-share:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-shareable:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-heart:before {
+  font-family: Entypo;
+  content: "♥";
+}
+.entypo-heart-empty:before {
+  font-family: Entypo;
+  content: "♡";
+}
+.entypo-star:before {
+  font-family: Entypo;
+  content: "★";
+}
+.entypo-star-empty:before {
+  font-family: Entypo;
+  content: "☆";
+}
+.entypo-thumbs-up:before {
+  font-family: Entypo;
+  content: "👍";
+}
+.entypo-thumbs-down:before {
+  font-family: Entypo;
+  content: "👎";
+}
+.entypo-chat:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-comment:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-quote:before {
+  font-family: Entypo;
+  content: "❞";
+}
+.entypo-home:before {
+  font-family: Entypo;
+  content: "⌂";
+}
+.entypo-popup:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-search:before {
+  font-family: Entypo;
+  content: "🔍";
+}
+.entypo-flashlight:before {
+  font-family: Entypo;
+  content: "🔦";
+}
+.entypo-print:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-bell:before {
+  font-family: Entypo;
+  content: "🔔";
+}
+.entypo-link:before {
+  font-family: Entypo;
+  content: "🔗";
+}
+.entypo-flag:before {
+  font-family: Entypo;
+  content: "⚑";
+}
+.entypo-cog:before {
+  font-family: Entypo;
+  content: "⚙";
+}
+.entypo-tools:before {
+  font-family: Entypo;
+  content: "⚒";
+}
+.entypo-trophy:before {
+  font-family: Entypo;
+  content: "🏆";
+}
+.entypo-tag:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-camera:before {
+  font-family: Entypo;
+  content: "📷";
+}
+.entypo-megaphone:before {
+  font-family: Entypo;
+  content: "📣";
+}
+.entypo-moon:before {
+  font-family: Entypo;
+  content: "☽";
+}
+.entypo-palette:before {
+  font-family: Entypo;
+  content: "🎨";
+}
+.entypo-leaf:before {
+  font-family: Entypo;
+  content: "🍂";
+}
+.entypo-note:before {
+  font-family: Entypo;
+  content: "♪";
+}
+.entypo-beamed-note:before {
+  font-family: Entypo;
+  content: "♫";
+}
+.entypo-new:before {
+  font-family: Entypo;
+  content: "💥";
+}
+.entypo-graduation-cap:before {
+  font-family: Entypo;
+  content: "🎓";
+}
+.entypo-book:before {
+  font-family: Entypo;
+  content: "📕";
+}
+.entypo-newspaper:before {
+  font-family: Entypo;
+  content: "📰";
+}
+.entypo-bag:before {
+  font-family: Entypo;
+  content: "👜";
+}
+.entypo-airplane:before {
+  font-family: Entypo;
+  content: "✈";
+}
+.entypo-lifebuoy:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-eye:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-clock:before {
+  font-family: Entypo;
+  content: "🕔";
+}
+.entypo-mic:before {
+  font-family: Entypo;
+  content: "🎤";
+}
+.entypo-calendar:before {
+  font-family: Entypo;
+  content: "📅";
+}
+.entypo-flash:before {
+  font-family: Entypo;
+  content: "⚡";
+}
+.entypo-thunder-cloud:before {
+  font-family: Entypo;
+  content: "⛈";
+}
+.entypo-droplet:before {
+  font-family: Entypo;
+  content: "💧";
+}
+.entypo-cd:before {
+  font-family: Entypo;
+  content: "💿";
+}
+.entypo-briefcase:before {
+  font-family: Entypo;
+  content: "💼";
+}
+.entypo-air:before {
+  font-family: Entypo;
+  content: "💨";
+}
+.entypo-hourglass:before {
+  font-family: Entypo;
+  content: "⏳";
+}
+.entypo-gauge:before {
+  font-family: Entypo;
+  content: "🛇";
+}
+.entypo-language:before {
+  font-family: Entypo;
+  content: "🎔";
+}
+.entypo-network:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-key:before {
+  font-family: Entypo;
+  content: "🔑";
+}
+.entypo-battery:before {
+  font-family: Entypo;
+  content: "🔋";
+}
+.entypo-bucket:before {
+  font-family: Entypo;
+  content: "📾";
+}
+.entypo-magnet:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-drive:before {
+  font-family: Entypo;
+  content: "📽";
+}
+.entypo-cup:before {
+  font-family: Entypo;
+  content: "☕";
+}
+.entypo-rocket:before {
+  font-family: Entypo;
+  content: "🚀";
+}
+.entypo-brush:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-suitcase:before {
+  font-family: Entypo;
+  content: "🛆";
+}
+.entypo-traffic-cone:before {
+  font-family: Entypo;
+  content: "🛈";
+}
+.entypo-globe:before {
+  font-family: Entypo;
+  content: "🌎";
+}
+.entypo-keyboard:before {
+  font-family: Entypo;
+  content: "⌨";
+}
+.entypo-browser:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-publish:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-progress-3:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-progress-2:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-progress-1:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-progress-0:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-light-down:before {
+  font-family: Entypo;
+  content: "🔅";
+}
+.entypo-light-up:before {
+  font-family: Entypo;
+  content: "🔆";
+}
+.entypo-adjust:before {
+  font-family: Entypo;
+  content: "◑";
+}
+.entypo-code:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-monitor:before {
+  font-family: Entypo;
+  content: "💻";
+}
+.entypo-infinity:before {
+  font-family: Entypo;
+  content: "∞";
+}
+.entypo-light-bulb:before {
+  font-family: Entypo;
+  content: "💡";
+}
+.entypo-credit-card:before {
+  font-family: Entypo;
+  content: "💳";
+}
+.entypo-database:before {
+  font-family: Entypo;
+  content: "📸";
+}
+.entypo-voicemail:before {
+  font-family: Entypo;
+  content: "✇";
+}
+.entypo-clipboard:before {
+  font-family: Entypo;
+  content: "📋";
+}
+.entypo-cart:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-box:before {
+  font-family: Entypo;
+  content: "📦";
+}
+.entypo-ticket:before {
+  font-family: Entypo;
+  content: "🎫";
+}
+.entypo-rss:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-signal:before {
+  font-family: Entypo;
+  content: "📶";
+}
+.entypo-thermometer:before {
+  font-family: Entypo;
+  content: "📿";
+}
+.entypo-water:before {
+  font-family: Entypo;
+  content: "💦";
+}
+.entypo-sweden:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-line-graph:before {
+  font-family: Entypo;
+  content: "📈";
+}
+.entypo-pie-chart:before {
+  font-family: Entypo;
+  content: "◴";
+}
+.entypo-bar-graph:before {
+  font-family: Entypo;
+  content: "📊";
+}
+.entypo-area-graph:before {
+  font-family: Entypo;
+  content: "🔾";
+}
+.entypo-lock:before {
+  font-family: Entypo;
+  content: "🔒";
+}
+.entypo-lock-open:before {
+  font-family: Entypo;
+  content: "🔓";
+}
+.entypo-logout:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-login:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-check:before {
+  font-family: Entypo;
+  content: "✓";
+}
+.entypo-cross:before {
+  font-family: Entypo;
+  content: "❌";
+}
+.entypo-squared-minus:before {
+  font-family: Entypo;
+  content: "⊟";
+}
+.entypo-squared-plus:before {
+  font-family: Entypo;
+  content: "⊞";
+}
+.entypo-squared-cross:before {
+  font-family: Entypo;
+  content: "❎";
+}
+.entypo-circled-minus:before {
+  font-family: Entypo;
+  content: "⊖";
+}
+.entypo-circled-plus:before {
+  font-family: Entypo;
+  content: "⊕";
+}
+.entypo-circled-cross:before {
+  font-family: Entypo;
+  content: "✖";
+}
+.entypo-minus:before {
+  font-family: Entypo;
+  content: "➖";
+}
+.entypo-plus:before {
+  font-family: Entypo;
+  content: "➕";
+}
+.entypo-erase:before {
+  font-family: Entypo;
+  content: "⌫";
+}
+.entypo-block:before {
+  font-family: Entypo;
+  content: "🚫";
+}
+.entypo-info:before {
+  font-family: Entypo;
+  content: "ℹ";
+}
+.entypo-circled-info:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-help:before {
+  font-family: Entypo;
+  content: "❓";
+}
+.entypo-circled-help:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-warning:before {
+  font-family: Entypo;
+  content: "⚠";
+}
+.entypo-cycle:before {
+  font-family: Entypo;
+  content: "🔄";
+}
+.entypo-cw:before {
+  font-family: Entypo;
+  content: "⟳";
+}
+.entypo-ccw:before {
+  font-family: Entypo;
+  content: "⟲";
+}
+.entypo-shuffle:before {
+  font-family: Entypo;
+  content: "🔀";
+}
+.entypo-back:before {
+  font-family: Entypo;
+  content: "🔙";
+}
+.entypo-level-down:before {
+  font-family: Entypo;
+  content: "↳";
+}
+.entypo-retweet:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-loop:before {
+  font-family: Entypo;
+  content: "🔁";
+}
+.entypo-back-in-time:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-level-up:before {
+  font-family: Entypo;
+  content: "↰";
+}
+.entypo-switch:before {
+  font-family: Entypo;
+  content: "⇆";
+}
+.entypo-numbered-list:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-add-to-list:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-layout:before {
+  font-family: Entypo;
+  content: "⚏";
+}
+.entypo-list:before {
+  font-family: Entypo;
+  content: "☰";
+}
+.entypo-text-doc:before {
+  font-family: Entypo;
+  content: "📄";
+}
+.entypo-text-doc-inverted:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-doc:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-docs:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-landscape-doc:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-picture:before {
+  font-family: Entypo;
+  content: "🌄";
+}
+.entypo-video:before {
+  font-family: Entypo;
+  content: "🎬";
+}
+.entypo-music:before {
+  font-family: Entypo;
+  content: "🎵";
+}
+.entypo-folder:before {
+  font-family: Entypo;
+  content: "📁";
+}
+.entypo-archive:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-trash:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-upload:before {
+  font-family: Entypo;
+  content: "📤";
+}
+.entypo-download:before {
+  font-family: Entypo;
+  content: "📥";
+}
+.entypo-save:before {
+  font-family: Entypo;
+  content: "💾";
+}
+.entypo-install:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-cloud:before {
+  font-family: Entypo;
+  content: "☁";
+}
+.entypo-upload-cloud:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-bookmark:before {
+  font-family: Entypo;
+  content: "🔖";
+}
+.entypo-bookmarks:before {
+  font-family: Entypo;
+  content: "📑";
+}
+.entypo-open-book:before {
+  font-family: Entypo;
+  content: "📖";
+}
+.entypo-play:before {
+  font-family: Entypo;
+  content: "▶";
+}
+.entypo-paus:before {
+  font-family: Entypo;
+  content: "‖";
+}
+.entypo-record:before {
+  font-family: Entypo;
+  content: "●";
+}
+.entypo-stop:before {
+  font-family: Entypo;
+  content: "■";
+}
+.entypo-ff:before {
+  font-family: Entypo;
+  content: "⏩";
+}
+.entypo-fb:before {
+  font-family: Entypo;
+  content: "⏪";
+}
+.entypo-to-start:before {
+  font-family: Entypo;
+  content: "⏮";
+}
+.entypo-to-end:before {
+  font-family: Entypo;
+  content: "⏭";
+}
+.entypo-resize-full:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-resize-small:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-volume:before {
+  font-family: Entypo;
+  content: "⏷";
+}
+.entypo-sound:before {
+  font-family: Entypo;
+  content: "🔊";
+}
+.entypo-mute:before {
+  font-family: Entypo;
+  content: "🔇";
+}
+.entypo-flow-cascade:before {
+  font-family: Entypo;
+  content: "🕨";
+}
+.entypo-flow-branch:before {
+  font-family: Entypo;
+  content: "🕩";
+}
+.entypo-flow-tree:before {
+  font-family: Entypo;
+  content: "🕪";
+}
+.entypo-flow-line:before {
+  font-family: Entypo;
+  content: "🕫";
+}
+.entypo-flow-parallel:before {
+  font-family: Entypo;
+  content: "🕬";
+}
+.entypo-left-bold:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-down-bold:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-up-bold:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-right-bold:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-left:before {
+  font-family: Entypo;
+  content: "⬅";
+}
+.entypo-down:before {
+  font-family: Entypo;
+  content: "⬇";
+}
+.entypo-up:before {
+  font-family: Entypo;
+  content: "⬆";
+}
+.entypo-right:before {
+  font-family: Entypo;
+  content: "➡";
+}
+.entypo-circled-left:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-circled-down:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-circled-up:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-circled-right:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-triangle-left:before {
+  font-family: Entypo;
+  content: "◂";
+}
+.entypo-triangle-down:before {
+  font-family: Entypo;
+  content: "▾";
+}
+.entypo-triangle-up:before {
+  font-family: Entypo;
+  content: "▴";
+}
+.entypo-triangle-right:before {
+  font-family: Entypo;
+  content: "▸";
+}
+.entypo-chevron-left:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-down:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-up:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-right:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-small-left:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-small-down:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-small-up:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-small-right:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-thin-left:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-thin-down:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-thin-up:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-chevron-thin-right:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-left-thin:before {
+  font-family: Entypo;
+  content: "←";
+}
+.entypo-down-thin:before {
+  font-family: Entypo;
+  content: "↓";
+}
+.entypo-up-thin:before {
+  font-family: Entypo;
+  content: "↑";
+}
+.entypo-right-thin:before {
+  font-family: Entypo;
+  content: "→";
+}
+.entypo-arrow-combo:before {
+  font-family: Entypo;
+  content: "";
+}
+.entypo-three-dots:before {
+  font-family: Entypo;
+  content: "⏶";
+}
+.entypo-two-dots:before {
+  font-family: Entypo;
+  content: "⏵";
+}
+.entypo-dot:before {
+  font-family: Entypo;
+  content: "⏴";
+}
+.entypo-cc:before {
+  font-family: Entypo;
+  content: "🕅";
+}
+.entypo-cc-by:before {
+  font-family: Entypo;
+  content: "🕆";
+}
+.entypo-cc-nc:before {
+  font-family: Entypo;
+  content: "🕇";
+}
+.entypo-cc-nc-eu:before {
+  font-family: Entypo;
+  content: "🕈";
+}
+.entypo-cc-nc-jp:before {
+  font-family: Entypo;
+  content: "🕉";
+}
+.entypo-cc-sa:before {
+  font-family: Entypo;
+  content: "🕊";
+}
+.entypo-cc-nd:before {
+  font-family: Entypo;
+  content: "🕋";
+}
+.entypo-cc-pd:before {
+  font-family: Entypo;
+  content: "🕌";
+}
+.entypo-cc-zero:before {
+  font-family: Entypo;
+  content: "🕍";
+}
+.entypo-cc-share:before {
+  font-family: Entypo;
+  content: "🕎";
+}
+.entypo-cc-remix:before {
+  font-family: Entypo;
+  content: "🕏";
+}
+.entypo-db-logo:before {
+  font-family: Entypo;
+  content: "🗹";
+}
+.entypo-db-shape:before {
+  font-family: Entypo;
+  content: "🗺";
+}
+@font-face {
+  font-family: 'Entypo';
+  font-weight: normal;
+  font-style: normal;
+  src: url("/fonts/entypo.eot");
+  src: url("/fonts/entypo.eot?#iefix") format('embedded-opentype'), url("/fonts/entypo.woff") format('woff'), url("/fonts/entypo.ttf") format('truetype'), url("/fonts/entypo.svg#'entypo'") format('svg');
+}
+i[class*="entypo"] {
+  font-style: normal;
+}
+.button,
+button {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: #312d2c;
+  border: 2px solid rgba(0,0,0,0.4);
+  width: 60px;
+  height: 60px;
+  line-height: 50px;
+  font-size: 40px;
+}
+.button:hover,
+button:hover {
+  background: #6483a3;
+  color: #fff;
+}
+.button:active,
+button:active,
+.button.active,
+button.active {
+  background: #312d2c;
+  color: #fff;
+}
+.button.disabled,
+button.disabled {
+  cursor: default;
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+.button.disabled:active,
+button.disabled:active,
+.button.disabled.active,
+button.disabled.active {
+  background: none;
+  color: #312d2c;
+  border-color: none;
+}
+.button-group .button,
+.button-group button {
+  display: block;
+  float: left;
+  border-right-width: 0;
+}
+.button-group .button:first-of-type,
+.button-group button:first-of-type {
+  -webkit-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.button-group .button:last-of-type,
+.button-group button:last-of-type {
+  -webkit-border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-right-width: 2px;
+}
+.circle-buttons button,
+.circle-buttons .button,
+.button.circle,
+button.circle {
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  overflow: hidden;
+  font-size: 40px;
+  line-height: 51px;
+}
+html {
+  font-family: Proxima Nova, Avenir, Helvetica;
+}
+p,
+.p,
+ul,
+ol,
+hr,
+table,
+form,
+pre,
+h1,
+.alpha,
+h2,
+.beta {
+  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
+  color: #312d2c;
+}
+h1,
+.alpha {
+  font-size: 60px;
+  font-size: 3rem;
+  font-weight: 700;
+}
+h2,
+.beta {
+  font-size: 30px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+h3,
+.gamma {
+  font-size: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+hr {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-top: -1px;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.scroll-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+#grid-container {
+  width: 100%;
+  height: 100%;
+}
+#control-shortcuts {
+  z-index: 100;
+  height: 60px;
+}
+#control-shortcuts ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+#control-shortcuts ul li:last-of-type {
+  margin: 0;
+}
+.pane {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+}
+.vis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.hint-right,
+.hint-left {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+}
+.hint-right {
+  right: 30px;
+}
+.hint-left {
+  left: 30px;
+}
+.hint-up,
+.hint-down {
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+}
+.hint-up {
+  top: 30px;
+}
+.hint-down {
+  bottom: 30px;
+}
+.bottom-right {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+.bottom-right div {
+  float: left;
+  margin-right: 15px;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+@media screen and (max-width: 650px) {
+  html {
+    font-size: 80%;
+  }
+}
+.hidden {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  display: none;
+}
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.hide-when-idle {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transition: opacity 10s;
+}
+body.idle .hide-when-idle {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+.pane {
+  -webkit-transition: -webkit-filter 0.2s;
+}
+.animate {
+  -webkit-transition: all 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+#grid-container,
+#timeline {
+  -webkit-backface-visibility: hidden;
+}
+-webkit-transform translate3d(0,
+0,
+0) scale3d(1,
+1,
+1),
+-webkit-transform-style preserve-3d,
+.pane {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform-style: preserve-3d;
+}
+.modal {
+  z-index: 250;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30px;
+  background: rgba(0,0,0,0.8);
+}
+.modal header {
+  margin: 0;
+  background: #fff;
+  height: 90px;
+  line-height: 50px;
+}
+.modal header .left-col,
+.modal header .right-col {
+  float: left;
+  margin: 0;
+  height: 100%;
+}
+.modal header .left-col {
+  width: 30%;
+}
+.modal header .right-col {
+  width: 70%;
+  padding: 15px;
+}
+.modal header .modal-title,
+.modal header .icon,
+.modal header .mode-title {
+  float: left;
+  height: 100%;
+}
+.modal header .modal-title {
+  line-height: 90px;
+  margin: 0;
+  padding: 0;
+}
+.modal header .mode-title {
+  line-height: 70px;
+}
+.modal header .icon {
+  line-height: 75px;
+  margin-right: 15px;
+  width: 60px;
+  text-align: center;
+  font-size: 60px;
+  background: rgba(0,0,0,0.3);
+  color: #fff;
+}
+.modal header .submit,
+.modal header .save {
+  display: inline-block;
+  margin-left: 15px;
+  float: right;
+}
+.modal .content {
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  right: 30px;
+  bottom: 120px;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.3);
+}
+.modal .content .left-col,
+.modal .content .right-col {
+  float: left;
+  margin: 0;
+  height: 100%;
+}
+.modal .content .left-col {
+  border-right: 1px solid rgba(0,0,0,0.3);
+  height: 100%;
+  width: 30%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.modal .content .right-col {
+  width: 70%;
+  height: 100%;
+  padding: 15px;
+}
+.modal .content menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.modal .content menu li a {
+  padding: 0 15px;
+  display: block;
+  min-height: 60px;
+  line-height: 60px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: #6483a3;
+}
+.modal .content menu li a:active {
+  background: #6483a3;
+  color: #fff;
+}
+.modal .content .add {
+  display: block;
+  margin: 20px auto;
+}
+.vis {
+  text-align: center;
+}
+.ambient {
+  margin: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 20;
+}
+.context {
+  background: #97b5c9;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  width: 1024px !important;
+  margin: 0 auto;
+}
+.line {
+  stroke: #fff;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+.line {
+  fill: none;
+  stroke: #4682b4;
+  stroke-width: 1.5px;
+}
+.line .brush .extent {
+  stroke: #fff;
+  fill: #71dc7e;
+  shape-rendering: crispEdges;
+}
+#clock {
+  width: 768;
+  margin: 0 auto;
+}
+.area {
+  fill: #b0c4de;
+}
+.line {
+  fill: none;
+  stroke: #4682b4;
+  stroke-width: 1px;
+}
+.min_line {
+  stroke: #e377c2;
+  stroke-width: 1.5px;
+  stroke-dasharray: 3px;
+  fill: none;
+}
+.max_line {
+  stroke: #e6550d;
+  stroke-width: 1.5px;
+  stroke-dasharray: 3px;
+  fill: none;
+}
+.daytime_arc {
+  fill: #ff0;
+  stroke: none;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.vertical-line {
+  width: 1px;
+  height: 100px;
+  border-right: 1px solid #fff;
+}
+.center {
+  margin: 0 auto;
+}
+.past-visible,
+.present-visible,
+.future-visible {
+  -webkit-transition: opacity 0.3s;
+  -webkit-transform: translate3d(0, 0, 0);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+.visible {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+#timeline {
+  zoom: 1;
+  width: 150%;
+  -webkit-transform: translate3d(0, 0, 0);
+  background: #97b5c9;
+  height: 70px;
+}
+#timeline:before,
+#timeline:after {
+  content: "";
+  display: table;
+}
+#timeline:after {
+  clear: both;
+}
+#timeline figure {
+  margin: 0;
+  height: 70px;
+}
+#timeline figure svg {
+  height: 70px;
+}
+#timeline figure svg .line {
+  z-index: 30;
+  stroke: #fff;
+  stroke-width: 2px;
+  stroke-linecap: round !important;
+}
+#timeline figure svg .axis.x {
+  -webkit-transform: translate(0, 42px);
+  -moz-transform: translate(0, 42px);
+  -o-transform: translate(0, 42px);
+  -ms-transform: translate(0, 42px);
+  transform: translate(0, 42px);
+}
+#timeline figure svg .axis.x line {
+  display: none;
+}
+#timeline figure svg .axis.x text {
+  fill: rgba(255,255,255,0.5);
+  text-transform: lowercase;
+  font-size: 11px;
+}
+#timeline figure svg .brush {
+  stroke-width: 2px;
+}
+#timeline .past-helper,
+#timeline .present-helper,
+#timeline .future-helper {
+  position: absolute;
+  top: 60px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#timeline .present-helper {
+  -webkit-transform: translate3d(16.66666666%, 0, 0);
+}
+#timeline .present-helper figure {
+  height: 60px;
+  margin: 0;
+  background: #6483a3;
+}
+#timeline .present-helper figure svg .line {
+  stroke: #fff;
+}
+#timeline .future-helper {
+  -webkit-transform: translate3d(33.33333333%, 0, 0);
+}
+#grid-container {
+  z-index: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+#overview {
+  -webkit-transform: translate3d(100%, 0, 0);
+}
+#goals {
+  -webkit-transform: translate3d(200%, 0, 0);
+}

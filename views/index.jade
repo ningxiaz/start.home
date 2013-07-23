@@ -2,21 +2,51 @@ doctype 5
 html
 	head
 		title= title
+
+		//- Stylesheets
 		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700', rel='stylesheet', type='text/css')
-		link(rel='stylesheet', href='/stylesheets/compiled/base.css')
-		link(rel='stylesheet', href='/stylesheets/compiled/style.css')
+		link(rel='stylesheet', href='/stylesheets/start.home.css')
+
+		//- Javascript libraries
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
+		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
+
+		//- Our Javascript (there's a lot of it...)
+		script(type='text/javascript', src='javascripts/segue.js')
 		script(type='text/javascript', src='javascripts/ambient.js')
 		script(type='text/javascript', src='javascripts/clock.js')
 		script(type='text/javascript', src='javascripts/clock_water.js')
+		script(type='text/javascript', src='javascripts/sample_data.js')
+		script(type='text/javascript', src='javascripts/data-manager.js')
+		script(type='text/javascript', src='javascripts/timeline-brush.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
+		//- Meta tags
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
-		.main
-			#clock
+		//- Navigation
+		//- nav#control-shortcuts.fixed.bottom-left
+		//- 	ul.circle-buttons
+		//- 		li: a(href="#").button: i.entypo-list
+		//- 		li: a(href="#").button: i.entypo-light-bulb
+		//- 		li: a(href="#").button: i.entypo-thermometer
+
+		section#timeline
+			figure
+				svg
+
+		div#grid-container
+			section#overview.pane
+				#clock
+
+			section#past.pane
+				h1 Past
+				figure.line-graph
+
+			section#goals.pane
+				h1 Goals
 			
 

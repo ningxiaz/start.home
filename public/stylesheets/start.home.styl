@@ -1,0 +1,113 @@
+// THIRD PARTY STUFF
+// reset
+@import "nib"
+global-reset()
+*
+	-webkit-font-smoothing antialiased
+
+// icons
+@import "entypo"
+entypo-define('Entypo', '/fonts/entypo', 'entypo')
+i[class*="entypo"]
+	font-style normal
+
+// CUSTOM STUFF
+// modules
+@import "variables"
+@import "buttons" 
+@import "typography"
+@import "layout"
+@import "interaction"
+@import "modals"
+@import "visualizations"
+
+// quick styles for prototyping... I should organize these
+
+.vertical-line
+	width 1px
+	height 100px
+	border-right 1px solid white
+
+.center
+	margin 0 auto
+
+.past-visible, .present-visible, .future-visible
+	-webkit-transition opacity .3s
+	-webkit-transform translate3d(0,0,0)
+	opacity 0
+
+.visible
+	opacity 1
+
+#timeline
+
+	clearfix()
+	width 150%
+	// padding 30p
+
+	-webkit-transform translate3d(0,0,0)
+	background light-blue
+	height 70px
+
+	figure
+		margin 0
+		height 70px
+
+		svg
+			height 70px
+
+			.line
+				z-index 30
+				stroke white
+				stroke-width 2px
+				stroke-linecap round !important
+
+			.axis.x
+				transform translate(0,42px)
+
+				line
+					display none
+
+				text
+					fill rgba(255,255,255,.5)
+					text-transform lowercase
+					font-size 11px
+
+			.brush
+				stroke-width 2px
+
+
+	.past-helper, .present-helper, .future-helper
+		position absolute
+		top 60px
+		margin 0
+		padding 0
+		width 100%
+
+	.present-helper
+		-webkit-transform translate3d(16.66666666%,0,0)
+
+		figure
+			height 60px
+			margin 0
+			background blue
+
+			svg
+				.line
+					stroke white
+
+	.future-helper
+		-webkit-transform translate3d(33.33333333%,0,0)
+
+// these styles should probably be done through javascript, but it might be faster to just hardcode them in the CSS instead of waiting for $(document).ready?
+
+#grid-container
+	z-index 0
+	// padding-top 60px
+	-webkit-transform translate3d(0,0,0)
+
+#overview
+	-webkit-transform translate3d(100%,0,0)
+
+#goals
+	-webkit-transform translate3d(200%,0,0)
