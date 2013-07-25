@@ -11,15 +11,15 @@ html
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
+		script(type='text/javascript', src='https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js')	
 
 		//- Our Javascript (there's a lot of it...)
 		script(type='text/javascript', src='javascripts/segue.js')
-		script(type='text/javascript', src='javascripts/ambient.js')
 		script(type='text/javascript', src='javascripts/clock.js')
 		script(type='text/javascript', src='javascripts/clock_water.js')
 		script(type='text/javascript', src='javascripts/sample_data.js')
 		script(type='text/javascript', src='javascripts/data-manager.js')
-		script(type='text/javascript', src='javascripts/timeline-brush.js')
+		script(type='text/javascript', src='javascripts/random_data.js')
 		script(type='text/javascript', src='javascripts/index.js')
 
 		//- Meta tags
@@ -28,15 +28,11 @@ html
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
 		//- Navigation
-		//- nav#control-shortcuts.fixed.bottom-left
-		//- 	ul.circle-buttons
-		//- 		li: a(href="#").button: i.entypo-list
-		//- 		li: a(href="#").button: i.entypo-light-bulb
-		//- 		li: a(href="#").button: i.entypo-thermometer
-
-		section#timeline
-			figure
-				svg
+		nav#control-shortcuts.fixed.bottom-left
+			ul.circle-buttons
+				li: a(href="#").button: i.entypo-list
+				li: a(href="#").button: i.entypo-light-bulb
+				li: a(href="#").button: i.entypo-thermometer
 
 		div#grid-container
 			section#overview.pane
