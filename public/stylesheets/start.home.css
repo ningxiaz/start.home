@@ -1453,11 +1453,25 @@ body.idle .hide-when-idle {
   margin: 0 auto;
 }
 .area {
-  fill: #b0c4de;
+  fill: #ffbb78;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
 }
 .line {
   fill: none;
-  stroke: #4682b4;
+  stroke: #e6550d;
+  stroke-width: 1px;
+}
+.in_area {
+  fill: #a1d99b;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.in_line {
+  fill: none;
+  stroke: #31a354;
   stroke-width: 1px;
 }
 .min_line {
@@ -1475,9 +1489,12 @@ body.idle .hide-when-idle {
 .daytime_arc {
   fill: #ff0;
   stroke: none;
-  opacity: 0.8;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-  filter: alpha(opacity=80);
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+}
+.coordinates {
+  stroke: #ccc;
 }
 .vertical-line {
   width: 1px;
