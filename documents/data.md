@@ -7,7 +7,7 @@ So far I think each data update from the server should look something like this:
 ```javascript
 {
 	timestamp: '2012-01-01 ...',
-	electricity: [
+	electric: [
 		{
 			id: 1, // probably not necessary
 			title: 'Kitchen outlets',
@@ -15,7 +15,7 @@ So far I think each data update from the server should look something like this:
 			description: "Maybe this could be useful?",
 			type: 'outlets',
 			stats: {
-				current: 123,
+				avg_wattage: 123,
 				min: 3,
 				max: 200
 			}
@@ -31,7 +31,7 @@ So far I think each data update from the server should look something like this:
 			stats: {
 				// these stats could probably be the total usage since the last data update
 				// we can then get some better conversion like gal/hour
-				flow: 70,
+				avg_flow: 70,
 				hot: 20,
 				cold: 50,
 			}
