@@ -8,47 +8,59 @@ var timeline = {
 		left: 30,
 		right: 30
 	},
-	split: .6, // percentage to split between past and future views
-	x: d3.time.scale(),
-	y: d3.scale.linear(),
-	line: d3.svg.line(),
+	scales: {
+		overall: d3.time.scale(),
+		past: d3.time.scale(),
+		y: d3.scale.linear()
+	},
+	lines: {
+		past: d3.svg.line(),
+		goal: d3.svg.line()
+	},
+	paths: {
+		past: null,
+		goal: null
+	},
 	brush: d3.svg.brush(),
 	xAxis: d3.svg.axis(),
-	path: null,
 
 	init: function(data) {
 		this.data = data;
+		this.width = $('#timeline figure').width();
 
-		this.width = $('#timeline figure').width() / 2;
+		var scales = this.scales,
+			lines = this.lines,
+			margin = this.margin;
 
-		this.x.range([this.margin.left, this.width - this.margin.right]);
-		this.y.range([1, this.height - 1]);
+		scales.overall
+			.domain([data.start_date, data.end_date])
+			.range([margin.left, this.width - margin.right]);
 
-		// get the first and last time in the data to set the domain
-		var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S")
-		var startDate = parseDate.parse(this.data[0].timestamp),
-			now       = parseDate.parse(this.data[this.data.length - 1].timestamp);
+		scales.past
+			.domain([data.start_date, data.now])
+			.range([margin.left, scales.overall(data.now)])
 
-		var endDate = d3.time.day.offset(now, 1)
+		scales.y
+			.range([0, this.height])
+			.domain(d3.extent(this.data, function(d) { return get_wattage(d); }));
 
-		this.x.domain([startDate, endDate]);
-		this.y.domain(d3.extent(this.data, function(d) { return d.total; }));
-
-		var x = this.x,
-			y = this.y;
-
-		this.line
-			// .interpolate("basis")
-			.x(function(d) { return x(parseDate.parse(d.timestamp)) })
-			.y(function(d) { return y(d.total) });
+		this.lines.past
+			.interpolate("basis")
+			.x(function(d) { return scales.past(new Date(d.timestamp)) })
+			.y(function(d) { return scales.y(get_wattage(d)) });
 
 		this.brush
-			.x(x)
+			.x(scales.past)
 			.on("brush", this.brushed)
 
 		this.xAxis
-			.scale(this.x)
-			.ticks(d3.time.hours, 1)
+			.scale(scales.overall)
+			.ticks(d3.time.months, 1)
+
+		function get_wattage(d) {
+			if (d.stats) return d.stats.total_wattage;
+			return d.target.wattage;
+		}
 	},
 
 	draw: function() {
@@ -69,7 +81,7 @@ var timeline = {
 			.data([this.data])
 			.attr("class", "line")
 			.attr("transform", "translate(0,5)")
-			.attr("d", this.line);
+			.attr("d", this.lines.past);
 
 		svg.append("g")
 			.attr("class", "x axis")
@@ -85,7 +97,7 @@ var timeline = {
 		var lastDate = parseDate.parse(this.data[this.data.length - 2].timestamp);
 		var newDate = parseDate.parse(datum.timestamp);
 
-		this.y.domain(d3.extent(this.data, function(d) { return d.total; }))
+		this.y.domain(d3.extent(this.data, function(d) { return this.get_wattage(d); }))
 
 		// this.line.interpolate("basis")
 

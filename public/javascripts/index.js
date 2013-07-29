@@ -5,7 +5,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 1,
+		initial_state: 2,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navPanes
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 1,
+		initial_state: 2,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navTimeline
@@ -46,6 +46,8 @@ $(document).ready(function(){
 	data_manager.on("update", function(d) {
 		timeline.update(d);
 	})
+
+	data_manager.init();
 
 	Clock.draw();
 

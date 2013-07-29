@@ -16,11 +16,10 @@ var data_manager = {
 		})
 	},
 
-	init: function(data) {
-		data = $.map(data, this.process_datum);
-		this.data = data;
+	init: function() {
+		this.data = RandomData();
 
-		this.trigger('init', data)
+		this.trigger('init', this.data)
 	},
 
 	update: function(datum) {
@@ -28,20 +27,5 @@ var data_manager = {
 		this.data.push(new_entry);
 
 		this.trigger('update', new_entry)
-	},
-
-	// just to sum up the totals on the sample data
-	process_datum: function(datum) {
-		var new_entry = datum;
-
-		new_entry.timestamp = datum['Timestamp'];
-		new_entry.total = 0;
-
-		$.each(datum, function(k, v) {
-			if (k == 'Timestamp' || k == 'timestamp') return;
-			new_entry.total += v;
-		})
-
-		return new_entry;
 	}
 }

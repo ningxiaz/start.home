@@ -14,6 +14,10 @@ function RandomData(options) {
 
 	var range   = dateRange(start_date, end_date, count),
 		entries = range.map(buildSnapshot);
+		
+	entries.now        = cutoff;
+	entries.start_date = start_date;
+	entries.end_date   = end_date;
 
 	return entries;
 

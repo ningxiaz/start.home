@@ -1591,9 +1591,18 @@ body.idle .hide-when-idle {
   z-index: 0;
   -webkit-transform: translate3d(0, 0, 0);
 }
-#overview {
+.overview {
   -webkit-transform: translate3d(100%, 0, 0);
 }
-#goals {
+.goal-view {
   -webkit-transform: translate3d(200%, 0, 0);
+}
+.future-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  padding: 15px;
+  background: #fff;
+  border-left: 1px solid #312d2c;
 }

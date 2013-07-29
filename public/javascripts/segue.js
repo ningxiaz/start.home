@@ -22,8 +22,6 @@ function Segue(element, options) {
   var state = initial_state,
       percent = 0;
 
-  console.log(state)
-
   function handleDrag(ev) {
     ev.gesture.preventDefault();
     ev.gesture.stopPropagation();
