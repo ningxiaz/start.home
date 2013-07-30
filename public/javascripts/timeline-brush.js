@@ -41,7 +41,7 @@ var timeline = {
 			.range([margin.left, scales.overall(data.now)])
 
 		scales.y
-			.range([0, this.height])
+			.range([this.height, 0])
 			.domain(d3.extent(this.data, function(d) { return get_wattage(d); }));
 
 		this.lines.past
@@ -60,7 +60,7 @@ var timeline = {
 
 		this.xAxis
 			.scale(scales.overall)
-			.ticks(d3.time.months, 1)
+			// .ticks(d3.time., 1)
 
 		function get_wattage(d) {
 			if (d.stats) return d.stats.total_wattage;
@@ -85,7 +85,7 @@ var timeline = {
 		svg.append("rect")
 			.attr("class", "split")
 			.attr("x", this.scales.overall(this.data.now))
-			.attr("height", '100px')
+			.attr("height", '66px')
 			.attr("width", '4px')
 
 		this.paths.past = svg.append("path")

@@ -145,8 +145,8 @@ function RandomData(options) {
 				},
 
 				target = {
-						wattage: stats.total_wattage + Math.random()*2 - 1,
-						flow:    stats.total_flow    + Math.random()*2 - 1,
+						wattage: stats.total_wattage + Math.random()*4 - 2,
+						flow:    stats.total_flow    + Math.random()*4 - 2,
 				}
 
 			target.wattage_was_met = (target.wattage >= stats.total_wattage);

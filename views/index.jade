@@ -27,6 +27,9 @@ html
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
+		section#idle-screen
+			#clock
+
 		//- Navigation
 		nav#control-shortcuts.fixed.bottom-left
 			ul.circle-buttons
@@ -43,7 +46,7 @@ html
 			section.overview.pane
 				a#past Past
 				.main
-					#clock
+					//- #clock
 					#floorplan
 
 			section.past-view.pane
@@ -52,10 +55,35 @@ html
 
 			section.goal-view.pane
 				figure.line-graph
-				section.future-controls
-					h1 Controls
+				section.future-controls.side-module
+					menu.control-mode
+						a(href="#") Goals
+						a(href="#") HVAC
 					//- HVAC Controls
 					//- Goal Controls
+					p.instructions Adjust your end-of-year goals by dragging the lines on the left.
+					h3 Selected actions
+					ul.commitments
+						li
+							| Showers 20% (2 minutes)
+						li Eat 4% less cereal
+						li Watch 
+					h3 Suggested actions
+
+					ul.commitments
+						li
+							div.empty-check
+							| Showers 20% (2 minutes)
+						li Eat 4% less cereal
+						li Watch 
+						li
+							i.direction.entypo-down
+							| Showers 20% (2 minutes)
+						li Eat 4% less cereal
+						li Watch 
+						li
+							i.direction.entypo-down
+							| Showers 20% (2 minutes)
 
 			
 

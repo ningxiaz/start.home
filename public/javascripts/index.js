@@ -5,7 +5,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 2,
+		initial_state: 1,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navPanes
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 2,
+		initial_state: 1,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navTimeline
@@ -58,6 +58,25 @@ $(document).ready(function(){
 		Clock.to_linear(show_floorplan);
 
 	});
+
+	// really rough timer to hide and display the idle screen -- this should
+	// be much more robust in the future
+	$('#idle-screen').on('click tap touchmove', function() {
+		$(this).fadeOut()
+
+		var t = setTimeout(function() {
+			$('#idle-screen').fadeIn()
+		}, 10000)
+
+		$('#grid-container').on('mousemove click touchmove', function() {
+			clearTimeout(t)
+
+			t = setTimeout(function() {
+			$('#idle-screen').fadeIn()
+		}, 10000)
+
+		})
+	})
 });
 
 function show_floorplan(){

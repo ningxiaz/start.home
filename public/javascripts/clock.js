@@ -2,8 +2,8 @@ var Clock = {
 	vis: null,
 
 	draw: function(){
-		var width = 1024,
-			height = 748,
+		var width = $(window).width(),
+			height = $(window).height(),
 			outer_radius = 748/2 - 80,
 			inner_radius = 180;
 
@@ -128,6 +128,13 @@ var Clock = {
 			sunset: 19
 		}
 
+		var nighttime = {
+			sunset: 0,
+			sunrise: 6
+		}
+
+		var now = [25, 25];
+
 		var coordinates = [];
 		var temp = [];
 		for(var i = 0; i < 24; i++){
@@ -190,7 +197,13 @@ var Clock = {
                      .attr("width", width)
                      .attr("height", height)
                   .append("svg:g")
-                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                     .attr("transform", "translate(" + width / 2 + "," + (height / 2)+ ")");
+
+        vis.selectAll(".coordinates")
+			  .data(coordinates)
+		    .enter().append("svg:g").append("path")
+		      .attr("class", "coordinates")
+		      .attr("d", coor);
 
         vis.selectAll(".area")
 		      .data([consumption])
@@ -234,12 +247,17 @@ var Clock = {
 		      .attr("class", "daytime_arc")
 		      .attr("d", arc);
 
-		vis.selectAll(".coordinates")
-			  .data(coordinates)
-		    .enter().append("svg:g").append("path")
-		      .attr("class", "coordinates")
-		      .attr("d", coor);
+		vis.selectAll(".nighttime_arc")
+			  .data([nighttime])
+		    .enter().append("path")
+		      .attr("class", "nighttime_arc")
+		      .attr("d", arc);
 
+		vis.selectAll(".now")
+			  .data([now])
+		    .enter().append("svg:g").append("path")
+		      .attr("class", "now")
+		      .attr("d", coor);
 	},
 
 	to_linear: function(callback){

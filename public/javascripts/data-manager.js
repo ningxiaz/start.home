@@ -17,7 +17,11 @@ var data_manager = {
 	},
 
 	init: function() {
-		this.data = RandomData({ cutoff: moment() });
+		this.data = RandomData({ 
+			start_date: moment().subtract('M', 1),
+			end_date: moment().add('M', 1),
+			cutoff: moment() 
+		});
 
 		this.trigger('init', this.data)
 	},

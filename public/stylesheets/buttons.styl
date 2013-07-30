@@ -3,17 +3,23 @@
 
 	text-align center
 	text-decoration none
-	color dark-brown
-	border 2px solid rgba(0,0,0,.4)
+	color button-color
+	border 2px solid button-color
+
+	&.yes
+		color darken(green, 40%)
+
+	&.no
+		color red
 
 	&:hover
-		background blue
-		// border-color blue
+		background button-hover-color
+		border-color button-hover-color
 		color white
 
 	&:active, &.active
-		// border-color dark-brown
-		background dark-brown
+		border-color button-active-color
+		background button-active-color
 		color white
 
 	&.disabled
@@ -22,7 +28,7 @@
 
 		&:active, &.active
 			background none
-			color dark-brown
+			color gray
 			border-color none
 	
 	width button-height

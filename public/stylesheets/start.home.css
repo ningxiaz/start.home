@@ -1059,23 +1059,33 @@ button {
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  color: #312d2c;
-  border: 2px solid rgba(0,0,0,0.4);
+  color: #a7afa6;
+  border: 2px solid #a7afa6;
   width: 60px;
   height: 60px;
   line-height: 50px;
   font-size: 40px;
 }
+.button.yes,
+button.yes {
+  color: #116e2b;
+}
+.button.no,
+button.no {
+  color: #d45d5d;
+}
 .button:hover,
 button:hover {
-  background: #6483a3;
+  background: #39474c;
+  border-color: #39474c;
   color: #fff;
 }
 .button:active,
 button:active,
 .button.active,
 button.active {
-  background: #312d2c;
+  border-color: #1e7fb8;
+  background: #1e7fb8;
   color: #fff;
 }
 .button.disabled,
@@ -1090,7 +1100,7 @@ button.disabled:active,
 .button.disabled.active,
 button.disabled.active {
   background: none;
-  color: #312d2c;
+  color: #39474c;
   border-color: none;
 }
 .button-group .button,
@@ -1143,30 +1153,34 @@ h2,
 .beta {
   margin-bottom: 30px;
   margin-bottom: 1.5rem;
-  color: #312d2c;
+  color: #002835;
 }
 h1,
 .alpha {
   font-size: 60px;
   font-size: 3rem;
   font-weight: 700;
+  line-height: 2;
 }
 h2,
 .beta {
   font-size: 30px;
   font-size: 1.5rem;
   font-weight: 700;
+  line-height: 2;
 }
 h3,
 .gamma {
   font-size: 20px;
   font-size: 1rem;
   font-weight: 700;
+  line-height: 2;
 }
 hr {
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.1);
   margin-top: -1px;
+  line-height: 2;
 }
 * {
   -webkit-box-sizing: border-box;
@@ -1400,10 +1414,10 @@ body.idle .hide-when-idle {
   line-height: 60px;
   text-decoration: none;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  color: #6483a3;
+  color: #1e7fb8;
 }
 .modal .content menu li a:active {
-  background: #6483a3;
+  background: #1e7fb8;
   color: #fff;
 }
 .modal .content .add {
@@ -1420,7 +1434,7 @@ body.idle .hide-when-idle {
   z-index: 20;
 }
 .context {
-  background: #97b5c9;
+  background: #66b7e6;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   width: 1024px !important;
@@ -1445,7 +1459,7 @@ body.idle .hide-when-idle {
 }
 .line .brush .extent {
   stroke: #fff;
-  fill: #71dc7e;
+  fill: #32df61;
   shape-rendering: crispEdges;
 }
 #clock {
@@ -1453,48 +1467,57 @@ body.idle .hide-when-idle {
   margin: 0 auto;
 }
 .area {
-  fill: #ffbb78;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
+  fill: #66b7e6;
 }
 .line {
   fill: none;
-  stroke: #e6550d;
-  stroke-width: 1px;
+  stroke: #1e7fb8;
 }
 .in_area {
-  fill: #a1d99b;
+  fill: #2291d1;
   opacity: 0.8;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
 }
 .in_line {
   fill: none;
-  stroke: #31a354;
+  stroke: #1e7fb8;
   stroke-width: 1px;
 }
 .min_line {
-  stroke: #e377c2;
-  stroke-width: 1.5px;
-  stroke-dasharray: 3px;
+  stroke: #fff;
+  stroke-dasharray: 5px;
+  stroke-width: 1px;
   fill: none;
 }
 .max_line {
-  stroke: #e6550d;
-  stroke-width: 1.5px;
-  stroke-dasharray: 3px;
+  stroke: #d45d5d;
+  stroke-dasharray: 5px;
+  stroke-width: 1px;
   fill: none;
 }
 .daytime_arc {
-  fill: #ff0;
-  stroke: none;
-  opacity: 0.7;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-  filter: alpha(opacity=70);
+  fill: #ebeb46;
+  stroke-width: 3px;
+  stroke: #ebeb46;
+  stroke-linejoin: round;
+}
+.nighttime_arc {
+  fill: #002835;
+  stroke-width: 3px;
+  stroke: #002835;
+  stroke-linejoin: round;
 }
 .coordinates {
-  stroke: #ccc;
+  stroke: #c4d4e6;
+}
+.now {
+  stroke: #1e7fb8;
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+body {
+  background: #eff4f8;
 }
 .vertical-line {
   width: 1px;
@@ -1519,11 +1542,13 @@ body.idle .hide-when-idle {
   filter: none;
 }
 #timeline {
+  position: absolute;
   zoom: 1;
   width: 150%;
   -webkit-transform: translate3d(0, 0, 0);
-  background: #97b5c9;
+  background: #66b7e6;
   height: 70px;
+  border-bottom: 4px solid #1e7fb8;
 }
 #timeline:before,
 #timeline:after {
@@ -1541,13 +1566,10 @@ body.idle .hide-when-idle {
   height: 70px;
 }
 #timeline figure svg .split {
-  fill: #cee3f0;
-  opacity: 0.6;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-  filter: alpha(opacity=60);
+  fill: #85c5eb;
 }
 #timeline figure svg .goal {
-  stroke-dasharray: 10px;
+  stroke-dasharray: 5px;
   stroke-width: 1px;
   stroke: #fff;
 }
@@ -1575,7 +1597,7 @@ body.idle .hide-when-idle {
   font-size: 11px;
 }
 #timeline figure svg .brush {
-  fill: #312d2c;
+  fill: #1e7fb8;
   stroke-width: 2px;
 }
 #timeline .past-helper,
@@ -1593,7 +1615,7 @@ body.idle .hide-when-idle {
 #timeline .present-helper figure {
   height: 60px;
   margin: 0;
-  background: #6483a3;
+  background: #1e7fb8;
 }
 #timeline .present-helper figure svg .line {
   stroke: #fff;
@@ -1603,6 +1625,7 @@ body.idle .hide-when-idle {
 }
 #grid-container {
   z-index: 0;
+  padding-top: 70px;
   -webkit-transform: translate3d(0, 0, 0);
 }
 .overview {
@@ -1611,12 +1634,69 @@ body.idle .hide-when-idle {
 .goal-view {
   -webkit-transform: translate3d(200%, 0, 0);
 }
-.future-controls {
+.side-module {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 15px;
+  right: 15px;
+  bottom: 85px;
   width: 300px;
+  overflow: scroll;
+  padding: 20px 0 0 0;
+  background: #f5f8fb;
+  border: 1px solid #c4d4e6;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #001d2b;
+}
+.side-module p {
+  padding: 0 15px;
+}
+.side-module h1,
+.side-module h2,
+.side-module h3,
+.side-module h4,
+.side-module h5 {
+  padding: 10px 15px;
+  background: #e5ecf4;
+}
+.commitments {
+  margin: 0;
+}
+.commitments li {
   padding: 15px;
-  background: #fff;
-  border-left: 1px solid #312d2c;
+  border-bottom: 1px solid #e5ecf4;
+}
+.commitments li .direction {
+  position: relative;
+  top: 5px;
+  font-size: 40px;
+  line-height: 10px;
+  margin-right: 5px;
+  color: #d45d5d;
+}
+.commitments li .controls {
+  display: inline-block;
+  float: right;
+  margin-top: -10px;
+}
+.commitments li .controls .button {
+  height: 40px;
+  width: 40px;
+  line-height: 32px;
+}
+.commitments li .empty-check {
+  height: 16px;
+  width: 16px;
+  float: left;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  margin-right: 5px;
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.2);
+  box-shadow: inset 0px 1px 1px rgba(0,0,0,0.2);
+}
+.commitments li:last-of-type {
+  border: none;
+}
+.instructions {
+  color: #39474c;
 }

@@ -23,6 +23,9 @@ i[class*="entypo"]
 
 // quick styles for prototyping... I should organize these
 
+body
+	background off-white
+
 .vertical-line
 	width 1px
 	height 100px
@@ -40,6 +43,7 @@ i[class*="entypo"]
 	opacity 1
 
 #timeline
+	position absolute
 
 	clearfix()
 	width 150%
@@ -48,6 +52,7 @@ i[class*="entypo"]
 	-webkit-transform translate3d(0,0,0)
 	background light-blue
 	height 70px
+	border-bottom 4px solid blue
 
 	figure
 		margin 0
@@ -57,11 +62,10 @@ i[class*="entypo"]
 			height 70px
 
 			.split
-				fill lightest-blue
-				opacity .6
+				fill lighten(light-blue, 20%)
 
 			.goal
-				stroke-dasharray 10px
+				stroke-dasharray 5px
 				stroke-width 1px
 				stroke white
 
@@ -85,7 +89,7 @@ i[class*="entypo"]
 					font-size 11px
 
 			.brush
-				fill dark-brown
+				fill blue
 				stroke-width 2px
 
 
@@ -115,7 +119,7 @@ i[class*="entypo"]
 
 #grid-container
 	z-index 0
-	// padding-top 60px
+	padding-top 70px
 	-webkit-transform translate3d(0,0,0)
 
 .overview
@@ -124,12 +128,68 @@ i[class*="entypo"]
 .goal-view
 	-webkit-transform translate3d(200%,0,0)
 
-.future-controls
+.side-module
 	position absolute
-	top 0
-	right 0
+	top 15px
+	right 15px
+	bottom 15 + 70px
 	width 300px
-	padding 15px
 
-	background white
-	border-left 1px solid dark-brown
+	overflow scroll
+
+	padding 20px 0 0 0
+
+	background lighten(off-white, 40%)
+	border 1px solid darken(lightest-gray, 10%)
+	border-radius 3px
+
+	color darkest-blue
+
+	p
+		padding 0 15px
+
+	h1, h2, h3, h4, h5
+		padding 10px 15px
+		background lightest-gray
+
+.commitments
+	margin 0
+	
+	li
+		padding 15px
+
+		border-bottom 1px solid lightest-gray
+
+		.direction
+			position relative
+			top 5px
+			font-size 40px
+			line-height 10px
+			margin-right 5px
+
+			color red
+
+		.controls
+			display inline-block
+			float right
+			margin-top -10px
+
+			.button
+				height 40px
+				width 40px
+				line-height 32px
+
+		.empty-check
+			height 16px
+			width 16px
+			float left
+			// background #fff
+			border-radius 3px
+			margin-right 5px
+			box-shadow inset 0px 1px 1px rgba(0,0,0,.2)
+
+		&:last-of-type
+			border none
+
+.instructions
+	color gray
