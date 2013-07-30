@@ -49,6 +49,11 @@ var timeline = {
 			.x(function(d) { return scales.past(new Date(d.timestamp)) })
 			.y(function(d) { return scales.y(get_wattage(d)) });
 
+		this.lines.goal
+			.interpolate("basis")
+			.x(function(d) { return scales.overall(new Date(d.timestamp)) })
+			.y(function(d) { return scales.y(d.target.wattage) })
+
 		this.brush
 			.x(scales.past)
 			.on("brush", this.brushed)
@@ -77,16 +82,32 @@ var timeline = {
 				.attr("height", this.height + 35)
 				// .attr("transform", "translate("+this.margin.left+",0)");
 
-		this.path = svg.append("path")
-			.data([this.data])
-			.attr("class", "line")
+		svg.append("rect")
+			.attr("class", "split")
+			.attr("x", this.scales.overall(this.data.now))
+			.attr("height", '100px')
+			.attr("width", '4px')
+
+		this.paths.past = svg.append("path")
+			.data([this.data.filter(past_data)])
+			.attr("class", "past line")
 			.attr("transform", "translate(0,5)")
 			.attr("d", this.lines.past);
+
+		this.paths.goal = svg.append("path")
+			.data([this.data])
+			.attr("class", "goal line")
+			.attr("transform", "translate(0,5)")
+			.attr("d", this.lines.goal);
 
 		svg.append("g")
 			.attr("class", "x axis")
 			// .attr("transform", "translate("+this.margin.left+",32)")
 			.call(this.xAxis);
+
+		function past_data(d) {
+			if (d.stats) return true;
+		}
 	},
 
 	update: function(datum) {

@@ -1540,10 +1540,23 @@ body.idle .hide-when-idle {
 #timeline figure svg {
   height: 70px;
 }
+#timeline figure svg .split {
+  fill: #cee3f0;
+  opacity: 0.6;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+}
+#timeline figure svg .goal {
+  stroke-dasharray: 10px;
+  stroke-width: 1px;
+  stroke: #fff;
+}
+#timeline figure svg .past {
+  stroke-width: 2px;
+  stroke: #fff;
+}
 #timeline figure svg .line {
   z-index: 30;
-  stroke: #fff;
-  stroke-width: 2px;
   stroke-linecap: round !important;
 }
 #timeline figure svg .axis.x {
@@ -1562,6 +1575,7 @@ body.idle .hide-when-idle {
   font-size: 11px;
 }
 #timeline figure svg .brush {
+  fill: #312d2c;
   stroke-width: 2px;
 }
 #timeline .past-helper,

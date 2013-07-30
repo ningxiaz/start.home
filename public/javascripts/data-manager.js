@@ -17,7 +17,7 @@ var data_manager = {
 	},
 
 	init: function() {
-		this.data = RandomData();
+		this.data = RandomData({ cutoff: moment() });
 
 		this.trigger('init', this.data)
 	},

@@ -2,9 +2,9 @@ function RandomData(options) {
 
 	// setup the options!
 	var options     = options             || {},
-		start_date  = options.start_date  || 'Jan 1 2012',
-		end_date    = options.end_date    || 'Jan 1 2013',
-		cutoff      = options.cutoff      || 'July 2, 2012',
+		start_date  = options.start_date  || 'Jan 1 2013',
+		end_date    = options.end_date    || 'Jan 1 2014',
+		cutoff      = options.cutoff      || 'July 2, 2013',
 		count       = options.count       || 100,
 		step		= options.step		  || null; // see http://momentjs.com/docs/durations/creating/
 
@@ -23,10 +23,12 @@ function RandomData(options) {
 
 	// returns an array of [count] dates between [start] and [end] (inclusive)
 	function dateRange(start, end, count) {
-		var range;
-
-		range = [];
+		var range = [];
 		count--;
+
+		start = start.clone();
+
+		var fixed = false;
 
 		if (step) {
 			step = moment.duration(step)
@@ -34,13 +36,24 @@ function RandomData(options) {
 			do {
 				range.push(start.clone());
 				start.add(step);
+
+				if (start.clone() >= cutoff && !fixed) {
+					range.push(cutoff.clone())
+					fixed = true;
+				}
 			} while (start <= end);
 
 		} else {
 			step = moment.duration((end - start) / count);
 
 			for (var i = 0; i <= count; i++) {
-				range.push(start.clone().add(i*step.as('ms')))
+				range.push(start.clone());
+				start.add(step);
+
+				if (start.clone() >= cutoff && !fixed) {
+					range.push(cutoff.clone())
+					fixed = true;
+				}
 			};
 		}
 
@@ -132,8 +145,8 @@ function RandomData(options) {
 				},
 
 				target = {
-						wattage: stats.total_wattage + Math.random() - .5,
-						flow:    stats.total_flow    + Math.random() - .5,
+						wattage: stats.total_wattage + Math.random()*2 - 1,
+						flow:    stats.total_flow    + Math.random()*2 - 1,
 				}
 
 			target.wattage_was_met = (target.wattage >= stats.total_wattage);
