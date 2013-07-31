@@ -1,0 +1,77 @@
+
+// globals/variables.styl
+//-----------------------
+// Colors, dimensions, settings! (based off Bootstrap's settings.less)
+
+
+// Colors
+//-------------------------------
+
+// "Black"
+
+base-black = #39474C
+
+// Grays
+
+base-gray    = #96AFA6
+
+gray-darker  = darken(base-gray, 60%)
+gray-dark    = darken(base-gray, 30%)  
+gray         = #A7AFA6
+gray-light   = #D6F8FF
+gray-lighter = lighten(gray-light, 60%)
+
+// Base colors
+
+darkest-blue  = #001d2b
+dark-blue     = #002835
+blue          = #1e7fb8
+yellow        = #E0C143
+orange        = #ed7d3b
+red           = #D45D5D
+green 	      = #1DB847
+
+
+// Abstracted colors
+
+brand-primary = blue
+brand-success = green
+brand-warning = orange
+brand-danger  = red
+brand-info    = yellow
+
+// Scaffolding
+//-------------------------------
+
+body-background = white
+body-padding 	= 30px
+text-color      = base-black
+
+// Links
+//-------------------------------
+// (links are not necesarry in this interface -- only buttons, move along)
+
+// Typography
+//-------------------------------
+
+font-size-base = 16px
+font = font-size-base Proxima Nova, Avenir, Helvetica
+
+line-height-base     = 1.25 // 20/14
+line-height-computed = floor(line-height-base * font-size-base)
+
+// Components
+//-------------------------------
+
+padding-base-vertical    = 8px
+padding-base-horizontal  = 12px
+
+padding-large-vertical   = 14px
+padding-large-horizontal = 16px
+
+padding-small-vertical   = 5px
+padding-small-horizontal = 10px
+
+border-radius-base       = 4px
+border-radius-large      = 6px
+border-radius-small      = 3px

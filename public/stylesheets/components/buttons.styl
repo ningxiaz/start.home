@@ -1,0 +1,114 @@
+
+// components/buttons.styl
+//------------------------
+// Buttons!
+
+// Variables
+//-------------------------------
+
+button-padding         = padding-base-vertical padding-base-horizontal
+button-large-padding   = padding-large-vertical padding-large-horizontal
+button-small-padding   = padding-small-vertical padding-small-horizontal
+
+button-circle-diameter = 40px
+button-circle-large-diameter = 60px
+
+// Button bases
+//-------------------------------
+
+.button-base
+	display inline-block
+	padding button-padding
+	margin-bottom 0 // For input.btn
+	font-size font-size-base
+	font-weight 500
+	line-height line-height-base
+	text-align center
+	vertical-align middle
+	cursor pointer
+	border 1px solid transparent
+	border-radius border-radius-base
+	white-space nowrap
+
+.button-circle-base
+	display inline-block
+	width button-circle-diameter
+	height button-circle-diameter
+
+	border-radius 30px
+	border 1px solid transparent
+
+	overflow hidden
+
+	text-align center
+
+	font-size 40px
+	line-height 33px // FIXME: circle button line-height needs to change with different base fonts -- why?
+
+// Button styles
+//-------------------------------
+
+button-colors(base-color, alt-color)
+	background-color base-color
+	color alt-color
+	border-color darken(base-color, 10%)
+
+	&:hover
+		background-color alt-color
+		border-color alt-color
+		color base-color
+
+.button
+	@extends .button-base
+	button-colors(white, brand-primary)
+
+.button-large
+	@extends .button
+
+	font-weight 700
+	padding button-large-padding
+
+.button-small
+	@extends .button
+
+	padding button-small-padding
+
+.button-circle
+	@extends .button-circle-base
+	button-colors(white, brand-primary)
+
+.button-circle-large
+	@extends .button-circle
+	width button-circle-large-diameter
+	height button-circle-large-diameter
+
+	line-height 55px
+
+.button-primary
+	button-colors(white, brand-primary)
+
+.button-success
+	button-colors(white, brand-success)
+
+.button-danger
+	button-colors(white, brand-danger)
+
+.button-warning
+	button-colors(white, brand-warning)
+
+.button-info
+	button-colors(white, brand-info)
+
+
+.button-group
+	.button, button
+		display block
+		float left
+		border-right-width 0
+
+		&:first-of-type
+			border-radius left 5px
+
+		&:last-of-type
+			border-radius right 5px
+			border-right-width 2px

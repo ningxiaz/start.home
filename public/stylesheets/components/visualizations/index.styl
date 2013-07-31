@@ -1,0 +1,59 @@
+
+// components/visualizations/index.styl
+//-------------------------------------
+// Styles for D3 visualizations
+
+
+// Variables
+//-------------------------------
+
+vis-background-color = lighten(blue, 40%)
+vis-line-color       = gray-lighter
+vis-off-color 	     = lighten(brand-primary, 20%)
+vis-axis-color 	     = lighten(vis-background-color, 20%)
+
+vis-line-stroke-width = 2px
+
+vis-goal-dasharray    = 5px
+vis-goal-stroke-width = 1px
+
+// Imports
+//-------------------------------
+
+@import "timeline"
+@import "clock"
+
+// Lines
+//-------------------------------
+
+.line
+	stroke vis-line-color
+	stroke-linecap round
+	stroke-width vis-line-stroke-width
+	fill none
+
+.goal // TODO: consider renaming this to .goal-line
+	@extends .line
+	stroke-dasharray vis-goal-dasharray
+	stroke-width vis-goal-stroke-width
+
+// Axes
+//-------------------------------
+
+.axis
+	line
+		display none // hide the ticks
+
+	text
+		fill rgba(255, 255, 255, .5)
+		text-transform lowercase
+		font-size 11px
+
+	.domain
+		display none
+	
+// Brush
+//-------------------------------
+
+.brush
+	fill vis-off-color

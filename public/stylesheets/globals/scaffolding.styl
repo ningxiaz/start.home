@@ -1,0 +1,53 @@
+
+// globals/scaffolding.styl
+//-------------------------
+// All the basic things that need to be styled
+
+*
+	box-sizing border-box
+
+body, html
+	width 100%
+	height 100%
+
+	margin 0
+	padding 0
+
+	position relative
+	overflow hidden
+
+	-webkit-tap-highlight-color rgba(0,0,0,0)
+
+body
+	background body-background
+	color text-color
+
+a
+	text-decoration none
+
+
+#grid-container
+	position absolute
+	top 0
+
+	width 100%
+	height 100%
+
+	padding-top 70px
+
+.pane
+	position absolute
+	width 100%
+	height 100%
+
+	padding body-padding
+
+#grid-container
+	z-index 0
+	-webkit-transform translate3d(0,0,0)
+
+.overview
+	-webkit-transform translate3d(100%,0,0)
+
+.goal-view
+	-webkit-transform translate3d(200%,0,0)

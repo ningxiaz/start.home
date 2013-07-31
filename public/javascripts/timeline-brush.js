@@ -85,7 +85,7 @@ var timeline = {
 		svg.append("rect")
 			.attr("class", "split")
 			.attr("x", this.scales.overall(this.data.now))
-			.attr("height", '66px')
+			.attr("height", '70px')
 			.attr("width", '4px')
 
 		this.paths.past = svg.append("path")
