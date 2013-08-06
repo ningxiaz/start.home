@@ -69,7 +69,7 @@ var timeline = {
 	},
 
 	draw: function() {
-		var svg = d3.select('#timeline figure svg')
+		var svg = d3.select('#timeline figure').append('svg');
 
 		// the brush is appended first in order to place it below the lines
 		// this is not ideal because the lines grab the touch before the brush can

@@ -5,7 +5,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 1,
+		initial_state: 2,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navPanes
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 1,
+		initial_state: 2,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navTimeline
@@ -35,12 +35,29 @@ $(document).ready(function(){
 		$('#timeline figure').removeClass('animate');
 		if (animate) $('#timeline figure').addClass('animate');
 
+		
 		$('#timeline figure').css('-webkit-transform', 'translate3d('+ -0.16666667*(percent+offset)*100 +'%,0,0)')
+
+		$('#timeline ').removeClass('animate');
+		if (animate) $('#timeline').addClass('animate');
+
+		var saturated_y = percent + offset;
+
+		if (saturated_y < 1) saturated_y = 1;
+		if (saturated_y > 2) saturated_y = 2;
+
+		saturated_y -= 1;
+
+		saturated_y *= -100;
+
+		$('#timeline').css('-webkit-transform', 'translate3d(0,' + saturated_y + '%,0)')
 	}
 
 	data_manager.on('init', function(d) {
 		timeline.init(d);
+		goal_view.init(d);
 		timeline.draw();
+		goal_view.draw();
 	})
 
 	data_manager.on("update", function(d) {

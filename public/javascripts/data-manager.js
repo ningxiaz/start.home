@@ -20,7 +20,8 @@ var data_manager = {
 		this.data = RandomData({ 
 			start_date: moment().subtract('M', 1),
 			end_date: moment().add('M', 1),
-			cutoff: moment() 
+			cutoff: moment(),
+			count: 15
 		});
 
 		this.trigger('init', this.data)

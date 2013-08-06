@@ -10,6 +10,7 @@ button-padding         = padding-base-vertical padding-base-horizontal
 button-large-padding   = padding-large-vertical padding-large-horizontal
 button-small-padding   = padding-small-vertical padding-small-horizontal
 
+button-circle-small-diameter = 20px
 button-circle-diameter = 40px
 button-circle-large-diameter = 60px
 
@@ -53,10 +54,12 @@ button-colors(base-color, alt-color)
 	color alt-color
 	border-color darken(base-color, 10%)
 
-	&:hover
+	&:active
 		background-color alt-color
 		border-color alt-color
 		color base-color
+
+// Sizes
 
 .button
 	@extends .button-base
@@ -77,12 +80,22 @@ button-colors(base-color, alt-color)
 	@extends .button-circle-base
 	button-colors(white, brand-primary)
 
+.button-circle-small
+	@extends .button-circle
+	width button-circle-small-diameter
+	height button-circle-small-diameter
+
+	font-size 20px
+	line-height 16px
+
 .button-circle-large
 	@extends .button-circle
 	width button-circle-large-diameter
 	height button-circle-large-diameter
 
 	line-height 55px
+
+// Colors
 
 .button-primary
 	button-colors(white, brand-primary)

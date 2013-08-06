@@ -2,16 +2,16 @@
 //-------------------------------
 
 #timeline
-	top 0
 	position absolute
+	top 0
 
-	clearfix()
+	// clearfix()
 	width 150%
 	// padding 30p
 
 	-webkit-transform translate3d(0,0,0)
 	background vis-background-color
-	height 70px
+	// height timeline-height
 
 	z-index 100
 
@@ -21,9 +21,6 @@
 
 		svg
 			height 70px
-
-			.split
-				fill vis-axis-color
 
 			.axis.x
 				transform translate(0,42px)

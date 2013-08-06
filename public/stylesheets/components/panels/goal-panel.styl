@@ -1,0 +1,76 @@
+
+// components/panels/goal-panel.styl
+//----------------------------------
+// Implementation styles for the goal-setting panel
+
+// Behavior suggestions
+//-------------------------------
+
+.goal-view p .electric-text, .goal-view p .water-text
+	font-weight 700
+
+.goal-view .panel-side
+	bottom body-padding
+
+.save-state
+	position absolute
+	bottom 0
+
+	float left
+	padding padding-base-horizontal
+	width 100%
+
+	.save
+		float right
+
+	.cancel
+		float left
+
+.behavior-suggestions
+	list-style-type none
+
+	margin 0
+	padding 0
+
+	li
+		padding padding-base-horizontal padding-large-vertical
+
+		&+ li
+			border-top 1px solid darken(white, 10%)
+
+		a
+			margin-right padding-base-horizontal
+
+		&.selected
+			color gray
+
+		.impact
+			float right
+			margin-top 4px
+
+			font-size 12px
+			color gray
+
+		// &:nth-child(2n)
+		// 	background gray-lighter
+
+.projections
+	clearfix()
+	width 100%
+
+	.projection
+		clearfix()
+		float left
+		width 50%
+
+		padding padding-base
+
+		i
+			float left
+			font-size 40px
+			line-height line-height-computed
+			margin-top -4px
+		
+		.amount
+			line-height line-height-computed
+			float right
