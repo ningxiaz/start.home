@@ -256,7 +256,8 @@ hr{border:none;border-bottom:1px solid rgba(0,0,0,0.1);margin-top:-1px}
 .water-text{color:#1e91b8}
 .caption{color:#a7afa6;font-size:12px}
 .right-align{text-align:right}
-.button-base,.button,.button-large,.button-small{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:14px;font-weight:500;line-height:1.25;text-align:center;vertical-align:middle;cursor:pointer;border:1px solid transparent;-webkit-border-radius:4px;border-radius:4px;white-space:nowrap}
+.button-base,.button,.button-large,.button-small{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:14px;font-weight:500;line-height:1.25;text-align:center;vertical-align:middle;cursor:pointer;border:1px solid transparent;-webkit-border-radius:4px;border-radius:4px;white-space:nowrap;}
+.button-base i,.button i,.button-large i,.button-small i{font-size:40px;line-height:0;position:relative;top:6px}
 .button-circle-base,.button-circle,.button-circle-small,.button-circle-large{display:inline-block;width:40px;height:40px;-webkit-border-radius:30px;border-radius:30px;border:1px solid transparent;overflow:hidden;text-align:center;font-size:40px;line-height:33px}
 .button,.button-large,.button-small{background-color:#fff;color:#1e91b8;border-color:#e6e6e6;}
 .button:active,.button-large:active,.button-small:active{background-color:#1e91b8;border-color:#1e91b8;color:#fff}
