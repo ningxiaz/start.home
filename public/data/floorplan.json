@@ -1,0 +1,48 @@
+{
+	"width": 400,
+	"height": 400,
+	"rooms":[
+		{
+			"name": "Patio",
+			"x": 1,
+			"y": 268,
+			"width": 398,
+			"height": 129
+		},
+		{
+			"name": "Kitchen",
+			"x": 1,
+			"y": 132,
+			"width": 134,
+			"height": 136
+		},
+		{
+			"name": "Dining Room",
+			"x": 134,
+			"y": 132,
+			"width": 158,
+			"height": 136
+		},
+		{
+			"name": "Living Room",
+			"x": 292,
+			"y": 132,
+			"width": 107,
+			"height": 136
+		},
+		{
+			"name": "Core",
+			"x": 134,
+			"y": 50,
+			"width": 134,
+			"height": 82
+		},
+		{
+			"name": "Bedroom",
+			"x": 292,
+			"y": 0,
+			"width": 107,
+			"height": 132
+		}
+	]
+}

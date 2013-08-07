@@ -263,6 +263,8 @@ var Clock = {
 	to_linear: function(callback){
 		vis.selectAll(".coordinates").remove();
 		vis.selectAll(".daytime_arc").remove();
+		vis.selectAll(".nighttime_arc").remove();
+		vis.selectAll(".now").remove();
 
 		var linear_angle = d3.time.scale().range([0, 512]).domain([19, 0]);
 		var linear_height = d3.scale.linear().range([0, 114]).domain([0, 1]);
@@ -306,7 +308,7 @@ var Clock = {
 			.interpolate("basis");
 
 		var unroll_duration = 1600;
-		var shift = -240;
+		var shift = -260;
 		var shift_duration = 1000;
 
 		vis.selectAll(".area")

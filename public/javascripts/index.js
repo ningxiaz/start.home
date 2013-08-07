@@ -41,6 +41,7 @@ $(document).ready(function(){
 	data_manager.on('init', function(d) {
 		timeline.init(d);
 		timeline.draw();
+		$('#timeline').hide();
 	})
 
 	data_manager.on("update", function(d) {
@@ -55,7 +56,7 @@ $(document).ready(function(){
 	$(document).bind('touchmove', false);
 
 	$('#past').click(function(){
-		Clock.to_linear(show_floorplan);
+		Clock.to_linear(show_now);
 
 	});
 
@@ -79,6 +80,9 @@ $(document).ready(function(){
 	})
 });
 
-function show_floorplan(){
+function show_now(){
+	$('#timeline').fadeIn();
+	FloorPlan.init();
+	FloorPlan.draw_rects();
 	$('#floorplan').append("<svg id=\"floorplan_svg\" height=\"400\" width=\"400\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ><image x=\"0\" y=\"0\" height=\"400\" width=\"400\"  xlink:href=\"images/floorplan.svg\" /></svg>");
 }
