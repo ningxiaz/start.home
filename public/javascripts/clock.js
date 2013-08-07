@@ -308,7 +308,7 @@ var Clock = {
 			.interpolate("basis");
 
 		var unroll_duration = 1600;
-		var shift = -260;
+		var shift = -320;
 		var shift_duration = 1000;
 
 		vis.selectAll(".area")
