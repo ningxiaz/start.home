@@ -1,0 +1,42 @@
+
+// components/panels/index.styl
+//-----------------------------
+// Panels are interface elements that group things that are not
+// visualizations. This can include controls, notifications, etc.
+
+// Imports
+//-------------------------------
+
+@import "goal-panel"
+
+// Variables
+//-------------------------------
+
+panel-side-width = 300px
+
+// Base panel styles
+//-------------------------------
+
+.panel-base
+
+	background white
+	border 1px solid darken(white, 10%)
+	border-radius border-radius-base
+
+	h1, h2, h3, h4, h5, p, ul, ol, dl
+		padding padding-base
+		margin 0
+
+// Panel implementations
+//-------------------------------
+
+.panel-side
+	@extends .panel-base
+	position absolute
+	width panel-side-width
+
+	top body-padding
+	// bottom body-padding + timeline-height
+
+	&.right
+		right body-padding

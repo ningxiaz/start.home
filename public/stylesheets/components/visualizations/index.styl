@@ -12,6 +12,9 @@ vis-line-color       = gray-lighter
 vis-off-color 	     = lighten(brand-primary, 20%)
 vis-axis-color 	     = lighten(vis-background-color, 20%)
 
+electricity-color    = yellow
+water-color          = blue
+
 vis-line-stroke-width = 2px
 
 vis-goal-dasharray    = 5px
@@ -23,6 +26,7 @@ vis-goal-stroke-width = 1px
 @import "timeline"
 @import "clock"
 @import "floorplan"
+@import "goal_view"
 
 // Lines
 //-------------------------------
@@ -33,10 +37,40 @@ vis-goal-stroke-width = 1px
 	stroke-width vis-line-stroke-width
 	fill none
 
+	&.dark
+		stroke blue
+
 .goal // TODO: consider renaming this to .goal-line
 	@extends .line
 	stroke-dasharray vis-goal-dasharray
 	stroke-width vis-goal-stroke-width
+
+.line.electricity
+	stroke electricity-color
+
+.line.water
+	stroke water-color
+
+.marker
+	stroke white
+	stroke-width 1px
+	stroke-dasharray 1000px
+
+#blue-circle
+	fill blue
+
+#yellow-circle
+	fill yellow
+
+
+
+// Handles
+//-------------------------------
+// Handles are elements that allow interaction with visualizations.
+// e.g. dragging a goal line up or down
+
+.handle
+	fill none
 
 // Axes
 //-------------------------------
@@ -52,6 +86,10 @@ vis-goal-stroke-width = 1px
 
 	.domain
 		display none
+
+.split
+	fill vis-axis-color
+
 	
 // Brush
 //-------------------------------

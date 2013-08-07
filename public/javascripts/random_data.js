@@ -19,6 +19,7 @@ function RandomData(options) {
 	entries.start_date = start_date;
 	entries.end_date   = end_date;
 
+
 	return entries;
 
 	// returns an array of [count] dates between [start] and [end] (inclusive)
@@ -163,8 +164,8 @@ function RandomData(options) {
 			return {
 				timestamp: date.format(),
 				target: {
-					wattage: Math.random() * 5,
-					flow:    Math.random() * 5
+					wattage: Math.random() * 4 + 3,
+					flow:    Math.random() * 4 + 3
 				}
 			}
 		}
