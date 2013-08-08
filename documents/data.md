@@ -60,6 +60,110 @@ I propose something like the following:
 	- last week (1 hour snapshots)
 	- last month (2 hour snapshots?)
 	- last year	(1 day snapshots?)
+
+#### What that looks like:
+
+```javascript
+start-home: {
+	usage: {
+		snapshots: {
+			-IKo28nwJLH0Nc5XeFmj: {
+				timestamp: '01-01-2013 3:00pm',
+				stats: {
+					electric: {
+						avg_power: 123, // in kW
+						total_energy: 123 // in kWH
+					},
+					water: {
+						avg_flow: 123, // in gal
+						total_flow: 123 // in gal
+					}
+				},
+				electric: {
+					[outletID]: {
+						avg_power: 123,
+						total_energy: 123
+					},
+					...
+				},
+				water: {
+					...
+				}
+			}
+			// more 10-minute snapshots
+		},
+		aggregates: {
+			// at the end of each day, the server could sum up each snapshot
+			daily: {
+				-IKo28nwJLH0Nc5XeFmj: {
+					timestamp: '01-01-2013',
+					stats: {
+						electric: {
+							avg_power: 123, // average of all 10-minute snapshots for the day
+							total_power: 123 // sum of all totals
+						},
+						water: {
+							// same treatment
+						}
+					}
+				}
+				// more daily snapshots
+			},
+			// and the same for each week and so on
+			weekly: {
+				...
+			},
+			etc...
+		}
+	},
+	goals: {
+		// we can't actually store functions in Firebase, so we need to figure out how to deterministically generate the same goal line each time based on parameters... this is tricky
+		electric: function(timestamp) {
+			return number_based_on_timestamp;
+		},
+		water: {
+			...
+		},
+		behaviors: {
+			// not sure how this would be fleshed out yet
+		}
+	},
+	// overview provides details on the status of each fixture in the house
+	// we can also use this to control the fixtures.
+	// setting lights.2 = 30 would prompt the server to change whichever light with ID = 2 to 30% brightness... something like that
+	// this is awesome because if we set up the hooks on the server right, we can use Firebase in a ton of ways in the future (e.g. a RESTful API for an iPhone-based remote)
+	overview: {
+		lights: {
+			[lightID]: 50,
+			[lightID]: 20,
+			[lightID]: true // on-off only
+		},
+		fans: {
+			[fanID]: 2, // assuming it has multiple speeds [0-3]
+		},
+		// we can specify which outlets are read-only and which are read/write through Firebase permissions
+		outlets: {
+			...
+		}
+	},
+	// we can denormalize the fixtures in the house to structure the data conveniently for Firebase
+	// see https://www.firebase.com/blog/2013-04-12-denormalizing-is-normal.html for some examples
+	fixtures: {
+		outlets: {
+			[outletID]: {
+				title: 'Kitchen outlets',
+				room: 'Kitchen',
+	            description: "Maybe this could be useful?",
+	            type: 'outlets',
+			}
+		},
+		// faucets, etc...
+	},
+	notifications: {
+		// we can have a list of notifications!
+	},
+}
+```
 	
 
 ---

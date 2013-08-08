@@ -3,15 +3,15 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , stylus  = require('stylus')
-  , nib     = require('nib')
-  , routes  = require('./routes')
-  , user    = require('./routes/user')
-  , http    = require('http')
-  , io      = require('socket.io')
-  , path    = require('path')
-  , data    = require('./public/data/sample.json');
+var express  = require('express')
+  , stylus   = require('stylus')
+  , nib      = require('nib')
+  , routes   = require('./routes')
+  , user     = require('./routes/user')
+  , http     = require('http')
+  , path     = require('path')
+  , Firebase = require('firebase')
+  , moment   = require('moment');
 
 var app = express();
 
@@ -49,23 +49,46 @@ app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
-  setupSocket(this)
+
+  generateRandomData();
 });
 
+// generates a new random snapshot every second and pushes it to firebase
+function generateRandomData() {
+  var rootRef = new Firebase('https://start-home.firebaseio.com/');
+  var snapRef = rootRef.child('usage/snapshots');
+  
+  setInterval(addDatum, 1000)
 
-// FIXME: this socket.io setup seems super sketchy...
+  function addDatum() {
+    var new_datum = {
+      timestamp: moment().format(),
+      stats: {
+        electric: {
+          avg_power: Math.random(),
+          total_energy: Math.random()
+        },
+        water: {
+          avg_flow: Math.random(),
+          total_flow: Math.random()
+        }
+      },
+      electric: {
+        1: {
+          avg_power: Math.random(),
+          total_energy: Math.random()
+        }
+      },
+      water: {
+        1: {
+          avg_flow: Math.random(),
+          total_flow: Math.random()
+        }
+      }
+    }
 
-function setupSocket(server) {
-  io = io.listen(server);
-
-  io.sockets.on('connection', function (socket) {
-    var count = 20;
-    socket.emit('init', data.slice(1,count))
-
-    var updater = setInterval(function() {
-      if (data[count] == null) clearInterval(updater);
-      else socket.emit('update', data[count]);
-      count++
-    }, 500)
-  });
+    snapRef.push(new_datum, function(e) {
+      if (e) console.log(e)
+    });
+  }
 }

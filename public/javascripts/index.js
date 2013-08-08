@@ -53,48 +53,41 @@ $(document).ready(function(){
 		$('#timeline').css('-webkit-transform', 'translate3d(0,' + saturated_y + '%,0)')
 	}
 
-	data_manager.on('init', function(d) {
-		timeline.init(d);
-		goal_view.init(d);
-		timeline.draw();
-		$('#timeline').hide();
-		goal_view.draw();
+	var rootRef = new Firebase('https://start-home.firebaseio.com/');
+	var snapRef = rootRef.child('usage/snapshots');
+	var goalRef = rootRef.child('goals');
+
+	var data = [];
+
+	// snapRef.once('value', function(snapshot) {
+
+	// 	snapshot.forEach(function(s) {
+	// 		data.push(s.val())
+	// 	})
+
+	// 	data.start_date = new Date(data[0].timestamp);
+
+	// 	timeline.draw();
+	// })
+
+	timeline.init();
+	timeline.draw();
+
+	snapRef.on('child_added', function(snapshot) {
+		timeline.add_datum(snapshot.val())
 	})
 
-	data_manager.on("update", function(d) {
-		timeline.update(d);
+	goalRef.on('value', function(snapshot) {
+		var electric_goal = snapshot.val().electric;
+		timeline.set_goal(electric_goal)
 	})
 
-	data_manager.init();
 
 	Clock.draw();
 
-	//prevent the document from scrolling
-	$(document).bind('touchmove', false);
-
 	$('#past').click(function(){
 		Clock.to_linear(show_now);
-
 	});
-
-	// really rough timer to hide and display the idle screen -- this should
-	// be much more robust in the future
-	$('#idle-screen').on('click tap touchmove', function() {
-		$(this).fadeOut()
-
-		var t = setTimeout(function() {
-			$('#idle-screen').fadeIn()
-		}, 10000)
-
-		$('#grid-container').on('mousemove click touchmove', function() {
-			clearTimeout(t)
-
-			t = setTimeout(function() {
-			$('#idle-screen').fadeIn()
-		}, 10000)
-
-		})
-	})
 });
 
 function show_now(){

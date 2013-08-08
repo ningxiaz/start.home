@@ -11,13 +11,15 @@ html
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
 		script(type='text/javascript', src='https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js')	
+		script(type='text/javascript', src='https://cdn.firebase.com/v0/firebase.js')
+		script(type='text/javascript', src='https://raw.github.com/mattedgod/D3Fire/master/d3fire.js')
 
 		//- Our Javascript (there's a lot of it...)
+		script(type='text/javascript', src='javascripts/data-manager.js')
 		script(type='text/javascript', src='javascripts/segue.js')
 		script(type='text/javascript', src='javascripts/clock.js')
 		script(type='text/javascript', src='javascripts/floorplan.js')
 		script(type='text/javascript', src='javascripts/timeline-brush.js')
-		script(type='text/javascript', src='javascripts/data-manager.js')
 		script(type='text/javascript', src='javascripts/random_data.js')
 		script(type='text/javascript', src='javascripts/goal_view.js')
 		script(type='text/javascript', src='javascripts/index.js')
@@ -43,11 +45,7 @@ html
 
 		div#grid-container
 			section.overview.pane
-				//- Some buttons!
-				a(href="#")#past.button Past
-				a(href="#")#past.button-large.button-info Future
-				a(href="#")#past.button-circle.button-warning: i.entypo-list
-				a(href="#")#past.button-circle-large.button-danger: i.entypo-user
+				a(href="#")#past.button-large Past
 
 				.main
 					#clock
