@@ -53,34 +53,11 @@ $(document).ready(function(){
 		$('#timeline').css('-webkit-transform', 'translate3d(0,' + saturated_y + '%,0)')
 	}
 
-	var rootRef = new Firebase('https://start-home.firebaseio.com/');
-	var snapRef = rootRef.child('usage/snapshots');
-	var goalRef = rootRef.child('goals');
-
-	var data = [];
-
-	// snapRef.once('value', function(snapshot) {
-
-	// 	snapshot.forEach(function(s) {
-	// 		data.push(s.val())
-	// 	})
-
-	// 	data.start_date = new Date(data[0].timestamp);
-
-	// 	timeline.draw();
-	// })
-
 	timeline.init();
 	timeline.draw();
 
-	snapRef.on('child_added', function(snapshot) {
-		timeline.add_datum(snapshot.val())
-	})
-
-	goalRef.on('value', function(snapshot) {
-		var electric_goal = snapshot.val().electric;
-		timeline.set_goal(electric_goal)
-	})
+	goal_view.init();
+	goal_view.draw();
 
 
 	Clock.draw();

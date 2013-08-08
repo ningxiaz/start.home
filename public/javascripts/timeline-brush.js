@@ -9,8 +9,7 @@ var timeline = {
 		right: 30
 	},
 	scales: {
-		overall: d3.time.scale(),
-		past: d3.time.scale(),
+		x: d3.time.scale(),
 		y: d3.scale.linear()
 	},
 	lines: {
@@ -25,31 +24,31 @@ var timeline = {
 	xAxis: d3.svg.axis(),
 
 	init: function() {
-		this.width = $('#timeline figure').width() / 2;
+		this.width = $('#timeline figure').width();
 
 		var scales = this.scales,
 			lines = this.lines,
 			margin = this.margin;
 
-		scales.overall.range([margin.left, this.width - margin.right]);
+		scales.x.range([margin.left, this.width - margin.right]);
 		scales.y.range([this.height, 0])
 
 		lines.past
 			.interpolate("basis")
-			.x(function(d) { return scales.overall(new Date(d.timestamp)) })
+			.x(function(d) { return scales.x(new Date(d.timestamp)) })
 			.y(function(d) { return scales.y(d.stats.electric.avg_power) });
 
 		lines.goal
 			.interpolate("basis")
-			.x(function(d) { return scales.overall(new Date(d.timestamp)) })
+			.x(function(d) { return scales.x(new Date(d.timestamp)) })
 			.y(function(d) { return scales.y(0) });
 
 		this.brush
-			.x(scales.past)
+			.x(scales.x)
 			.on("brush", this.brushed)
 
 		this.xAxis
-			.scale(scales.overall)
+			.scale(scales.x)
 			// .ticks(d3.time., 1)
 	},
 
@@ -67,22 +66,24 @@ var timeline = {
 		// 		.attr("height", this.height + 35)
 		// 		// .attr("transform", "translate("+this.margin.left+",0)");
 
-		svg.append("rect")
-			.attr("class", "split")
-			.attr("x", this.scales.overall(new Date()))
-			.attr("height", '70px')
-			.attr("width", '4px')
 
-		this.paths.past = svg.append("path")
+		var group = svg.append('g')
+			.attr("transform", "translate(0,5)")
+
+		this.paths.past = group.append("path")
 			.data([this.data])
 			.attr("class", "past line")
-			.attr("transform", "translate(0,5)")
 			.attr("d", this.lines.past);
 
-		this.paths.goal = svg.append("path")
+		this.split = svg.append("rect")
+			.attr("class", "split")
+			.attr("x", this.scales.x(new Date()) - 10)
+			.attr("height", '70px')
+			.attr("width", '10px')
+
+		this.paths.goal = group.append("path")
 			.data([this.data])
 			.attr("class", "goal line")
-			.attr("transform", "translate(0,5)")
 			.attr("d", this.lines.goal);
 
 		this.axis = svg.append("g")
@@ -97,19 +98,21 @@ var timeline = {
 
 	add_datum: function(datum) {
 		this.data.push(datum)
+		this.now = new Date(datum.timestamp)
 
 		var scales = this.scales,
 			lines = this.lines,
 			margin = this.margin,
 			data = this.data;
 
-		scales.overall
-			.domain([moment().subtract(2, 'minute'), new Date()])
+		scales.x
+			.domain([moment().subtract(.5, 'hour'), moment().add(.5, 'hour')])
 
 		scales.y
-			.domain(d3.extent(this.data, function(d) { return d.stats.electric.avg_power; }));
+			.domain([0,1.2]);
 
 		this.update();
+		if (this.data.length > 200) this.data.shift();
 	},
 
 	update: function() {
@@ -121,18 +124,31 @@ var timeline = {
 			axis = this.axis,
 			xAxis = this.xAxis,
 			data = this.data,
-			scales = this.scales;
+			scales = this.scales,
+			split = this.split,
+			now = this.now;
 
 		function real_update() {
 			paths.past
-				.transition()
 				.attr('d', lines.past)
+				// .attr('transform', null)
+				// .transition()
+				// .duration(10000)
+				// .ease('linear')
+				// .attr('transform', 'translate(' + (scales.x(moment(scales.x.domain()[0]).subtract(10,'s')) - 30) + ')')
 
 			paths.goal
-				.transition()
+				// .transition()
 				.attr('d', lines.goal)
 
-			axis.transition().call(xAxis);
+			axis
+				// .transition()
+				// .duration(10000)
+				// .ease('linear')
+				.call(xAxis);
+
+			split
+				.attr("x", scales.x(now) - 5)
 		}
 	},
 

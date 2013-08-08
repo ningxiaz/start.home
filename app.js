@@ -58,37 +58,41 @@ function generateRandomData() {
   var rootRef = new Firebase('https://start-home.firebaseio.com/');
   var snapRef = rootRef.child('usage/snapshots');
   
-  setInterval(addDatum, 1000)
+  setInterval(addDatum, 10000)
+
+  var water_num = Math.random(),
+      electric_num = Math.random();
 
   function addDatum() {
+    water_num += (Math.random() - .5) * .1;
+    electric_num += (Math.random() - .5) * .1;
+
     var new_datum = {
       timestamp: moment().format(),
       stats: {
         electric: {
-          avg_power: Math.random(),
-          total_energy: Math.random()
+          avg_power: electric_num,
+          total_energy: electric_num
         },
         water: {
-          avg_flow: Math.random(),
-          total_flow: Math.random()
+          avg_flow: water_num,
+          total_flow: water_num
         }
       },
       electric: {
         1: {
-          avg_power: Math.random(),
-          total_energy: Math.random()
+          avg_power: electric_num,
+          total_energy: electric_num
         }
       },
       water: {
         1: {
-          avg_flow: Math.random(),
-          total_flow: Math.random()
+          avg_flow: water_num,
+          total_flow: water_num
         }
       }
     }
 
-    snapRef.push(new_datum, function(e) {
-      if (e) console.log(e)
-    });
+    snapRef.push().setWithPriority(new_datum, moment().format());
   }
 }
