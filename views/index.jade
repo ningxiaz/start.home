@@ -21,9 +21,8 @@ html(ng-app="sh")
 		script(type='text/javascript', src='javascripts/firebase-manager.js')
 		script(type='text/javascript', src='javascripts/segue.js')
 		script(type='text/javascript', src='javascripts/clock.js')
-		script(type='text/javascript', src='javascripts/floorplan.js')
+		script(type='text/javascript', src='javascripts/main_view.js')
 		script(type='text/javascript', src='javascripts/timeline-brush.js')
-		script(type='text/javascript', src='javascripts/random_data.js')
 		script(type='text/javascript', src='javascripts/goal_view.js')
 		script(type='text/javascript', src='javascripts/index.js')
 		script(type='text/javascript', src='javascripts/controllers.js')
@@ -49,11 +48,16 @@ html(ng-app="sh")
 
 		div#grid-container
 			section.overview.pane
-				a(href="#")#past.button-large Past
+				figure.floorplan
+					svg
+						rect#living-room(width="140px", height="140px").room
 
-				.main
-					#clock
-					#floorplan
+
+				//- a(href="#")#past.button-large Past
+
+				//- .main
+				//- 	#clock
+				//- 	#floorplan
 
 			section.past-view.pane
 				h1 Past
@@ -129,9 +133,9 @@ html(ng-app="sh")
 									| {{commitment.description}}
 									span.impact - {{commitment.impact}} kw
 
-							div.progress-state
-								a.button-large.button-danger.cancel Cancel
-								a.button-large.save Save
+							//- div.progress-state
+							//- 	a.button-large.button-danger.cancel Cancel
+							//- 	a.button-large.save Save
 
 
 

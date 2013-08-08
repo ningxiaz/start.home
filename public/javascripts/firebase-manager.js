@@ -5,6 +5,7 @@ $(function() {
 	// Misc references
 	var snapRef = rootRef.child('usage/snapshots');
 	var goalRef = rootRef.child('goals');
+	var fixRef  = rootRef.child('fixtures');
 
 
 	// Every time the server pushes a new snapshot
@@ -17,5 +18,9 @@ $(function() {
 	goalRef.on('value', function(snapshot) {
 		timeline.set_goal(snapshot.val().electric)
 		goal_view.set_goals(snapshot.val())
+	})
+
+	fixRef.on('value', function(snapshot) {
+		floorplan.set_data(snapshot.val())
 	})
 })

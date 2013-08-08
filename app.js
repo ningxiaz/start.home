@@ -57,8 +57,10 @@ http.createServer(app).listen(app.get('port'), function(){
 function generateRandomData() {
   var rootRef = new Firebase('https://start-home.firebaseio.com/');
   var snapRef = rootRef.child('usage/snapshots');
+  var fixRef  = rootRef.child('fixtures');
   
   setInterval(addDatum, 10000)
+  setInterval(adjustOutlets, 1500)
 
   var water_num = Math.random(),
       electric_num = Math.random();
@@ -94,5 +96,11 @@ function generateRandomData() {
     }
 
     snapRef.push().setWithPriority(new_datum, moment().format());
+  }
+
+  function adjustOutlets() {
+    fixRef.child('outlets/1/output').set(Math.random() * 50)
+    fixRef.child('outlets/2/output').set(Math.random() * 50)
+    fixRef.child('outlets/3/output').set(Math.random() * 50)
   }
 }
