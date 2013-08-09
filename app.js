@@ -99,8 +99,8 @@ function generateRandomData() {
   }
 
   function adjustOutlets() {
+    fixRef.child('outlets/0/output').set(Math.random() * 50)
     fixRef.child('outlets/1/output').set(Math.random() * 50)
     fixRef.child('outlets/2/output').set(Math.random() * 50)
-    fixRef.child('outlets/3/output').set(Math.random() * 50)
   }
 }
