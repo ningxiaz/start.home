@@ -295,8 +295,8 @@ hr{border:none;border-bottom:1px solid rgba(0,0,0,0.1);margin-top:-1px}
 #clock .nighttime_arc{fill:#002835;stroke-width:3px;stroke:#002835;stroke-linejoin:round}
 #clock .coordinates{stroke:#bef3ff}
 #clock .now{stroke:#1e91b8;stroke-width:2px;stroke-linecap:round}
-#floorplan{position:absolute;left:130px;top:160px;}
-#floorplan #floorplan_svg{position:absolute;left:0}
+#floorplan{position:absolute;left:130px;top:140px;}
+#floorplan #floorplan_svg{position:absolute;left:50px;top:50px}
 #floorplan .floorplan_rect{fill:#d6f8ff;stroke:#a7afa6;stroke-width:1px}
 .goal-view figure{height:100%;width:100%;margin:0;position:absolute;top:0;left:0}
 .line,.goal{stroke:#effcff;stroke-linecap:round;stroke-width:2px;fill:none;}
