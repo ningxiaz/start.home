@@ -9,8 +9,7 @@ var timeline = {
 		right: 30
 	},
 	scales: {
-		overall: d3.time.scale(),
-		past: d3.time.scale(),
+		x: d3.time.scale(),
 		y: d3.scale.linear()
 	},
 	lines: {
@@ -24,48 +23,33 @@ var timeline = {
 	brush: d3.svg.brush(),
 	xAxis: d3.svg.axis(),
 
-	init: function(data) {
-		this.data = data;
+	init: function() {
 		this.width = $('#timeline figure').width();
 
 		var scales = this.scales,
 			lines = this.lines,
 			margin = this.margin;
 
-		scales.overall
-			.domain([data.start_date, data.end_date])
-			.range([margin.left, this.width - margin.right]);
+		scales.x.range([margin.left, this.width - margin.right]);
+		scales.y.range([this.height, 0])
 
-		scales.past
-			.domain([data.start_date, data.now])
-			.range([margin.left, scales.overall(data.now)])
-
-		scales.y
-			.range([this.height, 0])
-			.domain(d3.extent(this.data, function(d) { return get_wattage(d); }));
-
-		this.lines.past
+		lines.past
 			.interpolate("basis")
-			.x(function(d) { return scales.past(new Date(d.timestamp)) })
-			.y(function(d) { return scales.y(get_wattage(d)) });
+			.x(function(d) { return scales.x(new Date(d.timestamp)) })
+			.y(function(d) { return scales.y(d.stats.electric.avg_power) });
 
-		this.lines.goal
+		lines.goal
 			.interpolate("basis")
-			.x(function(d) { return scales.overall(new Date(d.timestamp)) })
-			.y(function(d) { return scales.y(d.target.wattage) })
+			.x(function(d) { return scales.x(new Date(d.timestamp)) })
+			.y(function(d) { return scales.y(0) });
 
 		this.brush
-			.x(scales.past)
+			.x(scales.x)
 			.on("brush", this.brushed)
 
 		this.xAxis
-			.scale(scales.overall)
+			.scale(scales.x)
 			// .ticks(d3.time., 1)
-
-		function get_wattage(d) {
-			if (d.stats) return d.stats.total_wattage;
-			return d.target.wattage;
-		}
 	},
 
 	draw: function() {
@@ -74,33 +58,35 @@ var timeline = {
 		// the brush is appended first in order to place it below the lines
 		// this is not ideal because the lines grab the touch before the brush can
 		// setting the brush to blend-mode: color would be great, but this is hard
-		svg.append("g")
-			.attr("class", "x brush")
-			.call(this.brush)
-			.selectAll("rect")
-				.attr("y", -6)
-				.attr("height", this.height + 35)
-				// .attr("transform", "translate("+this.margin.left+",0)");
+		// svg.append("g")
+		// 	.attr("class", "x brush")
+		// 	.call(this.brush)
+		// 	.selectAll("rect")
+		// 		.attr("y", -6)
+		// 		.attr("height", this.height + 35)
+		// 		// .attr("transform", "translate("+this.margin.left+",0)");
 
-		svg.append("rect")
-			.attr("class", "split")
-			.attr("x", this.scales.overall(this.data.now))
-			.attr("height", '70px')
-			.attr("width", '4px')
 
-		this.paths.past = svg.append("path")
-			.data([this.data.filter(past_data)])
-			.attr("class", "past line")
+		var group = svg.append('g')
 			.attr("transform", "translate(0,5)")
+
+		this.paths.past = group.append("path")
+			.data([this.data])
+			.attr("class", "past line")
 			.attr("d", this.lines.past);
 
-		this.paths.goal = svg.append("path")
+		this.split = svg.append("rect")
+			.attr("class", "split")
+			.attr("x", this.scales.x(new Date()) - 10)
+			.attr("height", '70px')
+			.attr("width", '10px')
+
+		this.paths.goal = group.append("path")
 			.data([this.data])
 			.attr("class", "goal line")
-			.attr("transform", "translate(0,5)")
 			.attr("d", this.lines.goal);
 
-		svg.append("g")
+		this.axis = svg.append("g")
 			.attr("class", "x axis")
 			// .attr("transform", "translate("+this.margin.left+",32)")
 			.call(this.xAxis);
@@ -110,26 +96,69 @@ var timeline = {
 		}
 	},
 
-	update: function(datum) {
+	add_datum: function(datum) {
+		this.data.push(datum)
+		this.now = new Date(datum.timestamp)
 
-		var totalLength = this.path.node().getTotalLength();
+		var scales = this.scales,
+			lines = this.lines,
+			margin = this.margin,
+			data = this.data;
 
-		var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S")
-		var lastDate = parseDate.parse(this.data[this.data.length - 2].timestamp);
-		var newDate = parseDate.parse(datum.timestamp);
+		scales.x
+			.domain([moment().subtract(.5, 'hour'), moment().add(.5, 'hour')])
 
-		this.y.domain(d3.extent(this.data, function(d) { return this.get_wattage(d); }))
+		scales.y
+			.domain([0,1.2]);
 
-		// this.line.interpolate("basis")
+		this.update();
+		if (this.data.length > 200) this.data.shift();
+	},
 
-		this.path
-			.attr("stroke-dasharray", totalLength)
-			.attr("stroke-dashoffset", this.x(newDate) - this.x(lastDate))
-			.attr("d", this.line)
-			.transition()
-			.duration(500)
-			.ease("linear")
-			.attr("stroke-dashoffset", 0)
+	update: function() {
+		clearTimeout(this.update_timer)
+		this.update_timer = setTimeout(real_update, 100);
+
+		var paths = this.paths,
+			lines = this.lines,
+			axis = this.axis,
+			xAxis = this.xAxis,
+			data = this.data,
+			scales = this.scales,
+			split = this.split,
+			now = this.now;
+
+		function real_update() {
+			paths.past
+				.attr('d', lines.past)
+				// .attr('transform', null)
+				// .transition()
+				// .duration(10000)
+				// .ease('linear')
+				// .attr('transform', 'translate(' + (scales.x(moment(scales.x.domain()[0]).subtract(10,'s')) - 30) + ')')
+
+			paths.goal
+				// .transition()
+				.attr('d', lines.goal)
+
+			axis
+				// .transition()
+				// .duration(10000)
+				// .ease('linear')
+				.call(xAxis);
+
+			split
+				.attr("x", scales.x(now) - 5)
+		}
+	},
+
+	set_goal: function(new_goal) {
+		var scales = this.scales;
+
+		this.lines.goal
+			.y(function(d) { return scales.y(new_goal) });
+
+		this.update();
 	},
 
 	brushed: function() {

@@ -1,5 +1,5 @@
 doctype 5
-html
+html(ng-app="sh")
 	head
 		title= title
 
@@ -11,16 +11,21 @@ html
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
 		script(type='text/javascript', src='https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js')	
+		script(type='text/javascript', src='https://cdn.firebase.com/v0/firebase.js')
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js')
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angularFire/0.2.0/angularfire.min.js')
+
+
 
 		//- Our Javascript (there's a lot of it...)
+		script(type='text/javascript', src='javascripts/firebase-manager.js')
 		script(type='text/javascript', src='javascripts/segue.js')
 		script(type='text/javascript', src='javascripts/clock.js')
-		script(type='text/javascript', src='javascripts/floorplan.js')
+		script(type='text/javascript', src='javascripts/main_view.js')
 		script(type='text/javascript', src='javascripts/timeline-brush.js')
-		script(type='text/javascript', src='javascripts/data-manager.js')
-		script(type='text/javascript', src='javascripts/random_data.js')
 		script(type='text/javascript', src='javascripts/goal_view.js')
 		script(type='text/javascript', src='javascripts/index.js')
+		script(type='text/javascript', src='javascripts/controllers.js')
 
 		//- Meta tags
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
@@ -43,15 +48,16 @@ html
 
 		div#grid-container
 			section.overview.pane
-				//- Some buttons!
-				a(href="#")#past.button Past
-				a(href="#")#past.button-large.button-info Future
-				a(href="#")#past.button-circle.button-warning: i.entypo-list
-				a(href="#")#past.button-circle-large.button-danger: i.entypo-user
+				figure.floorplan
+					svg
+						rect#living-room(width="140px", height="140px").room
 
-				.main
-					#clock
-					#floorplan
+
+				//- a(href="#")#past.button-large Past
+
+				//- .main
+				//- 	#clock
+				//- 	#floorplan
 
 			section.past-view.pane
 				h1 Past
@@ -60,60 +66,79 @@ html
 			section.goal-view.pane
 				figure.line-graph
 				div.panel-side.right
-					h3 Projected consumption
-					div.projections
-						div.projection.electricity
-							i.entypo-flash
-							span.amount.electric-text 33 kWh
-						div.projection.water
-							i.entypo-water
-							span.amount.water-text 200 gal
+					div.set_hvac
+						h3 Projected consumption
+						div.projections
+							div.projection.electricity
+								i.entypo-flash
+								span.amount.electric-text 33 kWh
+					div.set_goal(ng-controller="GoalCtrl")
+						h3 Projected consumption
+						div.projections
+							div.projection.electricity
+								i.entypo-flash
+								span.amount.electric-text 33 kWh
+							div.projection.water
+								i.entypo-water
+								span.amount.water-text 200 gal
 
-					p.caption This value is calculated assuming you meet your current goals by the end of the year.
+						p.caption This value is calculated assuming you meet your current goals by the end of the year.
 
-					//- Divider
-					hr
+						//- Divider
+						hr
 
-					h3 Commitments
-					p.caption Please make a few commitments in order to meet your short-term <span class="electric-text">electricity</span> goals.
+						div.adjust_goals
+							p.caption Please set a <strong>long-term goal</strong> for the household to reach until the end of the year. You can adjust this goal at any time if you wish.
 
-					div.progress
-						div.progress-bar(style="width: 80%;")
+							//- I intend to develop a more intuitive input
+							//- down the line, but this text input will do for
+							//- now.
+							div.goal_inputs
+								input(placeholder="Electricity", ng-model="goals.electric").electric
+								input(placeholder="Water", ng-model="goals.water").water
 
-					p.caption.right-align 3 kw remaining
+							//- div.slider-container
+							//- 	figure.slider.electric
+							//- 		span.meter 1 kWh
+							//- 		div.rail
+							//- 			div.knob
+							//- 	figure.slider.water
+							//- 		span.meter 200 gal
+							//- 		div.rail
+							//- 			div.knob
 
-					menu.behavior-suggestions
-						li
-							a(href="#").button-circle-small: i.entypo-check
-							| Take shorter showers
-							span.impact - 2 kw
-						li.selected
-							a(href="#").button-circle-small.button-danger: i.entypo-cross
-							| Leave the house a little warmer
-							span.impact - 2 kw
-						li 
-							a(href="#").button-circle-small: i.entypo-check
-							| Keep the lights a bit dimmer
-							span.impact - 2 kw
-						li 
-							a(href="#").button-circle-small: i.entypo-check
-							| Eat less food
-							span.impact - 5 kw
-						li 
-							a(href="#").button-circle-small: i.entypo-check
-							| Treat the planet a little better
-							span.impact - 1 kw
-						li 
-							a(href="#").button-circle-small: i.entypo-check
-							| Ride your bike to work
-							span.impact - 3 kw
-
-					div.save-state
-						a.button-large.button-danger.cancel Cancel
-						a.button-large.save Save
+							//- div.progress-state
+							//- 	a.button-large.button-danger.cancel Cancel
+							//- 	a.button-large.save Next
 
 
+						div.adjust_behaviors
+							h3 Commitments
+							p.caption Please make a few commitments in order to meet your short-term goals.
+
+							div.progress-electric
+								div.progress-bar(style="width: {{getCommitmentSum('electric') / goals.electric * 100}}%;")
+
+							p.caption.right-align {{ goals.electric - getCommitmentSum('electric') }} kw remaining
+
+							div.progress-water
+								div.progress-bar(style="width: {{getCommitmentSum('water') / goals.water * 100}}%;")
+
+							p.caption.right-align {{ goals.water - getCommitmentSum('water') }} gal remaining
+
+							menu.behavior-suggestions
+								li(ng-repeat="commitment in goals.commitments.suggestions")
+									//- a(href="#", ng-click="goals.commitments.electric_sum = goals.commitments.electric_sum + .1").button-circle-small: i.entypo-check
+									input(type="checkbox", ng-model="commitment.accepted")
+									| {{commitment.description}}
+									span.impact - {{commitment.impact}} kw
+
+							//- div.progress-state
+							//- 	a.button-large.button-danger.cancel Cancel
+							//- 	a.button-large.save Save
 
 
-			
+
+
+				
 

@@ -3,15 +3,15 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , stylus  = require('stylus')
-  , nib     = require('nib')
-  , routes  = require('./routes')
-  , user    = require('./routes/user')
-  , http    = require('http')
-  , io      = require('socket.io')
-  , path    = require('path')
-  , data    = require('./public/data/sample.json');
+var express  = require('express')
+  , stylus   = require('stylus')
+  , nib      = require('nib')
+  , routes   = require('./routes')
+  , user     = require('./routes/user')
+  , http     = require('http')
+  , path     = require('path')
+  , Firebase = require('firebase')
+  , moment   = require('moment');
 
 var app = express();
 
@@ -49,23 +49,58 @@ app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
-  setupSocket(this)
+
+  generateRandomData();
 });
 
+// generates a new random snapshot every second and pushes it to firebase
+function generateRandomData() {
+  var rootRef = new Firebase('https://start-home.firebaseio.com/');
+  var snapRef = rootRef.child('usage/snapshots');
+  var fixRef  = rootRef.child('fixtures');
+  
+  setInterval(addDatum, 10000)
+  setInterval(adjustOutlets, 1500)
 
-// FIXME: this socket.io setup seems super sketchy...
+  var water_num = Math.random(),
+      electric_num = Math.random();
 
-function setupSocket(server) {
-  io = io.listen(server);
+  function addDatum() {
+    water_num += (Math.random() - .5) * .1;
+    electric_num += (Math.random() - .5) * .1;
 
-  io.sockets.on('connection', function (socket) {
-    var count = 20;
-    socket.emit('init', data.slice(1,count))
+    var new_datum = {
+      timestamp: moment().format(),
+      stats: {
+        electric: {
+          avg_power: electric_num,
+          total_energy: electric_num
+        },
+        water: {
+          avg_flow: water_num,
+          total_flow: water_num
+        }
+      },
+      electric: {
+        1: {
+          avg_power: electric_num,
+          total_energy: electric_num
+        }
+      },
+      water: {
+        1: {
+          avg_flow: water_num,
+          total_flow: water_num
+        }
+      }
+    }
 
-    var updater = setInterval(function() {
-      if (data[count] == null) clearInterval(updater);
-      else socket.emit('update', data[count]);
-      count++
-    }, 500)
-  });
+    snapRef.push().setWithPriority(new_datum, moment().format());
+  }
+
+  function adjustOutlets() {
+    fixRef.child('outlets/1/output').set(Math.random() * 50)
+    fixRef.child('outlets/2/output').set(Math.random() * 50)
+    fixRef.child('outlets/3/output').set(Math.random() * 50)
+  }
 }

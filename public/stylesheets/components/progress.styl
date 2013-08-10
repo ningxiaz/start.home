@@ -7,7 +7,22 @@
 	width 100%
 	height line-height-computed + 10px
 	clear both
+	overflow hidden
 
 .progress-bar
-	background yellow
+	background gray
 	height line-height-computed + 10px
+
+	-webkit-transition all 500ms
+
+.progress-electric
+	@extends .progress
+
+	.progress-bar
+		background yellow
+
+.progress-water
+	@extends .progress
+
+	.progress-bar
+		background blue

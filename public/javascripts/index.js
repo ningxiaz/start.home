@@ -53,48 +53,18 @@ $(document).ready(function(){
 		$('#timeline').css('-webkit-transform', 'translate3d(0,' + saturated_y + '%,0)')
 	}
 
-	data_manager.on('init', function(d) {
-		timeline.init(d);
-		goal_view.init(d);
-		timeline.draw();
-		$('#timeline').hide();
-		goal_view.draw();
-	})
+	timeline.init();
+	timeline.draw();
 
-	data_manager.on("update", function(d) {
-		timeline.update(d);
-	})
+	goal_view.init();
+	goal_view.draw();
 
-	data_manager.init();
 
 	Clock.draw();
 
-	//prevent the document from scrolling
-	$(document).bind('touchmove', false);
-
 	$('#past').click(function(){
 		Clock.to_linear(show_now);
-
 	});
-
-	// really rough timer to hide and display the idle screen -- this should
-	// be much more robust in the future
-	$('#idle-screen').on('click tap touchmove', function() {
-		$(this).fadeOut()
-
-		var t = setTimeout(function() {
-			$('#idle-screen').fadeIn()
-		}, 10000)
-
-		$('#grid-container').on('mousemove click touchmove', function() {
-			clearTimeout(t)
-
-			t = setTimeout(function() {
-			$('#idle-screen').fadeIn()
-		}, 10000)
-
-		})
-	})
 });
 
 function show_now(){

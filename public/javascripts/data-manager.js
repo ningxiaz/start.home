@@ -17,20 +17,6 @@ var data_manager = {
 	},
 
 	init: function() {
-		this.data = RandomData({ 
-			start_date: moment().subtract('M', 1),
-			end_date: moment().add('M', 1),
-			cutoff: moment(),
-			count: 15
-		});
-
-		this.trigger('init', this.data)
+		
 	},
-
-	update: function(datum) {
-		var new_entry = this.process_datum(datum);
-		this.data.push(new_entry);
-
-		this.trigger('update', new_entry)
-	}
 }
