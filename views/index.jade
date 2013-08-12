@@ -36,11 +36,11 @@ html(ng-app="sh")
 		//- 	#clock
 
 		//- Navigation
-		//- nav.shortcuts
-		//- 	ul
-		//- 		li: a(href="#").button-circle-large: i.entypo-list
-		//- 		li: a(href="#").button-circle-large: i.entypo-light-bulb
-		//- 		li: a(href="#").button-circle-large: i.entypo-thermometer 
+		nav.shortcuts
+			ul
+				li: a(href="#").button-circle-large: i.entypo-list
+				li: a(href="#").button-circle-large: i.entypo-light-bulb
+				li: a(href="#").button-circle-large: i.entypo-thermometer 
 
 		div#timeline
 			figure
@@ -131,7 +131,7 @@ html(ng-app="sh")
 									//- a(href="#", ng-click="goals.commitments.electric_sum = goals.commitments.electric_sum + .1").button-circle-small: i.entypo-check
 									input(type="checkbox", ng-model="commitment.accepted")
 									| {{commitment.description}}
-									span.impact - {{commitment.impact}} kw
+									span.impact - {{commitment.impact}}
 
 							//- div.progress-state
 							//- 	a.button-large.button-danger.cancel Cancel

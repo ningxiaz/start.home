@@ -106,7 +106,7 @@ var timeline = {
 			data = this.data;
 
 		scales.x
-			.domain([moment().subtract(.5, 'hour'), moment().add(.5, 'hour')])
+			.domain([moment().subtract(5, 'hour'), moment().add(5, 'hour')])
 
 		scales.y
 			.domain([0,1.2]);

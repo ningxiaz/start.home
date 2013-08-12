@@ -26,17 +26,15 @@ var floorplan = {
 
 		o.transition()
 			.duration(500)
-			.ease('bounce')
 			.attr('r', function(d) { return d.output })
 
 		o.enter().append('circle')
-			.attr('class', 'outlet')
+			.attr('class', 'outlet shape electric')
 			.attr('r', 0)
 			.attr('cx', function(d) { return d.position.x })
 			.attr('cy', function(d) { return d.position.y })
 			.transition()
 			.duration(500)
-			.ease('bounce')
 			.attr('r', function(d) { return d.output })
 	}
 }

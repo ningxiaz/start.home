@@ -307,7 +307,7 @@ hr{border:none;border-bottom:1px solid rgba(0,0,0,0.1);margin-top:-1px}
 .marker{stroke:#fff;stroke-width:1px;stroke-dasharray:1000px}
 #blue-circle{fill:#1e91b8}
 #yellow-circle{fill:#f9de4f}
-.handle{fill:none}
+.shape.electric{fill:#f9de4f}
 .axis line{display:none}
 .axis text{fill:rgba(255,255,255,0.5);text-transform:lowercase;font-size:11px}
 .axis .domain{display:none}
@@ -325,7 +325,8 @@ hr{border:none;border-bottom:1px solid rgba(0,0,0,0.1);margin-top:-1px}
 .goal_inputs{padding:8px 12px;}
 .goal_inputs input{-webkit-appearance:none;outline:none;width:100%;padding:8px 12px;border:1px solid #e6e6e6;-webkit-border-radius:4px;border-radius:4px;}
 .goal_inputs input+input{margin-top:10px}
-.behavior-suggestions{list-style-type:none;margin:0;padding:0;}
+.height-fix{position:relative}
+.behavior-suggestions{list-style-type:none;overflow:scroll;position:relative;margin:0;padding:0;}
 .behavior-suggestions li{padding:12px 14px;}
 .behavior-suggestions li+ li{border-top:1px solid #e6e6e6}
 .behavior-suggestions li a{margin-right:12px}
@@ -350,4 +351,8 @@ hr{border:none;border-bottom:1px solid rgba(0,0,0,0.1);margin-top:-1px}
 .slider{margin:0;display:block;height:100%;}
 .slider .rail{margin:0 auto;display:block;height:100%;width:10px;background:#a7afa6;content:" ";}
 .slider .rail .knob{position:relative;left:-25px;height:20px;width:60px;background:#39474c}
+.shortcuts{position:absolute;bottom:30px;left:30px;z-index:200;}
+.shortcuts ul{margin:0;padding:0;list-style-type:none;}
+.shortcuts ul li{display:inline;}
+.shortcuts ul li+li{margin-left:12px}
 .animate{-webkit-transition:all 200ms cubic-bezier(.785,.135,.15,.86)}
