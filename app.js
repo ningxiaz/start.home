@@ -59,7 +59,7 @@ function generateRandomData() {
   var snapRef = rootRef.child('usage/snapshots');
   var fixRef  = rootRef.child('fixtures');
   
-  setInterval(addDatum, 10000)
+  setInterval(addDatum, 1000)
   setInterval(adjustOutlets, 1500)
 
   var water_num = Math.random(),

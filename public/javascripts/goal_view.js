@@ -183,7 +183,7 @@ var goal_view = {
 			data = this.data;
 
 		scales.x
-			.domain([moment().subtract(7, 'h'), moment().add(10, 'h')])
+			.domain([moment().subtract(7, 'm'), moment().add(10, 'm')])
 
 		scales.y
 			.domain([-1, 1.5]);

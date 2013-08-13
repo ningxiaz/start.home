@@ -59,23 +59,9 @@
 	position relative
 
 .behavior-suggestions
-	list-style-type none
-
-	overflow scroll
-	position relative
-
-	margin 0
-	padding 0
-
-	li
-		padding padding-base-horizontal padding-large-vertical
-
-		&+ li
-			border-top 1px solid darken(white, 10%)
-
-		a
-			margin-right padding-base-horizontal
-
+	@extends .list-stacked
+	
+	li 
 		&.selected
 			color gray
 

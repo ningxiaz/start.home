@@ -34,12 +34,12 @@ var timeline = {
 		scales.y.range([this.height, 0])
 
 		lines.past
-			.interpolate("basis")
+			// .interpolate("basis")
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
 			.y(function(d) { return scales.y(d.stats.electric.avg_power) });
 
 		lines.goal
-			.interpolate("basis")
+			// .interpolate("basis")
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
 			.y(function(d) { return scales.y(0) });
 
@@ -106,7 +106,7 @@ var timeline = {
 			data = this.data;
 
 		scales.x
-			.domain([moment().subtract(5, 'hour'), moment().add(5, 'hour')])
+			.domain([moment().subtract(5, 'm'), moment().add(5, 'm')])
 
 		scales.y
 			.domain([0,1.2]);

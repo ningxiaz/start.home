@@ -20,9 +20,9 @@ sh.controller('GoalCtrl', ['$scope', 'angularFire',
 ])
 
 
-sh.controller('FloorplanCtrl', ['$scope', 'angularFire', 
-	function GoalCtrl($scope, angularFire) {
-		var url = 'https://start-home.firebaseio.com/fixtures/';
-		var promise = angularFire(url, $scope, 'fixtures', {});
+sh.controller('NotificationCtrl', ['$scope', 'angularFire', 
+	function NotificationCtrl($scope, angularFire) {
+		var url = 'https://start-home.firebaseio.com/notifications/';
+		var promise = angularFire(url, $scope, 'notifications', []);
 	}
 ])

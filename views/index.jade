@@ -32,8 +32,16 @@ html(ng-app="sh")
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
-		//- section#idle-screen
-		//- 	#clock
+		section#idle-screen
+			#clock
+			div#half-step
+				div.panel-side.left(ng-controller="NotificationCtrl")
+					h3 Notifications
+						span.badge {{ notifications.length }}
+					ul.list-stacked
+						li(ng-repeat="notification in notifications") 
+							a(href="#").button-circle-small: i.entypo-check
+							{{ notification }}
 
 		//- Navigation
 		nav.shortcuts
@@ -50,7 +58,10 @@ html(ng-app="sh")
 			section.overview.pane
 				figure.floorplan
 					svg
-						rect#living-room(width="140px", height="140px").room
+						rect#living-room(width="140px", height="140px", y="140px").room
+						rect#kitchen(width="140px", height="140px", x="140px", y="140px").room
+						rect#studio(width="140px", height="140px", x="280px", y="140px").room
+						rect#bedroom(width="140px", height="140px", x="280px").room
 
 
 				//- a(href="#")#past.button-large Past

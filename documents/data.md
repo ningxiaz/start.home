@@ -164,6 +164,39 @@ start-home: {
 	},
 }
 ```
+
+What about...
+
+```javascript
+start-home: {
+	snapshots: {
+		8-1-2013: {
+			summary: {
+				sunrise: 7 am,
+				sunset: 8 pm,
+				electric: {
+					average: 123,
+					total: 123
+				},
+				water: {
+					average: 123,
+					total: 123
+				},
+				climate: {
+					humidity: 123,
+					temperature: 123,
+					// inside and out?
+				}
+			},
+			hourly: {
+				// ...
+			},
+			all: {
+				// ...
+			}
+		}
+	}
+}
 	
 
 ---
