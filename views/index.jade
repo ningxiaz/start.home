@@ -10,7 +10,7 @@ html(ng-app="sh")
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
-		script(type='text/javascript', src='https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js')	
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js')	
 		script(type='text/javascript', src='https://cdn.firebase.com/v0/firebase.js')
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js')
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angularFire/0.2.0/angularfire.min.js')
@@ -24,6 +24,7 @@ html(ng-app="sh")
 		script(type='text/javascript', src='javascripts/main_view.js')
 		script(type='text/javascript', src='javascripts/timeline-brush.js')
 		script(type='text/javascript', src='javascripts/goal_view.js')
+		script(type='text/javascript', src='javascripts/past-view.js')
 		script(type='text/javascript', src='javascripts/index.js')
 		script(type='text/javascript', src='javascripts/controllers.js')
 
@@ -32,23 +33,26 @@ html(ng-app="sh")
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
 	body
-		section#idle-screen
-			#clock
-			div#half-step
-				div.panel-side.left(ng-controller="NotificationCtrl")
-					h3 Notifications
-						span.badge {{ notifications.length }}
-					ul.list-stacked
-						li(ng-repeat="notification in notifications") 
-							a(href="#").button-circle-small: i.entypo-check
-							{{ notification }}
+		//- section#idle-screen
+		//- 	#clock
+		//- 	div#half-step
+		//- 		div.panel-side.left(ng-controller="NotificationCtrl")
+		//- 			h3 Notifications
+		//- 				span.badge {{ notifications.length }}
+		//- 			ul.list-stacked
+		//- 				li(ng-repeat="notification in notifications") 
+		//- 					a(href="#").button-circle-small: i.entypo-check
+		//- 					{{ notification }}
 
 		//- Navigation
 		nav.shortcuts
 			ul
-				li: a(href="#").button-circle-large: i.entypo-list
-				li: a(href="#").button-circle-large: i.entypo-light-bulb
-				li: a(href="#").button-circle-large: i.entypo-thermometer 
+				li: a(href="#").button-large Scenes
+				li: a(href="#").button-large Controls
+				li: a(href="#").button-large HVAC
+				//- li: a(href="#").button-circle-large: i.entypo-list
+				//- li: a(href="#").button-circle-large: i.entypo-light-bulb
+				//- li: a(href="#").button-circle-large: i.entypo-thermometer 
 
 		div#timeline
 			figure
@@ -71,8 +75,22 @@ html(ng-app="sh")
 				//- 	#floorplan
 
 			section.past-view.pane
-				h1 Past
-				figure.line-graph
+				figure.main-vis
+
+				figure.floorplan-filter
+					svg
+						rect#living-room(width="100px", height="100px", y="100px").room
+						rect#kitchen(width="100px", height="100px", x="100px", y="100px").room
+						rect#studio(width="100px", height="100px", x="200px", y="100px").room
+						rect#bedroom(width="100px", height="100px", x="200px").room
+
+				figure.statistics
+					h2 Statistics
+				nav.vis-types
+					ul
+						li: a(href="#").button-large Trends
+						li: a(href="#").button-large Usage
+						li: a(href="#").button-large Usage
 
 			section.goal-view.pane
 				figure.line-graph

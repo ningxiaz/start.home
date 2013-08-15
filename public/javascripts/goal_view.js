@@ -19,7 +19,8 @@ var goal_view = {
 
 	scales: {
 		x: d3.time.scale(),
-		y: d3.scale.linear()
+		water: d3.scale.linear(),
+		electric: d3.scale.linear()
 	},
 
 	lines: {
@@ -44,7 +45,11 @@ var goal_view = {
 		}
 	},
 
-	xAxis: d3.svg.axis(),
+	axes: {
+		x: d3.svg.axis(),
+		water: d3.svg.axis(),
+		electric: d3.svg.axis()
+	},
 
 	init: function() {
 		this.width 	= $('.goal-view figure').width();
@@ -53,33 +58,45 @@ var goal_view = {
 		var	margin = this.margin,
 			scales = this.scales,
 			lines  = this.lines,
-			paths  = this.paths;
+			paths  = this.paths,
+			axes   = this.axes;
 
 		scales.x
 			.range([margin.left, this.width - margin.right]);
 
-		scales.y
+		scales.electric
+			.range([this.height - margin.top, margin.bottom]);
+
+		scales.water
 			.range([this.height - margin.top, margin.bottom]);
 
 		lines.electricity.past
 			// .interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.y(d.stats.electric.avg_power) });
+			.y(function(d) { return scales.electric(d.stats.electric.avg_power) });
 
 		lines.electricity.goal
 			// .interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.y(0) });
+			.y(function(d) { return scales.electric(0) });
 
 		lines.water.past
 			// .interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.y(d.stats.water.avg_flow) });
+			.y(function(d) { return scales.water(d.stats.water.avg_flow) });
 
 		lines.water.goal
 			// .interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.y(0) });
+			.y(function(d) { return scales.water(0) });
+
+		axes.electric
+			.scale(scales.electric)
+			.orient('left');
+
+		axes.water
+			.scale(scales.water)
+			.orient('right');
 	},
 
 	draw: function() {
@@ -150,23 +167,15 @@ var goal_view = {
 			.attr("marker-end", "url(#blue-circle)")
 			.attr("d", this.lines.water.goal);
 
+		this.eAx = svg.append("g")
+		    .attr("transform", "translate(" + this.scales.x(new Date()) + ",5)")
+		    .attr('class', 'y axis dark')
+		    .call(this.axes.electric);
 
-		// // append handles
-
-		// var electricity_target = this.data[this.data.length - 1].target.wattage;
-		// var water_target = this.data[this.data.length - 1].target.flow;
-
-		// svg.append('circle')
-		// 	.attr('class', 'electricity handle')
-		// 	.attr('r', 15)
-		// 	.attr('cx', this.scales.x(this.data.end_date))
-		// 	.attr('cy', this.scales.y(electricity_target))
-
-		// svg.append('circle')
-		// 	.attr('class', 'water handle')
-		// 	.attr('r', 15)
-		// 	.attr('cx', this.scales.x(this.data.end_date))
-		// 	.attr('cy', this.scales.y(water_target))
+		this.wAx = svg.append("g")
+		    .attr("transform", "translate(" + this.scales.x(new Date()) + ",5)")
+		    .attr('class', 'y axis dark')
+		    .call(this.axes.water);
 
 		function past_data(d) {
 			if (d.stats) return true;
@@ -185,8 +194,13 @@ var goal_view = {
 		scales.x
 			.domain([moment().subtract(7, 'm'), moment().add(10, 'm')])
 
-		scales.y
-			.domain([-1, 1.5]);
+		scales.electric
+			.domain([d3.min(data, function(d) { return d.stats.electric.avg_power; }) - .5, 
+					 d3.max(data, function(d) { return d.stats.electric.avg_power; }) + .5]);
+
+		scales.water
+			.domain([d3.min(data, function(d) { return d.stats.water.avg_flow; }) - .5, 
+					 d3.max(data, function(d) { return d.stats.water.avg_flow; }) + .5]);
 
 		this.update();
 		if (this.data.length > 200) this.data.shift();
@@ -206,7 +220,10 @@ var goal_view = {
 			data = this.data,
 			scales = this.scales,
 			split = this.split,
-			now = this.now;
+			now = this.now,
+			axes = this.axes,
+			eAx = this.eAx,
+			wAx = this.wAx;
 
 		function real_update() {
 			paths.electricity.past
@@ -234,6 +251,14 @@ var goal_view = {
 
 			split
 				.attr("x", scales.x(now) - 5)
+
+			eAx
+				.attr("transform", "translate(" + scales.x(new Date()) + ",5)")
+				.call(axes.electric)
+
+			wAx
+				.attr("transform", "translate(" + scales.x(new Date()) + ",5)")
+				.call(axes.water)
 		}
 	},
 
@@ -241,10 +266,10 @@ var goal_view = {
 		var scales = this.scales;
 
 		this.lines.electricity.goal
-			.y(function(d) { return scales.y(new_goals.electric) });
+			.y(function(d) { return scales.electric(new_goals.electric) });
 
 		this.lines.water.goal
-			.y(function(d) { return scales.y(new_goals.water) });
+			.y(function(d) { return scales.water(new_goals.water) });
 
 		this.update();
 	}

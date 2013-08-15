@@ -1,0 +1,45 @@
+
+// components/visualizations/past-view.styl
+//-----------------------------------------
+
+.past-view
+	padding-top 70px
+
+	figure
+		margin 0
+
+	.main-vis
+		background gray
+
+		position absolute
+		top 70px + body-padding
+		left body-padding
+		right body-padding
+		bottom 40%
+
+		margin-bottom padding-base-horizontal
+
+		svg
+			position absolute
+
+	.floorplan-filter
+
+		position absolute
+		top 60%
+		left body-padding
+		right 70%
+		bottom body-padding * 2 + 60px
+
+		margin-right padding-base-horizontal * .5
+
+
+	.statistics
+		@extends .panel-base
+
+		position absolute
+		top 60%
+		right body-padding
+		left 30%
+		bottom body-padding * 2 + 60px
+
+		margin-left padding-base-horizontal * .5

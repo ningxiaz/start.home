@@ -50,6 +50,8 @@ var timeline = {
 		this.xAxis
 			.scale(scales.x)
 			// .ticks(d3.time., 1)
+
+		this.now = new Date();
 	},
 
 	draw: function() {
@@ -87,7 +89,7 @@ var timeline = {
 			.attr("d", this.lines.goal);
 
 		this.axis = svg.append("g")
-			.attr("class", "x axis")
+			.attr("class", "x axis light")
 			// .attr("transform", "translate("+this.margin.left+",32)")
 			.call(this.xAxis);
 
@@ -96,6 +98,7 @@ var timeline = {
 		}
 	},
 
+	// unused right now
 	add_datum: function(datum) {
 		this.data.push(datum)
 		this.now = new Date(datum.timestamp)
@@ -115,9 +118,35 @@ var timeline = {
 		if (this.data.length > 200) this.data.shift();
 	},
 
+	set_data: function(data) {
+		data = d3.values(data);
+		// data.sort(function(a,b) { return a.timestamp < b.timestamp; })
+
+		this.data = data;
+		this.now = new Date(data[data.length - 1].timestamp)
+		var start = new Date(data[0].timestamp);
+		var end = moment().add(this.now).subtract(start)
+
+		this.scales.x
+			.domain([start, end])
+
+		this.scales.y
+			.domain([d3.min(data, function(d) { return d.stats.electric.avg_power; }) - .1, 
+					 d3.max(data, function(d) { return d.stats.electric.avg_power; }) + .1]);
+
+
+		// this.update();
+		this.paths.past.data([data]).attr('d', this.lines.past)
+		this.paths.goal.data([data]).attr('d', this.lines.goal)
+		this.axis.call(this.xAxis)
+		this.split.attr("x", this.scales.x(this.now) - 5)
+	},
+
+
+	// unused right now
 	update: function() {
-		clearTimeout(this.update_timer)
-		this.update_timer = setTimeout(real_update, 100);
+		// clearTimeout(this.update_timer)
+		// this.update_timer = setTimeout(real_update, 100);
 
 		var paths = this.paths,
 			lines = this.lines,
@@ -128,23 +157,27 @@ var timeline = {
 			split = this.split,
 			now = this.now;
 
+		// paths.past.attr('d', lines.past)
+
+		real_update();
+
 		function real_update() {
 			paths.past
 				.attr('d', lines.past)
-				// .attr('transform', null)
-				// .transition()
-				// .duration(10000)
-				// .ease('linear')
-				// .attr('transform', 'translate(' + (scales.x(moment(scales.x.domain()[0]).subtract(10,'s')) - 30) + ')')
+		// 		// .attr('transform', null)
+		// 		// .transition()
+		// 		// .duration(10000)
+		// 		// .ease('linear')
+		// 		// .attr('transform', 'translate(' + (scales.x(moment(scales.x.domain()[0]).subtract(10,'s')) - 30) + ')')
 
 			paths.goal
-				// .transition()
+		// 		// .transition()
 				.attr('d', lines.goal)
 
 			axis
-				// .transition()
-				// .duration(10000)
-				// .ease('linear')
+		// 		// .transition()
+		// 		// .duration(10000)
+		// 		// .ease('linear')
 				.call(xAxis);
 
 			split
