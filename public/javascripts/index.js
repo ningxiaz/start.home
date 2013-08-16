@@ -5,7 +5,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 1,
+		initial_state: 0,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navPanes
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 1,
+		initial_state: 0,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navTimeline
@@ -58,6 +58,9 @@ $(document).ready(function(){
 
 	goal_view.init();
 	goal_view.draw();
+
+	past_view.init();
+	past_view.draw();
 
 
 	Clock.draw();

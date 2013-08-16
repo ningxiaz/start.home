@@ -189,10 +189,10 @@ start-home: {
 				}
 			},
 			hourly: {
-				// ...
+				// electric, water, climate...
 			},
 			all: {
-				// ...
+				// same
 			}
 		}
 	}

@@ -27,6 +27,7 @@ vis-goal-stroke-width = 1px
 @import "clock"
 @import "floorplan"
 @import "goal_view"
+@import "past-view"
 
 // Lines
 //-------------------------------
@@ -75,13 +76,20 @@ vis-goal-stroke-width = 1px
 	line
 		display none // hide the ticks
 
-	text
-		fill rgba(255, 255, 255, .5)
-		text-transform lowercase
-		font-size 11px
-
 	.domain
 		display none
+
+	&.light
+		text
+			fill rgba(255, 255, 255, .5)
+			text-transform lowercase
+			font-size 11px
+
+	&.dark
+		text
+			fill rgba(0, 0, 0, .5)
+			text-transform lowercase
+			font-size 11px
 
 .split
 	fill vis-axis-color
