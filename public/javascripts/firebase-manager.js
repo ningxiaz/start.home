@@ -3,7 +3,7 @@ $(function() {
 	var rootRef = new Firebase('https://start-home.firebaseio.com/');
 
 	// Misc references
-	var snapRef = rootRef.child('usage/snapshots');
+	var snapRef = rootRef.child('usage/snapshots/all');
 	var goalRef = rootRef.child('goals');
 	var fixRef  = rootRef.child('fixtures');
 
