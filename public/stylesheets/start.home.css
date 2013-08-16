@@ -322,8 +322,8 @@ hr{border:none;border-bottom:1px solid rgba(0,0,0,0.1);margin-top:-1px}
 #clock{width:768;margin:0 auto;}
 #clock .area{fill:#66c6e6}
 #clock .line{fill:none;stroke:#1e91b8}
-#clock .in_area{fill:#22a5d1;opacity:.8;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter:alpha(opacity=80)}
-#clock .in_line{fill:none;stroke:#1e91b8;stroke-width:1px}
+#clock .prod_area{fill:#fae161;opacity:.8;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";filter:alpha(opacity=80)}
+#clock .prod_line{fill:none;stroke:#f9de4f}
 #clock .min_line{stroke:#fff;stroke-dasharray:5px;stroke-width:1px;fill:none}
 #clock .max_line{stroke:#d45d5d;stroke-dasharray:5px;stroke-width:1px;fill:none}
 #clock .daytime_arc{fill:#f9de4f;stroke-width:3px;stroke:#f9de4f;stroke-linejoin:round}
