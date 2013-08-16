@@ -109,18 +109,18 @@ var Clock = {
 					{date: 0, time: 5, amount: 0}, 
 					{date: 0, time: 6, amount: 0.12}, 
 					{date: 0, time: 7, amount: 0.23}, 
-					{date: 0, time: 8, amount: 0.30},
-					{date: 0, time: 9, amount: 0.42},
-					{date: 0, time: 10, amount: 0.52},
-					{date: 0, time: 11, amount: 0.49},
-					{date: 0, time: 12, amount: 0.56},
-					{date: 0, time: 13, amount: 0.51},
-					{date: 0, time: 14, amount: 0.46},
-					{date: 0, time: 15, amount: 0.38},
-					{date: 0, time: 16, amount: 0.29},
-					{date: 0, time: 17, amount: 0.23},
-					{date: 0, time: 18, amount: 0.18},
-					{date: 0, time: 19, amount: 0.07}
+					{date: 0, time: 8, amount: 0.40},
+					{date: 0, time: 9, amount: 0.62},
+					{date: 0, time: 10, amount: 0.72},
+					{date: 0, time: 11, amount: 0.89},
+					{date: 0, time: 12, amount: 0.92},
+					{date: 0, time: 13, amount: 0.71},
+					{date: 0, time: 14, amount: 0.86},
+					{date: 0, time: 15, amount: 0.78},
+					{date: 0, time: 16, amount: 0.79},
+					{date: 0, time: 17, amount: 0.53},
+					{date: 0, time: 18, amount: 0.48},
+					{date: 0, time: 19, amount: 0.37}
 		];
 
 		var daytime = {
@@ -217,17 +217,17 @@ var Clock = {
 		      .attr("class", "line")
 		      .attr("d", line);
 
-		vis.selectAll(".in_area")
+		vis.selectAll(".prod_area")
 		      .data([production])
 		    .enter().append("path")
-		      .attr("class", "in_area")
-		      .attr("d", in_area);
+		      .attr("class", "prod_area")
+		      .attr("d", area);
 
-		vis.selectAll(".in_line")
+		vis.selectAll(".prod_line")
 		      .data([production])
 		    .enter().append("path")
-		      .attr("class", "in_line")
-		      .attr("d", in_line);
+		      .attr("class", "prod_line")
+		      .attr("d", line);
 
 		vis.selectAll(".min_line")
 			  .data([min])
