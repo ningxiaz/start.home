@@ -1,6 +1,21 @@
 var random   = require('./random_data'),
 	moment   = require('moment'),
-	Firebase = require('firebase');
+	Firebase = require('firebase'),
+	pj		 = require('prettyjson');
+
+// This module should handle all the data management services on the backend
+// including:
+// - Getting snapshots from the house
+// - Pushing snapshots to Firebase
+// - Processing snapshots for daily summaries
+// - Getting weather and meteorological data
+// - Helper functions for testing (bootstrapping the firebase, random data)
+
+// Using the module from the command line:
+// m = require('./manager')
+// m.processSnapshots()
+// m.pushRandomSnapshot()
+// etc...
 
 // forward the modules from random_data.js
 module.exports.bootstrapFirebase  = random.bootstrapFirebase;
@@ -11,26 +26,34 @@ module.exports.pushRandomSnapshot = random.pushRandomSnapshot;
 // real manager functions
 module.exports.processSnapshots   = processSnapshots;
 
-// clean data
-// when a datum is added to snapshots/all, figure out which day it belongs to and update the day summary for it
-
+// process data 
+// when a snapshot is added to snapshots/all, figure out which
+// day it belongs to and update the day summary for it
 function processSnapshots() {
 	var fb = new Firebase('https://start-home.firebaseio.com/');
 
 	var timer = moment();
 
-	var checker = setInterval(function() {
-		if (timer.isBefore(moment().subtract(10, 'seconds'))) {
-			console.log("Listening to new snapshots.")
-			clearInterval(checker);
-		}
-	}, 100)
+	console.log("Starting the snapshot processor...")
+
+	// var checker = setInterval(function() {
+	// 	process.stdout.write(".")
+	// 	if (timer.isBefore(moment().subtract(10, 'seconds'))) {
+	// 		process.stdout.write("\n")
+	// 		console.log("Listening to new snapshots.")
+	// 		clearInterval(checker);
+	// 	}
+	// }, 1000)
 
 	fb.child('snapshots/all').on('child_added', function (fbSnapshot) {
-		// simple hack to avoid the initial wave of snapshots
-		if (timer.isAfter(moment().subtract(10, 'seconds'))) return;
 
 		var snapshot = fbSnapshot.val();
+		
+		// simple hack to disregard old snapshots (which are assumed to be processed...)
+		if (moment(snapshot.timestamp).isBefore(timer)) return;
+
+		console.log("Received snapshot:")
+		console.log(pj.render(snapshot))
 
 		var dayRef = fb.child('snapshots/daily/' + snapshotDate(snapshot));
 

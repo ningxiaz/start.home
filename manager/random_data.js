@@ -20,8 +20,8 @@ function dateRange(start, end) {
     return range;
 }
 
-function randomSnapshot() {
-    return {
+function randomSnapshot(timestamp) {
+    var response = {
         electric: {
             average: rand(.5,1), // in kW
             total: rand(.08, .16) // in kWh
@@ -61,6 +61,10 @@ function randomSnapshot() {
             7: rand(0,1),
         }
     }
+
+    if (timestamp) response.timestamp = moment().format();
+
+    return response;
 }
 
 // This resets the firebase and sets it up for testing
@@ -150,7 +154,7 @@ function bootstrapFirebase() {
 function pushRandomSnapshot() {
     var fb = new Firebase('https://start-home.firebaseio.com/');
 
-    var snapshot = randomSnapshot();
+    var snapshot = randomSnapshot(moment());
     fb.child('snapshots/all').push().setWithPriority(snapshot, +moment(snapshot.timestamp));
 }
 
