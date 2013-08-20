@@ -56,7 +56,7 @@ var goal_view = {
 	},
 
 	init: function() {
-		this.width 	= $('.goal-view figure').width() - 300;
+		this.width 	= $('.goal-view figure').width() - 100;
 		this.height = $('.goal-view figure').height();
 
 		var	margin = this.margin,

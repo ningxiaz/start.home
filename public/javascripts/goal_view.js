@@ -268,11 +268,11 @@ var goal_view = {
 				.attr("x", scales.x(now) - 5)
 
 			eAx
-				.attr("transform", "translate(" + (scales.x(new Date()) - 20) + ",5)")
+				.attr("transform", "translate(" + (scales.x(now)) + ",5)")
 				.call(axes.electric)
 
 			wAx
-				.attr("transform", "translate(" + (scales.x(new Date()) - 20) + ",5)")
+				.attr("transform", "translate(" + (scales.x(now)) + ",5)")
 				.call(axes.water)
 
 			xAx.call(axes.x)
