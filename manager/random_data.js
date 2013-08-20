@@ -12,7 +12,7 @@ function dateRange(start, end) {
 
     var count = moment.duration(end - start).asDays();
 
-    for (var i = 1; i <= count; i++) {
+    for (var i = 0; i <= count; i++) {
         range.push(start.clone());
         start.add(1, 'd');
     };
@@ -20,7 +20,7 @@ function dateRange(start, end) {
     return range;
 }
 
-function randomSnapshot(timestamp) {
+function randomSnapshot(prev, timestamp) {
     var response = {
         electric: {
             average: rand(.5,1), // in kW
@@ -62,6 +62,16 @@ function randomSnapshot(timestamp) {
         }
     }
 
+    console.log(prev)
+
+    if (prev) {
+        response.electric.average = prev.electric.average + response.electric.average * rand(-.5,.5);
+        response.electric.total = prev.electric.total + response.electric.total * rand(-.5,.5);
+
+        response.water.average = prev.water.average + response.water.average * rand(-.5,.5);
+        response.water.total = prev.water.total + response.water.total * rand(-.5,.5);
+    }
+
     if (timestamp) response.timestamp = moment().format();
 
     return response;
@@ -80,6 +90,7 @@ function bootstrapFirebase() {
     }
 
     var all = [];
+    var prev = null;
 
     dates.forEach(function(date) {
         var newDay = snapshots.daily[date.startOf('day').format('MM-DD-YYYY')] = {
@@ -93,9 +104,12 @@ function bootstrapFirebase() {
         var batch = [];
 
         for(var i = 0; i < 144; i++) {
-            var snap = randomSnapshot();
+            var snap = randomSnapshot(prev);
             snap.timestamp = s.format()
+
             batch.push(snap);
+            prev = snap;
+
             s.add(10, 'm');
 
             if (s.isAfter(moment())) break;
@@ -143,6 +157,10 @@ function bootstrapFirebase() {
             6: { title: "Bathroom Shower Light",  room: "Bathroom",    type: "lights" },
             7: { title: "Bathroom Shower Fan",    room: "Bathroom",    type: "fan" }
         },
+        goals: {
+            electric: rand(0,3),
+            water: rand(0,3)
+        },
         snapshots: snapshots
     })
 
@@ -154,11 +172,46 @@ function bootstrapFirebase() {
 function pushRandomSnapshot() {
     var fb = new Firebase('https://start-home.firebaseio.com/');
 
-    var snapshot = randomSnapshot(moment());
-    fb.child('snapshots/all').push().setWithPriority(snapshot, +moment(snapshot.timestamp));
+    fb.child('snapshots/all').limit(1).once('value', function(fbSnap) {
+        var key = Object.keys(fbSnap.val())[0];
+        var snapshot = randomSnapshot(fbSnap.val()[key], moment());
+        fb.child('snapshots/all').push().setWithPriority(snapshot, +moment(snapshot.timestamp));
+    })
+}
+
+function startSnapshots() {
+    var now = moment(),
+        nextTenMinute = now.clone().startOf('hour');
+
+    while(nextTenMinute.isBefore(now)) nextTenMinute.add(10, 'minutes');
+
+    var delay = nextTenMinute - now;
+
+    console.log("Waiting " + 
+                moment.duration(delay).asSeconds() + 
+                " seconds until " + 
+                nextTenMinute.format("h:mm a") +
+                " to start pushing snapshots.");
+
+    setTimeout(start, delay);
+
+    var interval;
+
+    function start() {
+        interval = setInterval(pushRandomSnapshot, 600000);
+    }
+
+    function stop() {
+        clearInterval(interval);
+    }
+
+    return {
+        stop: stop
+    }
 }
 
 module.exports.bootstrapFirebase = bootstrapFirebase;
 module.exports.randomSnapshot = randomSnapshot;
 module.exports.dateRange = dateRange;
 module.exports.pushRandomSnapshot = pushRandomSnapshot;
+module.exports.startSnapshots = startSnapshots;

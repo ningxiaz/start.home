@@ -15,7 +15,7 @@ vis-axis-color 	     = lighten(vis-background-color, 20%)
 electricity-color    = yellow
 water-color          = blue
 
-vis-line-stroke-width = 2px
+vis-line-stroke-width = 1.5px
 
 vis-goal-dasharray    = 5px
 vis-goal-stroke-width = 1px
@@ -76,20 +76,25 @@ vis-goal-stroke-width = 1px
 	line
 		display none // hide the ticks
 
+	text
+		fill rgba(0,0,0,.5)
+		text-transform lowercase
+		font-size 11px
+
 	.domain
 		display none
 
-	&.light
-		text
-			fill rgba(255, 255, 255, .5)
-			text-transform lowercase
-			font-size 11px
+	&.light text
+		fill rgba(255, 255, 255, .5)
 
 	&.dark
-		text
-			fill rgba(0, 0, 0, .5)
-			text-transform lowercase
-			font-size 11px
+		&.electric text
+			fill darken(yellow, 40%)
+
+		&.water text
+			fill blue
+
+
 
 .split
 	fill vis-axis-color

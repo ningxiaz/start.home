@@ -47,17 +47,17 @@ html(ng-app="sh")
 		//- Navigation
 		nav.shortcuts
 			ul
-				li: a(href="#").button-large Scenes
-				li: a(href="#").button-large Controls
-				li: a(href="#").button-large HVAC
-				//- li: a(href="#").button-circle-large: i.entypo-list
-				//- li: a(href="#").button-circle-large: i.entypo-light-bulb
-				//- li: a(href="#").button-circle-large: i.entypo-thermometer 
+				//- li: a(href="#").button-large Scenes
+				//- li: a(href="#").button-large Controls
+				//- li: a(href="#").button-large HVAC
+				li: a(href="#").button-circle-large: i.entypo-cog
+				li: a(href="#").button-circle-large: i.entypo-light-bulb
+				li: a(href="#").button-circle-large: i.entypo-thermometer 
 
 		div#timeline
 			figure
 
-
+		div#touchzone
 		div#grid-container
 			section.overview.pane
 				figure.floorplan
@@ -92,16 +92,25 @@ html(ng-app="sh")
 						li: a(href="#").button-large Usage
 						li: a(href="#").button-large Usage
 
-			section.goal-view.pane
+			section.goal-view.pane(ng-controller="GoalViewCtrl")
 				figure.line-graph
 				div.panel-side.right
 					div.set_hvac
-						h3 Projected consumption
-						div.projections
-							div.projection.electricity
-								i.entypo-flash
-								span.amount.electric-text 33 kWh
-					div.set_goal(ng-controller="GoalCtrl")
+						div.group
+							a(href="#").button-circle-small: i.entypo-chevron-left
+							h3 Thermostat
+
+						div.temp(ng-style="{ 'background': scale(100 - temperature) }")
+							h1 {{ 100 - temperature}}° F
+
+						div.slider
+							input(type="range", ng-model="temperature").block-segue
+
+					div.progress-state
+						a.button-large.button-danger.cancel Cancel
+						a.button-large.save Save
+
+					div.set_goal
 						h3 Projected consumption
 						div.projections
 							div.projection.electricity

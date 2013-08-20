@@ -22,6 +22,7 @@ module.exports.bootstrapFirebase  = random.bootstrapFirebase;
 module.exports.randomSnapshot     = random.randomSnapshot;
 module.exports.dateRange          = random.dateRange;
 module.exports.pushRandomSnapshot = random.pushRandomSnapshot;
+module.exports.startSnapshots = random.startSnapshots;
 
 // real manager functions
 module.exports.processSnapshots   = processSnapshots;

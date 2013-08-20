@@ -5,7 +5,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 0,
+		initial_state: 2,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navPanes
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 0,
+		initial_state: 2,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navTimeline
@@ -68,6 +68,8 @@ $(document).ready(function(){
 	$('#past').click(function(){
 		Clock.to_linear(show_now);
 	});
+
+	$(document).bind('touchmove', false);
 });
 
 function show_now(){

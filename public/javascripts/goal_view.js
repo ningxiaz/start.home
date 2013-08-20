@@ -1,7 +1,11 @@
 // Goal view controls
 $(function() {
-	// $('.adjust_behaviors').hide();
-	$('.set_hvac').hide();
+	$('.set_goal').hide();
+
+	$('.set_hvac').on('touchmove', function(e) {
+		e.stopPropagation();
+	})
+	// $('.set_hvac').hide();
 })
 
 // Goal view visuals
@@ -14,7 +18,7 @@ var goal_view = {
 		left: 0,
 		right: 360,
 		top: 30,
-		bottom: 30,	
+		bottom: 120,	
 	},
 
 	scales: {
@@ -65,15 +69,15 @@ var goal_view = {
 			.range([margin.left, this.width - margin.right]);
 
 		scales.electric
-			.range([this.height - margin.top, margin.bottom]);
+			.range([this.height - margin.bottom, margin.top]);
 
 		scales.water
-			.range([this.height - margin.top, margin.bottom]);
+			.range([this.height - margin.bottom, margin.top]);
 
 		lines.electricity.past
 			// .interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.electric(d.stats.electric.avg_power) });
+			.y(function(d) { return scales.electric(d.electric.average) });
 
 		lines.electricity.goal
 			// .interpolate('basis')
@@ -83,7 +87,7 @@ var goal_view = {
 		lines.water.past
 			// .interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.water(d.stats.water.avg_flow) });
+			.y(function(d) { return scales.water(d.water.average) });
 
 		lines.water.goal
 			// .interpolate('basis')
@@ -97,6 +101,11 @@ var goal_view = {
 		axes.water
 			.scale(scales.water)
 			.orient('right');
+
+		axes.x
+			.ticks(d3.time.days, 1)
+			.scale(scales.x)
+			.orient('top');
 	},
 
 	draw: function() {
@@ -169,13 +178,18 @@ var goal_view = {
 
 		this.eAx = svg.append("g")
 		    .attr("transform", "translate(" + this.scales.x(new Date()) + ",5)")
-		    .attr('class', 'y axis dark')
+		    .attr('class', 'y axis dark electric')
 		    .call(this.axes.electric);
 
 		this.wAx = svg.append("g")
-		    .attr("transform", "translate(" + this.scales.x(new Date()) + ",5)")
-		    .attr('class', 'y axis dark')
+		    .attr("transform", "translate(" + this.scales.x(new Date()) - 10 + ",5)")
+		    .attr('class', 'y axis dark water')
 		    .call(this.axes.water);
+
+		this.xAx = svg.append("g")
+		    .attr("transform", "translate(0," + (this.height - this.margin.bottom + 20) + ")")
+		    .attr('class', 'x axis dark')
+		    .call(this.axes.x);
 
 		function past_data(d) {
 			if (d.stats) return true;
@@ -192,18 +206,18 @@ var goal_view = {
 			data = this.data;
 
 		scales.x
-			.domain([moment().subtract(7, 'm'), moment().add(10, 'm')])
+			.domain([moment().subtract(2, 'd'), moment()])
 
 		scales.electric
-			.domain([d3.min(data, function(d) { return d.stats.electric.avg_power; }) - .5, 
-					 d3.max(data, function(d) { return d.stats.electric.avg_power; }) + .5]);
+			.domain([d3.min(data, function(d) { return d.electric.average; }) - .5, 
+					 d3.max(data, function(d) { return d.electric.average; }) + .5]);
 
 		scales.water
-			.domain([d3.min(data, function(d) { return d.stats.water.avg_flow; }) - .5, 
-					 d3.max(data, function(d) { return d.stats.water.avg_flow; }) + .5]);
+			.domain([d3.min(data, function(d) { return d.water.average; }) - .5, 
+					 d3.max(data, function(d) { return d.water.average; }) + .5]);
 
 		this.update();
-		if (this.data.length > 200) this.data.shift();
+		// if (this.data.length > 200) this.data.shift();
 	},
 
 	update: function() {
@@ -223,7 +237,8 @@ var goal_view = {
 			now = this.now,
 			axes = this.axes,
 			eAx = this.eAx,
-			wAx = this.wAx;
+			wAx = this.wAx,
+			xAx = this.xAx;
 
 		function real_update() {
 			paths.electricity.past
@@ -253,12 +268,14 @@ var goal_view = {
 				.attr("x", scales.x(now) - 5)
 
 			eAx
-				.attr("transform", "translate(" + scales.x(new Date()) + ",5)")
+				.attr("transform", "translate(" + (scales.x(new Date()) - 20) + ",5)")
 				.call(axes.electric)
 
 			wAx
-				.attr("transform", "translate(" + scales.x(new Date()) + ",5)")
+				.attr("transform", "translate(" + (scales.x(new Date()) - 20) + ",5)")
 				.call(axes.water)
+
+			xAx.call(axes.x)
 		}
 	},
 

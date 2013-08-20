@@ -26,20 +26,20 @@
 	.cancel
 		float left
 
-.slider-container
-	height 200px
-	padding padding-base
+// .slider-container
+// 	height 200px
+// 	padding padding-base
 
-	.slider
-		float left
-		width 50%
-		text-align center
+// 	.slider
+// 		float left
+// 		width 50%
+// 		text-align center
 
-	.electric
-		color darken(yellow, 30%)
+// 	.electric
+// 		color darken(yellow, 30%)
 
-	.water
-		color blue
+// 	.water
+// 		color blue
 
 .goal_inputs
 	padding padding-base
@@ -54,6 +54,37 @@
 
 		&+input
 			margin-top 10px
+
+.temp
+	h1
+		// background red
+		text-align center
+		color white
+
+.set_hvac 
+	z-index 200
+
+	input[type="range"]
+		-webkit-appearance none !important
+		background lighten(gray, 40%)
+		-webkit-transform rotate(90deg)
+
+		width 450px
+		height 10px
+
+		position absolute
+		top 340px
+		left -71px
+
+		border-radius border-radius-base
+
+	input[type="range"]::-webkit-slider-thumb
+		-webkit-appearance none !important
+		background base-black
+		content " "
+		width 40px
+		height 120px
+		border-radius border-radius-base
 
 .height-fix
 	position relative

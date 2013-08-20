@@ -15,7 +15,7 @@ function Segue(element, options) {
     orientation = (options.orientation) || 'horizontal',
     states = options.states - 1 || 1,
     initial_state = options.initial_state || 0,
-    elastic = options.elastic || true,
+    elastic = (options.elastic != undefined) ? options.elastic : true,
     elasticity = (options.elasticity != undefined) ? 1 - options.elasticity : .8, // default is (1-.2) = .8 here
     reverse = (options.reverse != undefined) ? options.reverse : false;
 
@@ -25,6 +25,8 @@ function Segue(element, options) {
   function handleDrag(ev) {
     ev.gesture.preventDefault();
     ev.gesture.stopPropagation();
+
+    if ($(ev.target).hasClass('block-segue')) return;
 
     var delta;
 
@@ -138,6 +140,15 @@ function Segue(element, options) {
     $(element).trigger('statechange', state)
   }
 
+  function softComplete(ev) {
+    if (ev) {
+      // var percent = ev.gesture.distance / (max - min);
+      state = percent;
+
+      manipulator(state, 0, false, element)
+    }
+  }
+
   function handleToggle() {
     cycleState();
     handleComplete();
@@ -146,8 +157,8 @@ function Segue(element, options) {
   function setup() {
     Hammer(element).on('drag', handleDrag);
 
-
-    Hammer(element).on('swipe release', handleComplete);
+    if (complete) Hammer(element).on('swipe release', handleComplete);
+    if (!complete) Hammer(element).on('release', softComplete);
     if (toggle_on_tap) Hammer(element).on('tap', handleToggle);
 
     handleComplete();
