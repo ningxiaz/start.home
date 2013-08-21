@@ -5,12 +5,28 @@ $(function() {
 	$('.set_hvac').on('touchmove', function(e) {
 		e.stopPropagation();
 	})
-	// $('.set_hvac').hide();
 })
+
+// used for making array of dates for goals
+function dateRange(start, end) {
+    var range = [];
+
+    start = start.clone();
+
+    var count = moment.duration(end - start).asDays();
+
+    for (var i = 0; i <= count; i++) {
+        range.push(start.clone());
+        start.add(1, 'd');
+    };
+
+    return range;
+}
 
 // Goal view visuals
 var goal_view = {
 	data: [],
+	goal_data: [],
 
 	height: 100,
 	width: 100,
@@ -80,9 +96,9 @@ var goal_view = {
 			.y(function(d) { return scales.electric(d.electric.average) });
 
 		lines.electricity.goal
-			// .interpolate('basis')
+			.interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.electric(0) });
+			.y(function(d) { return scales.electric(d.electric) });
 
 		lines.water.past
 			// .interpolate('basis')
@@ -90,9 +106,9 @@ var goal_view = {
 			.y(function(d) { return scales.water(d.water.average) });
 
 		lines.water.goal
-			// .interpolate('basis')
+			.interpolate('basis')
 			.x(function(d) { return scales.x(new Date(d.timestamp)) })
-			.y(function(d) { return scales.water(0) });
+			.y(function(d) { return scales.water(d.water) });
 
 		axes.electric
 			.scale(scales.electric)
@@ -163,14 +179,14 @@ var goal_view = {
 			.attr("width", '10px');
 
 		this.paths.electricity.goal = svg.append("path")
-			.data([this.data])
+			.data([this.goal_data])
 			.attr("class", "goal line dark electricity")
 			.attr("transform", "translate(0,5)")
 			.attr("marker-end", "url(#yellow-circle)")
 			.attr("d", this.lines.electricity.goal);
 
 		this.paths.water.goal = svg.append("path")
-			.data([this.data])
+			.data([this.goal_data])
 			.attr("class", "goal line dark water")
 			.attr("transform", "translate(0,5)")
 			.attr("marker-end", "url(#blue-circle)")
@@ -206,15 +222,15 @@ var goal_view = {
 			data = this.data;
 
 		scales.x
-			.domain([moment().subtract(2, 'd'), moment()])
+			.domain([moment().subtract(5, 'd'), moment().add(10, 'd')])
 
 		scales.electric
 			.domain([d3.min(data, function(d) { return d.electric.average; }) - .5, 
-					 d3.max(data, function(d) { return d.electric.average; }) + .5]);
+					 d3.max(data, function(d) { return d.electric.average; }) + 10]);
 
 		scales.water
 			.domain([d3.min(data, function(d) { return d.water.average; }) - .5, 
-					 d3.max(data, function(d) { return d.water.average; }) + .5]);
+					 d3.max(data, function(d) { return d.water.average; }) + 10]);
 
 		this.update();
 		// if (this.data.length > 200) this.data.shift();
@@ -249,10 +265,6 @@ var goal_view = {
 				// .ease('linear')
 				// .attr('transform', 'translate(' + scales.x(moment(scales.x.domain()[0]).subtract(10,'s')) + ')')
 
-			paths.electricity.goal
-				.transition()
-				.attr('d', lines.electricity.goal)
-
 			paths.water.past
 				.attr('d', lines.water.past)
 				// .attr('transform', null)
@@ -268,26 +280,51 @@ var goal_view = {
 				.attr("x", scales.x(now) - 5)
 
 			eAx
-				.attr("transform", "translate(" + (scales.x(new Date()) - 20) + ",5)")
+				.attr("transform", "translate(" + (scales.x(now)) + ",5)")
 				.call(axes.electric)
 
 			wAx
-				.attr("transform", "translate(" + (scales.x(new Date()) - 20) + ",5)")
+				.attr("transform", "translate(" + (scales.x(now)) + ",5)")
 				.call(axes.water)
 
 			xAx.call(axes.x)
 		}
 	},
 
-	set_goals: function(new_goals) {
-		var scales = this.scales;
+	update_goal_lines: function(goals) {
+		var range = dateRange(moment().subtract(10, 'days'), moment().add(10,'days'));
 
-		this.lines.electricity.goal
-			.y(function(d) { return scales.electric(new_goals.electric) });
+		this.goal_data = range.map(function(date) {
+			var index = date.dayOfYear() - 1,
+				climate = climate_data[index];
 
-		this.lines.water.goal
-			.y(function(d) { return scales.water(new_goals.water) });
+			var sunrise = moment("1-01-2013 " + climate.sunrise, "M-D-YYYY Hmm Z"),
+				sunset  = moment("1-01-2013 " + climate.sunset, "M-D-YYYY Hmm Z").add(1, 'day'),
+				sleep   = moment("1-01-2013 11:00 pm", "M-D-YYYY h:mm a"),
+				lighting_duration = moment.duration(sleep - sunset).asHours();
 
-		this.update();
+			var light_rate = 0.5, // kW
+				hvac_rate = 0.5, // kW per delta degrees
+				hvac_setting = 72, // degrees
+				delta = Math.abs(hvac_setting - parseFloat(climate.temperature_max)); // degrees
+
+
+
+			return {
+				timestamp: date.format(),
+				electric: light_rate * lighting_duration + delta*hvac_rate,
+				water: 3 // gallons
+			}
+		})
+
+		this.paths.electricity.goal
+				.data([this.goal_data])
+				.transition()
+				.attr('d', this.lines.electricity.goal)
+
+		this.paths.water.goal
+				.data([this.goal_data])
+				.transition()
+				.attr('d', this.lines.water.goal)
 	}
 }

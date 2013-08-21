@@ -14,7 +14,7 @@ $(function() {
 	// })
 
 	// Every time the server pushes a new snapshot
-	snapRef.limit(400).on('child_added', function(snapshot) {
+	snapRef.limit(600).on('child_added', function(snapshot) {
 		// timeline.add_datum(snapshot.val())
 		goal_view.add_datum(snapshot.val())
 	})
@@ -22,7 +22,7 @@ $(function() {
 	// // Every time goals are updated
 	goalRef.on('value', function(snapshot) {
 		timeline.set_goal(snapshot.val().electric)
-		goal_view.set_goals(snapshot.val())
+		// goal_view.set_goals(snapshot.val())
 	})
 
 	// fixRef.on('value', function(snapshot) {

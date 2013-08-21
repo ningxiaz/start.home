@@ -58,6 +58,7 @@ $(document).ready(function(){
 
 	goal_view.init();
 	goal_view.draw();
+	// goal_view.update_goal_lines();
 
 	past_view.init();
 	past_view.draw();
