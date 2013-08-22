@@ -14,10 +14,12 @@ $(function() {
 	// })
 
 	// Every time the server pushes a new snapshot
-	snapRef.limit(600).on('child_added', function(snapshot) {
+	snapRef.on('child_added', addSnapshot)
+
+	function addSnapshot(snapshot) {
 		// timeline.add_datum(snapshot.val())
 		goal_view.add_datum(snapshot.val())
-	})
+	}
 
 	// // Every time goals are updated
 	goalRef.on('value', function(snapshot) {

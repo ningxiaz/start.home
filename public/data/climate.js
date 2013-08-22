@@ -4026,3 +4026,5 @@ var climate_data = [
 		sunset: "0100 +0000"
 	}
 ]
+
+module.exports.climate = climate_data;

@@ -27,8 +27,8 @@ function randomSnapshot(prev, timestamp) {
             total: rand(.08, .16) // in kWh
         },
         water: {
-            average: rand(0,1), // in gal/hour
-            total: rand(0,1) // in gal
+            average: rand(3,4), // in gal/hour
+            total: rand(15,20) // in gal
         },
         climate: {
             indoor: {
@@ -82,7 +82,7 @@ function randomSnapshot(prev, timestamp) {
 function bootstrapFirebase() {
     var fb = new Firebase('https://start-home.firebaseio.com/');
 
-    var dates = dateRange(moment().subtract(10, 'd'), moment());
+    var dates = dateRange(moment().subtract(40, 'd'), moment());
 
     var snapshots = {
         daily: {},

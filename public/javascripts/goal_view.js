@@ -222,7 +222,7 @@ var goal_view = {
 			data = this.data;
 
 		scales.x
-			.domain([moment().subtract(5, 'd'), moment().add(10, 'd')])
+			.domain([moment().subtract(20, 'd'), moment().add(40, 'd')])
 
 		scales.electric
 			.domain([d3.min(data, function(d) { return d.electric.average; }) - .5, 
@@ -292,7 +292,7 @@ var goal_view = {
 	},
 
 	update_goal_lines: function(goals) {
-		var range = dateRange(moment().subtract(10, 'days'), moment().add(10,'days'));
+		var range = dateRange(moment().subtract(40, 'days'), moment().add(40,'days'));
 
 		this.goal_data = range.map(function(date) {
 			var index = date.dayOfYear() - 1,
