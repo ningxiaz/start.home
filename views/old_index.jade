@@ -1,0 +1,183 @@
+doctype 5
+html(ng-app="sh")
+	head
+		title= title
+
+		//- Stylesheets
+		link(rel='stylesheet', href='stylesheets/start.home.css')
+
+		//- Javascript libraries
+		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
+		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
+		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js')	
+		script(type='text/javascript', src='https://cdn.firebase.com/v0/firebase.js')
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js')
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angularFire/0.2.0/angularfire.min.js')
+
+
+
+		//- //- Our Javascript (there's a lot of it...)
+		//- script(type='text/javascript', src='data/climate.js')
+		//- script(type='text/javascript', src='javascripts/firebase-manager.js')
+		//- script(type='text/javascript', src='javascripts/segue.js')
+		//- script(type='text/javascript', src='javascripts/clock.js')
+		//- script(type='text/javascript', src='javascripts/main_view.js')
+		//- script(type='text/javascript', src='javascripts/timeline-brush.js')
+		//- script(type='text/javascript', src='javascripts/goal_view.js')
+		//- script(type='text/javascript', src='javascripts/past-view.js')
+		//- script(type='text/javascript', src='javascripts/index.js')
+		//- script(type='text/javascript', src='javascripts/controllers.js')
+
+		//- Meta tags
+		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
+		meta(name="apple-mobile-web-app-capable", content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style", content="black")
+	body
+		//- section#idle-screen
+		//- 	#clock
+		//- 	div#half-step
+		//- 		div.panel-side.left(ng-controller="NotificationCtrl")
+		//- 			h3 Notifications
+		//- 				span.badge {{ notifications.length }}
+		//- 			ul.list-stacked
+		//- 				li(ng-repeat="notification in notifications") 
+		//- 					a(href="#").button-circle-small: i.entypo-check
+		//- 					{{ notification }}
+
+		//- Navigation
+		nav.shortcuts
+			ul
+				//- li: a(href="#").button-large Scenes
+				//- li: a(href="#").button-large Controls
+				//- li: a(href="#").button-large HVAC
+				li: a(href="#").button-circle-large: i.entypo-cog
+				li: a(href="#").button-circle-large: i.entypo-light-bulb
+				li: a(href="#").button-circle-large: i.entypo-thermometer 
+
+		div#timeline
+			figure
+
+		div#touchzone
+		div#grid-container
+			section.overview.pane
+				figure.floorplan
+					svg
+						rect#living-room(width="140px", height="140px", y="140px").room
+						rect#kitchen(width="140px", height="140px", x="140px", y="140px").room
+						rect#studio(width="140px", height="140px", x="280px", y="140px").room
+						rect#bedroom(width="140px", height="140px", x="280px").room
+
+
+				//- a(href="#")#past.button-large Past
+
+				//- .main
+				//- 	#clock
+				//- 	#floorplan
+
+			section.past-view.pane
+				figure.main-vis
+
+				figure.floorplan-filter
+					svg
+						rect#living-room(width="100px", height="100px", y="100px").room
+						rect#kitchen(width="100px", height="100px", x="100px", y="100px").room
+						rect#studio(width="100px", height="100px", x="200px", y="100px").room
+						rect#bedroom(width="100px", height="100px", x="200px").room
+
+				figure.statistics
+					h2 Statistics
+				nav.vis-types
+					ul
+						li: a(href="#").button-large Trends
+						li: a(href="#").button-large Usage
+						li: a(href="#").button-large Usage
+
+			section.goal-view.pane(ng-controller="GoalViewCtrl")
+				figure.line-graph
+				div.panel-side.right
+					div.set_hvac
+						div.group
+							a(href="#").button-circle-small: i.entypo-chevron-left
+							h3 Thermostat
+
+						div.temp(ng-style="{ 'background': scale(100 - temperature) }")
+							h1 {{ 100 - temperature}}° F
+
+						div.slider
+							input(type="range", ng-model="temperature").block-segue
+
+					div.progress-state
+						a.button-large.button-danger.cancel Cancel
+						a.button-large.save Save
+
+					div.set_goal
+						h3 Projected consumption
+						div.projections
+							div.projection.electricity
+								i.entypo-flash
+								span.amount.electric-text 33 kWh
+							div.projection.water
+								i.entypo-water
+								span.amount.water-text 200 gal
+
+						p.caption This value is calculated assuming you meet your current goals by the end of the year.
+
+						//- Divider
+						hr
+
+						div.adjust_goals
+							p.caption Please set a <strong>long-term goal</strong> for the household to reach until the end of the year. You can adjust this goal at any time if you wish.
+
+							//- I intend to develop a more intuitive input
+							//- down the line, but this text input will do for
+							//- now.
+							div.goal_inputs
+								input(placeholder="Electricity", ng-model="goals.electric").electric
+								input(placeholder="Water", ng-model="goals.water").water
+
+							//- div.slider-container
+							//- 	figure.slider.electric
+							//- 		span.meter 1 kWh
+							//- 		div.rail
+							//- 			div.knob
+							//- 	figure.slider.water
+							//- 		span.meter 200 gal
+							//- 		div.rail
+							//- 			div.knob
+
+							//- div.progress-state
+							//- 	a.button-large.button-danger.cancel Cancel
+							//- 	a.button-large.save Next
+
+
+						div.adjust_behaviors
+							h3 Commitments
+							p.caption Please make a few commitments in order to meet your short-term goals.
+
+							div.progress-electric
+								div.progress-bar(style="width: {{getCommitmentSum('electric') / goals.electric * 100}}%;")
+
+							p.caption.right-align {{ goals.electric - getCommitmentSum('electric') }} kw remaining
+
+							div.progress-water
+								div.progress-bar(style="width: {{getCommitmentSum('water') / goals.water * 100}}%;")
+
+							p.caption.right-align {{ goals.water - getCommitmentSum('water') }} gal remaining
+
+							menu.behavior-suggestions
+								li(ng-repeat="commitment in goals.commitments.suggestions")
+									//- a(href="#", ng-click="goals.commitments.electric_sum = goals.commitments.electric_sum + .1").button-circle-small: i.entypo-check
+									input(type="checkbox", ng-model="commitment.accepted")
+									| {{commitment.description}}
+									span.impact - {{commitment.impact}}
+
+							//- div.progress-state
+							//- 	a.button-large.button-danger.cancel Cancel
+							//- 	a.button-large.save Save
+
+
+
+
+				
+

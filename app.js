@@ -4,8 +4,7 @@
  */
 
 var express    = require('express')
-    , stylus   = require('stylus')
-    , nib      = require('nib')
+    , less     = require('less-middleware')
     , routes   = require('./routes')
     , user     = require('./routes/user')
     , http     = require('http')
@@ -16,14 +15,6 @@ var express    = require('express')
 
 var app = express();
 
-// Stylus compiler
-function compile(str, path) {
-    return stylus(str)
-        .set('filename', path)
-        .set('compress', true)
-        .use(nib())
-}
-
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
@@ -33,9 +24,10 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
-    app.use(stylus.middleware(
-        { src: __dirname + '/public'
-            , compile: compile
+    app.use(less(
+        { 
+            src: __dirname + '/public',
+            compress: true
         }
     ))
     app.use(express.static(path.join(__dirname, 'public')));
