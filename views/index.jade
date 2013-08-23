@@ -30,15 +30,16 @@ html(ng-app="sh")
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
 		meta(name="apple-mobile-web-app-capable", content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style", content="black")
+
 	body(ng-controller="MainCtrl")
 		div.pane-container
 			div.past-view
 				div.full-row
-					figure.timeline
+					figure.vis-timeline
 						p This is where the timeline would go.
 
 				div.full-row
-					figure.past-detail-view
+					figure.vis-past-detail
 						p This is where the main past view would go
 
 				div.bottom-bar.full-row
@@ -47,12 +48,23 @@ html(ng-app="sh")
 							a.btn.btn-default.btn-lg.active: span.icon.icon-th
 							a.btn.btn-default.btn-lg: span.icon.icon-stats
 							a.btn.btn-default.btn-lg: span.icon.icon-tasks
-					div.col-md-6
+					div.col-md-5
 						div.btn-group.btn-group-justified
-							a.btn.btn-primary.btn-lg.active: span.icon.icon-tint
-							a.btn.btn-primary.btn-lg: span.icon.icon-flash
-					div.col-md-2
-						a.btn.btn-lg.btn-default.btn-block: span.icon.icon-filter
+							a.btn.btn-dark.btn-lg.active: span.icon.icon-tint
+							a.btn.btn-dark.btn-lg: span.icon.icon-flash
+					div.col-md-3
+						a.filter-toggle.btn.btn-lg.btn-default.btn-block: span.icon.icon-filter
+
+				div.filter-content.hide
+					div.list-group
+						a(href="#").active.list-group-item All
+						a(href="#").list-group-item Living Room
+						a(href="#").list-group-item Kitchen
+						a(href="#").active.list-group-item Hallway
+						a(href="#").list-group-item Studio
+						a(href="#").list-group-item Bedroom
+						a(href="#").active.list-group-item Bathroom
+						a(href="#").list-group-item Exterior
 
 			div.pane.present-view
 				div.full-row
@@ -83,10 +95,59 @@ html(ng-app="sh")
 							h3.thin last 10 minutes
 
 			div.pane.future-view
-				div.col-md-3.pull-right
+				figure.vis-goal-setting
+					p This is where the goal setting vis should go
+				div.sidebar
 					div.panel.panel-default
+						ul.nav.nav-pills.nav-justified
+							li.active: a(href="#") Electric
+							li: a(href="#") Water
+
+						table.table
+							tr
+								td: strong Goal
+								td: strong 13 kW
+							tr
+								td Projection
+								td 13 kW
+
+						div.panel-subheading
+							| HVAC
+
 						div.panel-body
-							| Hello world
+							input(type="range")
+
+						div.panel-subheading
+							| Commitments
+						div.list-group
+							a.list-group-item 
+								span.icon.icon-check
+								| Watch less TV
+								span.badge 3 kWh
+							a.list-group-item 
+								span.icon.icon-check
+								| Turn lights off earlier
+								span.badge 3 kWh
+							a.list-group-item 
+								span.icon.icon-unchecked
+								| Eat healthier
+								span.badge 3 kWh
+							a.list-group-item 
+								span.icon.icon-check
+								| Watch less TV
+								span.badge 3 kWh
+							a.list-group-item 
+								span.icon.icon-check
+								| Turn lights off earlier
+								span.badge 3 kWh
+							a.list-group-item 
+								span.icon.icon-unchecked
+								| Eat healthier
+								span.badge 3 kWh
+
+						div.panel-footer
+							a.btn.btn-danger Cancel
+							a.btn.btn-primary.pull-right Save
 
 
 
