@@ -153,9 +153,13 @@ html, body {
 
 	right: @grid-gutter-width;
 	top: @grid-gutter-width;
+	bottom: @grid-gutter-width;
 	width: 300px;
 
 	.panel {
+		display: table;
+		height: 100%;
+
 		.nav li {
 			padding: @padding-small-horizontal;
 
@@ -164,11 +168,15 @@ html, body {
 			}
 		}
 	}
+
+	table {
+		margin-bottom: 0;
+	}
 }
 
 .list-group-item .icon {
 	margin-right: @padding-small-horizontal;
-	line-height: 20px;
+	line-height: 18px;
 
 	color: @gray;
 }
@@ -187,13 +195,49 @@ html, body {
 	.border-top-radius(0px);
 }
 
+.unflexible {
+	float: none;
+	clear: both;
+	display: table-row;
+}
 
+.flexible {
+	display: table-row;
+	height: 100%;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 
+	.list-group {
+		height: 100%;
+		overflow: auto;
 
+		.list-group-item {
+			border-color: transparent;
+			border-radius: 0;
+		}
+	}
+}
 
+.hvac-control {
 
+	input[type="range"] {
+		 -webkit-appearance: none !important;
+		
+		width: 100%;
+		background: @gray-light;
+		border-radius: 40px;
 
+		padding: 3px;
 
+		border: 1px solid darken(@gray-light, 10%);
+	}
 
+	input[type="range"]::-webkit-slider-thumb {
+	 	-webkit-appearance: none !important;
 
-
+	 	background: @gray;
+	 	height: 40px;
+	 	width: 40px;
+	 	border-radius: 50%;
+	}
+}

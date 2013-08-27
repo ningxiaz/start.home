@@ -99,55 +99,88 @@ html(ng-app="sh")
 					p This is where the goal setting vis should go
 				div.sidebar
 					div.panel.panel-default
-						ul.nav.nav-pills.nav-justified
-							li.active: a(href="#") Electric
-							li: a(href="#") Water
+						div.unflexible
+							ul.nav.nav-pills.nav-justified
+								li.active: a(href="#") Electric
+								li: a(href="#") Water
 
-						table.table
-							tr
-								td: strong Goal
-								td: strong 13 kW
-							tr
-								td Projection
-								td 13 kW
+							table.table
+								tr
+									td: strong Goal
+									td: strong 3.00 kW
+								tr
+									td Projection
+									td {{ (temperature - 60) / 10 + 2 }} kW
 
-						div.panel-subheading
-							| HVAC
+							div.hvac-control
+								div.panel-subheading
+									| Temperature
+									span.temp.pull-right {{ temperature }}° F
 
-						div.panel-body
-							input(type="range")
+								div.panel-body.block-segue
+									input(type="range", ng-model="temperature", min="60", max="80").block-segue
 
-						div.panel-subheading
-							| Commitments
-						div.list-group
-							a.list-group-item 
-								span.icon.icon-check
-								| Watch less TV
-								span.badge 3 kWh
-							a.list-group-item 
-								span.icon.icon-check
-								| Turn lights off earlier
-								span.badge 3 kWh
-							a.list-group-item 
-								span.icon.icon-unchecked
-								| Eat healthier
-								span.badge 3 kWh
-							a.list-group-item 
-								span.icon.icon-check
-								| Watch less TV
-								span.badge 3 kWh
-							a.list-group-item 
-								span.icon.icon-check
-								| Turn lights off earlier
-								span.badge 3 kWh
-							a.list-group-item 
-								span.icon.icon-unchecked
-								| Eat healthier
-								span.badge 3 kWh
+							div.panel-subheading
+								| Commitments
 
-						div.panel-footer
-							a.btn.btn-danger Cancel
-							a.btn.btn-primary.pull-right Save
+						div.flexible
+							ul.list-group
+								li.list-group-item 
+									span.icon.icon-check
+									| Watch less TV
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Turn lights off earlier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-unchecked
+									| Eat healthier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Watch less TV
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Turn lights off earlier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-unchecked
+									| Eat healthier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Watch less TV
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Turn lights off earlier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-unchecked
+									| Eat healthier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Watch less TV
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-check
+									| Turn lights off earlier
+									span.badge 3 kWh
+								li.list-group-item 
+									span.icon.icon-unchecked
+									| Eat healthier
+									span.badge 3 kWh
+								a(href="#").list-group-item.center
+									span.icon.icon-refresh
+									| Load more ideas
+
+						div.unflexible
+							div.panel-footer
+								a.btn.btn-danger Cancel
+								a.btn.btn-primary.pull-right Save
 
 
 
