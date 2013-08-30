@@ -26,7 +26,7 @@ function Segue(element, options) {
     ev.gesture.preventDefault();
     ev.gesture.stopPropagation();
 
-    if ($(ev.target).hasClass('block-segue')) return;
+    if ($(ev.target).hasClass('block-segue') || $(ev.target).parents().hasClass('block-segue')) return;
 
     var delta;
 
@@ -137,7 +137,8 @@ function Segue(element, options) {
     }
 
     manipulator(state, 0, true, element);
-    $(element).trigger('statechange', state)
+    $(element).trigger('segue', state)
+    $(element).trigger('segue-'+state)
   }
 
   function softComplete(ev) {

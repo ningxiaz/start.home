@@ -6,7 +6,7 @@ sh.directive('currentTime', function () {
 			$scope.time = new Date()
 			$scope.num = null
 
-			var interval = setInterval(tick, 500)
+			var interval = setInterval(tick, 10000)
 
 			function tick() {
 				$scope.time = new Date();

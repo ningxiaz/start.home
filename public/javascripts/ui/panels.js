@@ -6,7 +6,7 @@ $(function() {
 	Segue(container, {
 		max: window.innerWidth,
 		states: 3,
-		initial_state: 2,
+		initial_state: 0,
 		reverse: true,
 		elasticity: .2,
 		manipulator: navPanes
@@ -23,9 +23,19 @@ $(function() {
 // Past view
 $(function() {
 	$('.filter-toggle').popover({
-		title: 'Filter by room',
+		// title: 'Filter',
 		placement: 'top',
 		html: true,
 		content: $('.filter-content').html(),
 	})
 })
+
+$('*').on('click', function (e) {
+    $('.popover-link').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});

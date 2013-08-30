@@ -1,0 +1,88 @@
+// General styles
+
+.line {
+	stroke: #000;
+	stroke-width: 2px;
+	// stroke-linecap: round;
+	fill: none;
+	opacity: 1;
+
+	&.electric {
+		stroke: darken(@yellow, 10%);
+	}
+
+	&.water {
+		stroke: @blue;
+	}
+
+	&.thin {
+		stroke-width: 1px;
+	}
+}
+
+.area {
+	fill: @gray-light;
+
+	&.electric {
+		fill: lighten(@yellow, 20%);
+		opacity: .5;
+	}
+
+	&.water {
+		fill: lighten(@blue, 20%);
+		opacity: .2;
+	}
+}
+
+.axis {
+	text {
+		font-family: @font-family-base;
+		font-size: @font-size-small;
+		fill: @gray-base;
+		opacity: .8;
+
+		text-transform: lowercase;
+	}
+
+	.domain {
+		fill: @gray;
+	}
+
+	&.light text {
+		fill: @gray;
+	}
+}
+
+.no-domain .domain {
+	display: none;
+}
+
+.brush {
+	.extent {
+		fill: @gray-lighter;
+	}
+}
+// Specific visualizations
+
+#three {
+	// height: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 228px;
+	width: 100%;
+
+	svg {
+		border-radius: @border-radius-large;
+	}
+}
+
+#timeline {
+	padding: 0;
+	border-radius: @border-radius-small;
+	height: 70px;
+
+	svg {
+		border-radius: @border-radius-small;
+	}
+}

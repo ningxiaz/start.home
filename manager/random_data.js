@@ -62,8 +62,6 @@ function randomSnapshot(prev, timestamp) {
         }
     }
 
-    console.log(prev)
-
     if (prev) {
         response.electric.average = prev.electric.average + response.electric.average * rand(-.5,.5);
         response.electric.total = prev.electric.total + response.electric.total * rand(-.5,.5);
@@ -86,6 +84,7 @@ function bootstrapFirebase() {
 
     var snapshots = {
         daily: {},
+        hourly: {},
         all: {}
     }
 
@@ -93,12 +92,6 @@ function bootstrapFirebase() {
     var prev = null;
 
     dates.forEach(function(date) {
-        var newDay = snapshots.daily[date.startOf('day').format('MM-DD-YYYY')] = {
-            sunrise: date.startOf('day').add(7, 'h').format(),
-            sunset: date.startOf('day').add(19, 'h').format(),
-            water: {},
-            electric: {}
-        };
         var s = date.clone();
 
         var batch = [];
@@ -115,24 +108,6 @@ function bootstrapFirebase() {
             if (s.isAfter(moment())) break;
         }
 
-        newDay.electric.average = batch.reduce(function(prev, curr) {
-            return prev + curr.electric.average;
-        }, 0) / batch.length;
-
-        newDay.water.average = batch.reduce(function(prev, curr) {
-            return prev + curr.water.average;
-        }, 0) / batch.length;
-
-        newDay.electric.total = batch.reduce(function(prev, curr) {
-            return prev + curr.electric.total;
-        }, 0);
-
-        newDay.water.total = batch.reduce(function(prev, curr) {
-            return prev + curr.water.total;
-        }, 0);
-
-        newDay.numSnapshots = batch.length;
-
         all = all.concat(batch);
     })
 
@@ -144,8 +119,8 @@ function bootstrapFirebase() {
             3: { title: 'Garbage disposal',    room: 'Kitchen',     type: 'appliance', position: {x: 20,  y: 120}},
             4: { title: 'Laundry',             room: 'Laundry',     type: 'appliance', position: {x: 30,  y: 30}},
             5: { title: 'Bathroom sink',       room: 'Bathroom',    type: 'faucet',    position: {x: 50,  y: 50}},
-            6: { title: 'Toilet',              room: 'Bathroom',    type: 'bathroom',  position: {x: 100, y: 40}},
-            7: { title: 'Shower',              room: 'Bathroom',    type: 'bathroom',  position: {x: 30,  y: 0}}
+            6: { title: 'Toilet',              room: 'Bathroom',    type: 'appliance',  position: {x: 100, y: 40}},
+            7: { title: 'Shower',              room: 'Bathroom',    type: 'appliance',  position: {x: 30,  y: 0}}
         },
         controls: {
             0: { title: "Living Room Uplights",   room: "Living room", type: "lights" },
@@ -164,8 +139,11 @@ function bootstrapFirebase() {
         snapshots: snapshots
     })
 
+    console.log("Pushing random snapshots (" + all.length + "): ")
+
     all.forEach(function(e) {
         fb.child('snapshots/all').push().setWithPriority(e, +moment(e.timestamp));
+        process.stdout.write(".");
     })
 }
 

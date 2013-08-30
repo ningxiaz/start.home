@@ -1,0 +1,56 @@
+.make-full-row(@gutter: @grid-gutter-width) {
+	padding-left:  (@gutter / -2);
+  	padding-right: (@gutter / -2);
+	.clearfix();
+}
+
+.full-row {
+	.make-full-row();
+}
+
+.yellow-text {
+	color: darken(@yellow, 10%);
+}
+
+.blue-text {
+	color: @blue;
+}
+
+.green-text {
+	color: @green;
+}
+
+.thin {
+	font-weight: 100;
+}
+
+.center {
+	text-align: center;
+}
+
+.btn-yellow {
+	.button-variant(#fff; #CFA62D; darken(#CFA62D, 10%));
+}
+
+.btn-dark {
+    .button-variant(#fff; @gray; darken(@gray, 10%));
+}
+
+.list-group-item .icon {
+    margin-right: @padding-small-horizontal;
+    line-height: 18px;
+
+    color: @gray;
+}
+
+.list-group-item .badge {
+    position: relative;
+    bottom: -3px;
+}
+
+.panel-subheading:extend(.panel-heading) {
+
+    border-top: 1px solid transparent;
+
+    .border-top-radius(0px);
+}

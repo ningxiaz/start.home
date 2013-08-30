@@ -8,6 +8,7 @@ html(ng-app="sh")
 
 		//- Javascript libraries
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
+		script(type='text/javascript', src='javascripts/lib/colorbrewer.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js')	
@@ -21,6 +22,10 @@ html(ng-app="sh")
 		//- Our Javascript (there's a lot of it...)
 		script(type='text/javascript', src='javascripts/lib/segue.js')
 		script(type='text/javascript', src='javascripts/ui/panels.js')
+		script(type='text/javascript', src='javascripts/vis/past_view.js')
+		script(type='text/javascript', src='javascripts/vis/present_view.js')
+
+		//- Angular app
 		script(type='text/javascript', src='javascripts/app/index.js')
 		script(type='text/javascript', src='javascripts/app/controllers.js')
 		script(type='text/javascript', src='javascripts/app/directives.js')
@@ -35,12 +40,12 @@ html(ng-app="sh")
 		div.pane-container
 			div.past-view
 				div.full-row
-					figure.vis-timeline
-						p This is where the timeline would go.
+					figure#timeline.vis-timeline.block-segue
 
 				div.full-row
-					figure.vis-past-detail
-						p This is where the main past view would go
+					figure#tiles.vis-past-detail
+
+						
 
 				div.bottom-bar.full-row
 					div.col-md-4
@@ -50,32 +55,41 @@ html(ng-app="sh")
 							a.btn.btn-default.btn-lg: span.icon.icon-tasks
 					div.col-md-5
 						div.btn-group.btn-group-justified
-							a.btn.btn-dark.btn-lg.active: span.icon.icon-tint
-							a.btn.btn-dark.btn-lg: span.icon.icon-flash
+							a.btn.btn-dark.btn-lg: span.icon.icon-tint
+							a.btn.btn-dark.btn-lg.active: span.icon.icon-flash
 					div.col-md-3
-						a.filter-toggle.btn.btn-lg.btn-default.btn-block: span.icon.icon-filter
+						a.filter-toggle.btn.btn-lg.btn-default.btn-block.popover-link: span.icon.icon-filter
 
 				div.filter-content.hide
-					div.list-group
-						a(href="#").active.list-group-item All
-						a(href="#").list-group-item Living Room
-						a(href="#").list-group-item Kitchen
-						a(href="#").active.list-group-item Hallway
-						a(href="#").list-group-item Studio
-						a(href="#").list-group-item Bedroom
-						a(href="#").active.list-group-item Bathroom
-						a(href="#").list-group-item Exterior
+					div.full-row
+						div.col-md-6
+							h5 Rooms
+							div.list-group
+								a(href="#").active.list-group-item All
+								a(href="#").list-group-item Living Room
+								a(href="#").list-group-item Kitchen
+								a(href="#").active.list-group-item Hallway
+								a(href="#").list-group-item Studio
+								a(href="#").list-group-item Bedroom
+								a(href="#").active.list-group-item Bathroom
+								a(href="#").list-group-item Exterior
+						div.col-md-6
+							h5 Sources
+							div.list-group
+								a(href="#").active.list-group-item All
+								a(href="#").list-group-item Outlets
+								a(href="#").list-group-item Appliances
+								a(href="#").list-group-item Lights
 
 			div.pane.present-view
 				div.full-row
-					div.jumbotron.clearfix
-						figure.col-md-8
-							br
-							p This is where a quick visualization of the last three hours would go
+					div.jumbotron.clearfix.overview
 						current-time
-							div.col-md-4.pull-right.center
+							div.col-md-4.center
 								h1 {{ moment(time).format('h:mm a') }}
 								p 72° indoors, 83° outdoors
+						figure#three
+						
 
 				div.col-md-4
 					svg
