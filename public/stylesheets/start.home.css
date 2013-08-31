@@ -872,7 +872,7 @@ th.visible-print,td.visible-print{display:none !important}
 #timeline{padding:0;border-radius:3px;height:70px}#timeline svg{border-radius:3px}
 .vis-past-detail,.vis-goal-setting{border-radius:3px}
 .vis-timeline{margin:30px 0;margin-bottom:0;height:70px}
-.vis-past-detail{position:absolute;top:130px;bottom:0;left:30px;right:30px;margin-bottom:105px}
+.vis-past-detail{position:absolute;top:130px;bottom:0;left:0;right:0;margin-bottom:105px}
 .vis-goal-setting{position:absolute;top:30px;bottom:30px;left:30px;right:360px}
 .bottom-bar{position:absolute;bottom:0;width:100%;padding:0 15px;margin:30px 0}
 .popover{max-width:300px !important;width:300px}
