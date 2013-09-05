@@ -34,14 +34,18 @@
 	}
 }
 
+.axis-text {
+	font-family: @font-family-base;
+	font-size: @font-size-small;
+	fill: @gray;
+	opacity: .8;
+
+	text-transform: lowercase;
+}
+
 .axis {
 	text {
-		font-family: @font-family-base;
-		font-size: @font-size-small;
-		fill: @gray-base;
-		opacity: .8;
-
-		text-transform: lowercase;
+		.axis-text;
 	}
 
 	.domain {

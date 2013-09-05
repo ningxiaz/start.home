@@ -19,11 +19,15 @@ html(ng-app="sh")
 		script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
 		script(type='text/javascript', src='http://ricostacruz.com/nprogress/nprogress.js')
 
-
-
 		//- Our Javascript (there's a lot of it...)
 		script(type='text/javascript', src='javascripts/lib/segue.js')
+
 		script(type='text/javascript', src='javascripts/ui/panels.js')
+		script(type='text/javascript', src='javascripts/ui/buttons.js')
+
+		script(type='text/javascript', src='javascripts/vis/gantt.js')	
+		script(type='text/javascript', src='javascripts/vis/tiles.js')
+		script(type='text/javascript', src='javascripts/vis/timeline.js')
 		script(type='text/javascript', src='javascripts/vis/past_view.js')
 		script(type='text/javascript', src='javascripts/vis/present_view.js')
 
@@ -42,25 +46,39 @@ html(ng-app="sh")
 		div.pane-container
 			div.past-view
 				div.full-row
+					//- p.text-muted Release to update the visualization
 					figure#timeline.vis-timeline.block-segue
 
 				div.full-row
 					figure#tiles.vis-past-detail
+					figure#gantt.vis-past-detail
 
 						
 
 				div.bottom-bar.full-row
 					div.col-md-4
-						div.btn-group.btn-group-justified
-							a.btn.btn-default.btn-lg.active: span.icon.icon-th
-							a.btn.btn-default.btn-lg: span.icon.icon-stats
-							a.btn.btn-default.btn-lg: span.icon.icon-tasks
+						div.btn-group.btn-group-justified(data-toggle="buttons")
+							label.btn.btn-default.btn-lg.active
+								input(type="radio", name="active-vis", value="tiles") 
+								span.icon.icon-th
+							label.btn.btn-default.btn-lg 
+								input(type="radio", name="active-vis", value="not-sure") 
+								span.icon-entypo-line-graph
+							label.btn.btn-default.btn-lg 
+								input(type="radio", name="active-vis", value="gantt") 
+								span.icon.icon-tasks
 					div.col-md-5
-						div.btn-group.btn-group-justified
-							a.btn.btn-dark.btn-lg: span.icon.icon-tint
-							a.btn.btn-dark.btn-lg.active: span.icon.icon-flash
+						div.btn-group.btn-group-justified(data-toggle="buttons")
+							label.btn.btn-dark.btn-lg
+								input(type="radio", name="active-data-type", value="water")
+								span.icon.icon-tint
+							label.btn.btn-dark.btn-lg.active
+								input(type="radio", name="active-data-type", value="electric")
+								span.icon.icon-flash
+
 					div.col-md-3
-						a.filter-toggle.btn.btn-lg.btn-default.btn-block.popover-link: span.icon.icon-filter
+						a.filter-toggle.btn.btn-lg.btn-default.btn-block.popover-link(data-toggle="button")
+							span.icon.icon-filter
 
 				div.filter-content.hide
 					div.full-row

@@ -127,6 +127,8 @@ function processSnapshots(processPrevious) {
 				},
 				timestamp: moment(snapshot.timestamp).startOf('hour').format()
 			})
+
+			hourRef.setPriority(+moment(snapshot.timestamp).startOf('hour'))
 		})
 	})
 }
