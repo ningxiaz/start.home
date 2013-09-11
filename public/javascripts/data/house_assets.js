@@ -1,0 +1,1 @@
+var monitors =  ['Kitchen outlets', 'Dishwasher', 'Refrigerator', 'Garbage disposal', 'Laundry', 'Bathroom sink', 'Toilet', 'Shower'];

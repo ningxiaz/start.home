@@ -1,7 +1,8 @@
 var random   = require('./random_data'),
 	moment   = require('moment'),
 	Firebase = require('firebase'),
-	pj		 = require('prettyjson');
+	pj		 = require('prettyjson'),
+	api      = require('./api');
 
 // This module should handle all the data management services on the backend
 // including:
@@ -22,7 +23,10 @@ module.exports.bootstrapFirebase  = random.bootstrapFirebase;
 module.exports.randomSnapshot     = random.randomSnapshot;
 module.exports.dateRange          = random.dateRange;
 module.exports.pushRandomSnapshot = random.pushRandomSnapshot;
-module.exports.startSnapshots = random.startSnapshots;
+module.exports.startSnapshots 	  = random.startSnapshots;
+
+// The API manager
+module.exports.startAPIInterface  = api.startInterface;
 
 // real manager functions
 module.exports.processSnapshots   = processSnapshots;

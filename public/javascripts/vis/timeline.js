@@ -64,10 +64,10 @@ function timeline(brushFunc) {
 		.y(function(d) { return y4(d.water.average) })
 
 	paths.electric
-		.attr('class', 'line thin electric')
+		.attr('class', 'line round thin electric')
 
 	paths.water
-		.attr('class', 'line thin water')
+		.attr('class', 'line round thin water')
 
 	brush
 		.x(x)

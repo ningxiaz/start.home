@@ -172,7 +172,7 @@ function tiles() {
 			.attr('width', 0)
 			.attr('height', 0)
 			.transition()
-				.duration(500)
+				.duration(1000)
 				.delay(function(d,i) { return (x(d.hour) + y(d.day))/5; })
 				.attr('x', function(d) { return x(d.hour) + gutter/2 - gridSize/2 })
 				.attr('y', function(d) { return y(d.day) + gutter/2 - gridSize/2})

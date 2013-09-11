@@ -112,26 +112,26 @@ function bootstrapFirebase() {
     })
 
     fb.set({
-        monitors: {
-            0: { title: 'Kitchen outlets',     room: 'Kitchen',     type: 'outlets',   position: {x: 20,  y: 40}},
-            1: { title: 'Dishwasher',          room: 'Kitchen',     type: 'appliance', position: {x: 30,  y: 100}},
-            2: { title: 'Refrigerator',        room: 'Kitchen',     type: 'appliance', position: {x: 100, y: 20}},
-            3: { title: 'Garbage disposal',    room: 'Kitchen',     type: 'appliance', position: {x: 20,  y: 120}},
-            4: { title: 'Laundry',             room: 'Laundry',     type: 'appliance', position: {x: 30,  y: 30}},
-            5: { title: 'Bathroom sink',       room: 'Bathroom',    type: 'faucet',    position: {x: 50,  y: 50}},
-            6: { title: 'Toilet',              room: 'Bathroom',    type: 'appliance',  position: {x: 100, y: 40}},
-            7: { title: 'Shower',              room: 'Bathroom',    type: 'appliance',  position: {x: 30,  y: 0}}
-        },
-        controls: {
-            0: { title: "Living Room Uplights",   room: "Living room", type: "lights" },
-            1: { title: "Living Room Downlights", room: "Living room", type: "lights" },
-            2: { title: "Living Room Fan",        room: "Living room", type: "fan" },
-            3: { title: "Kitchen Uplights",       room: "Kitchen",     type: "lights" },
-            4: { title: "Kitchen Undercab",       room: "Kitchen",     type: "lights" },
-            5: { title: "Kitchen Pendant",        room: "Kitchen",     type: "lights" },
-            6: { title: "Bathroom Shower Light",  room: "Bathroom",    type: "lights" },
-            7: { title: "Bathroom Shower Fan",    room: "Bathroom",    type: "fan" }
-        },
+        // monitors: {
+        //     0: { title: 'Kitchen outlets',     room: 'Kitchen',     type: 'outlets',   position: {x: 20,  y: 40}},
+        //     1: { title: 'Dishwasher',          room: 'Kitchen',     type: 'appliance', position: {x: 30,  y: 100}},
+        //     2: { title: 'Refrigerator',        room: 'Kitchen',     type: 'appliance', position: {x: 100, y: 20}},
+        //     3: { title: 'Garbage disposal',    room: 'Kitchen',     type: 'appliance', position: {x: 20,  y: 120}},
+        //     4: { title: 'Laundry',             room: 'Laundry',     type: 'appliance', position: {x: 30,  y: 30}},
+        //     5: { title: 'Bathroom sink',       room: 'Bathroom',    type: 'faucet',    position: {x: 50,  y: 50}},
+        //     6: { title: 'Toilet',              room: 'Bathroom',    type: 'appliance',  position: {x: 100, y: 40}},
+        //     7: { title: 'Shower',              room: 'Bathroom',    type: 'appliance',  position: {x: 30,  y: 0}}
+        // },
+        // controls: {
+        //     0: { title: "Living Room Uplights",   room: "Living room", type: "lights" },
+        //     1: { title: "Living Room Downlights", room: "Living room", type: "lights" },
+        //     2: { title: "Living Room Fan",        room: "Living room", type: "fan" },
+        //     3: { title: "Kitchen Uplights",       room: "Kitchen",     type: "lights" },
+        //     4: { title: "Kitchen Undercab",       room: "Kitchen",     type: "lights" },
+        //     5: { title: "Kitchen Pendant",        room: "Kitchen",     type: "lights" },
+        //     6: { title: "Bathroom Shower Light",  room: "Bathroom",    type: "lights" },
+        //     7: { title: "Bathroom Shower Fan",    room: "Bathroom",    type: "fan" }
+        // },
         goals: {
             electric: rand(0,3),
             water: rand(0,3)

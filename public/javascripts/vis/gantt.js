@@ -1,8 +1,6 @@
 function gantt() {
 	var selector = '#gantt';
 
-	var monitors =  ['Kitchen outlets', 'Dishwasher', 'Refrigerator', 'Garbage disposal', 'Laundry', 'Bathroom sink', 'Toilet', 'Shower'];
-
 	// dimensions
 	var width  = $(selector).width(),
 		height = $(selector).height();
@@ -61,8 +59,6 @@ function gantt() {
 
 		x.domain([first, last])
 
-		// console.log(data)
-
 		draw();
 	}
 
@@ -71,7 +67,7 @@ function gantt() {
 		// column is the list of stats for a particular monitor
 
 		// basically:
-		// [snapshot, snapshot, snapshot...] -> [[stat, stat, stat...], [stat, stat, stat...]]
+		// [snapshot, snapshot, snapshot...] -> [[stat1, stat1, stat1...], [stat2, stat2, stat2...]]
 
 		return d3.transpose(d3.values(new_data).map(function(d, i) {
 			return getDatum(d).map(function(e) {
