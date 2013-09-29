@@ -1,4 +1,4 @@
-module.exports.times = [
+var sun_times = [
 	{sunrise: "1524 +0000", sunset: "0101 +0000"},
 	{sunrise: "1524 +0000", sunset: "0101 +0000"},
 	{sunrise: "1524 +0000", sunset: "0102 +0000"},

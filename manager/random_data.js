@@ -1,78 +1,51 @@
 var Firebase = require('firebase'),
-    moment = require('moment');
+    moment = require('moment'),
+    request = require('request'),
+    async = require('async'),
+    pj = require('prettyjson');
+
+var base_url = 'http://localhost',
+    port = 5000;
+
+var time_format = 'h:mm a';
+
+var time_trends = dateRange(moment().startOf('day'), moment().endOf('day'))
+    .map(function(d, i) {
+        return {
+            time: d.format(time_format),
+            weight: Math.sin(Math.PI * (i/40) - 2)
+        }
+    })
 
 function rand(min, max) {
     return Math.random() * (max - min) + min;
 }
 
 function dateRange(start, end) {
+    start = moment(start).startOf('day')
+
     var range = [];
 
     start = start.clone();
 
-    var count = moment.duration(end - start).asDays();
+    var count = moment.duration(end - start).asMinutes() / 10; 
 
     for (var i = 0; i <= count; i++) {
         range.push(start.clone());
-        start.add(1, 'd');
+        start.add(10, 'm');
     };
 
     return range;
 }
 
-function randomSnapshot(prev, timestamp) {
-    var response = {
-        electric: {
-            average: rand(.5,1), // in kW
-            total: rand(.08, .16) // in kWh
-        },
-        water: {
-            average: rand(3,4), // in gal/hour
-            total: rand(15,20) // in gal
-        },
-        climate: {
-            indoor: {
-                humidity: rand(20, 40),
-                temperature: rand(68,72),
-            },
-            outdoor: {
-                humidity: rand(20, 40),
-                temperature: rand(60,90),
-            }
-        },
-        monitors: {
-            0: rand(0,10),
-            1: rand(0,10),
-            2: rand(0,10),
-            3: rand(0,10),
-            4: rand(0,10),
-            5: rand(0,10),
-            6: rand(0,10),
-            7: rand(0,10),
-        },
-        controls: {
-            0: rand(0,1),
-            1: rand(0,1),
-            2: rand(0,1),
-            3: rand(0,1),
-            4: rand(0,1),
-            5: rand(0,1),
-            6: rand(0,1),
-            7: rand(0,1),
-        }
-    }
+function randomSnapshot(config, timestamp) {
+    var time_trend;
 
-    if (prev) {
-        response.electric.average = prev.electric.average + response.electric.average * rand(-.5,.5);
-        response.electric.total = prev.electric.total + response.electric.total * rand(-.5,.5);
+    time_trends.forEach(function(d) {
+        if (d.time == moment(timestamp).format(time_format)) time_trend = d;
+    })
 
-        response.water.average = prev.water.average + response.water.average * rand(-.5,.5);
-        response.water.total = prev.water.total + response.water.total * rand(-.5,.5);
-    }
-
-    if (timestamp) response.timestamp = moment().format();
-
-    return response;
+    console.log(time_trend)
 }
 
 // This resets the firebase and sets it up for testing
@@ -82,68 +55,12 @@ function bootstrapFirebase() {
 
     var dates = dateRange(moment().subtract(40, 'd'), moment());
 
-    var snapshots = {
-        daily: {},
-        hourly: {},
-        all: {}
-    }
+    // Make sure we have the config!
+    getConfig(function(config) {
+        var controls = config.controls,
+            monitors = config.monitors;
 
-    var all = [];
-    var prev = null;
 
-    dates.forEach(function(date) {
-        var s = date.clone();
-
-        var batch = [];
-
-        for(var i = 0; i < 144; i++) {
-            var snap = randomSnapshot(prev);
-            snap.timestamp = s.format()
-
-            batch.push(snap);
-            prev = snap;
-
-            s.add(10, 'm');
-
-            if (s.isAfter(moment())) break;
-        }
-
-        all = all.concat(batch);
-    })
-
-    fb.set({
-        // monitors: {
-        //     0: { title: 'Kitchen outlets',     room: 'Kitchen',     type: 'outlets',   position: {x: 20,  y: 40}},
-        //     1: { title: 'Dishwasher',          room: 'Kitchen',     type: 'appliance', position: {x: 30,  y: 100}},
-        //     2: { title: 'Refrigerator',        room: 'Kitchen',     type: 'appliance', position: {x: 100, y: 20}},
-        //     3: { title: 'Garbage disposal',    room: 'Kitchen',     type: 'appliance', position: {x: 20,  y: 120}},
-        //     4: { title: 'Laundry',             room: 'Laundry',     type: 'appliance', position: {x: 30,  y: 30}},
-        //     5: { title: 'Bathroom sink',       room: 'Bathroom',    type: 'faucet',    position: {x: 50,  y: 50}},
-        //     6: { title: 'Toilet',              room: 'Bathroom',    type: 'appliance',  position: {x: 100, y: 40}},
-        //     7: { title: 'Shower',              room: 'Bathroom',    type: 'appliance',  position: {x: 30,  y: 0}}
-        // },
-        // controls: {
-        //     0: { title: "Living Room Uplights",   room: "Living room", type: "lights" },
-        //     1: { title: "Living Room Downlights", room: "Living room", type: "lights" },
-        //     2: { title: "Living Room Fan",        room: "Living room", type: "fan" },
-        //     3: { title: "Kitchen Uplights",       room: "Kitchen",     type: "lights" },
-        //     4: { title: "Kitchen Undercab",       room: "Kitchen",     type: "lights" },
-        //     5: { title: "Kitchen Pendant",        room: "Kitchen",     type: "lights" },
-        //     6: { title: "Bathroom Shower Light",  room: "Bathroom",    type: "lights" },
-        //     7: { title: "Bathroom Shower Fan",    room: "Bathroom",    type: "fan" }
-        // },
-        goals: {
-            electric: rand(0,3),
-            water: rand(0,3)
-        },
-        snapshots: snapshots
-    })
-
-    console.log("Pushing random snapshots (" + all.length + "): ")
-
-    all.forEach(function(e) {
-        fb.child('snapshots/all').push().setWithPriority(e, +moment(e.timestamp));
-        process.stdout.write(".");
     })
 }
 
@@ -186,6 +103,33 @@ function startSnapshots() {
     return {
         stop: stop
     }
+}
+
+// From routes/index.js
+function getConfig(callback) {
+    async.parallel({
+        controls: function(callback) {
+            request(getUrl('/controls'), function(error, response, body) {
+                callback(null, JSON.parse(body));
+            })
+        },
+        monitors: function(callback) {
+            request(getUrl('/monitors'), function(error, response, body) {
+                callback(null, JSON.parse(body));
+            })
+        }
+    }, function(err, results) {
+        response = {
+            controls: results.controls,
+            monitors: results.monitors
+        }
+
+        callback(response)
+    })
+}
+
+function getUrl(endpoint) {
+    return url.resolve(base_url + ':' + port, endpoint)
 }
 
 module.exports.bootstrapFirebase = bootstrapFirebase;

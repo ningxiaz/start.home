@@ -15,21 +15,28 @@ html(ng-app="sh")
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js')	
 		script(type='text/javascript', src='https://cdn.firebase.com/v0/firebase.js')
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js')
-		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angularFire/0.2.0/angularfire.min.js')
+		script(type='text/javascript', src='https://raw.github.com/firebase/angularFire/master/angularfire.min.js')
 		script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
 		script(type='text/javascript', src='http://ricostacruz.com/nprogress/nprogress.js')
+		script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js')
 
 		//- Our Javascript (there's a lot of it...)
 		script(type='text/javascript', src='javascripts/lib/segue.js')
+		script(type='text/javascript', src='data/sun_times.js')
+
+		//- Config
+		script(type='text/javascript', src='/config', id='config')
 
 		script(type='text/javascript', src='javascripts/ui/panels.js')
 		script(type='text/javascript', src='javascripts/ui/buttons.js')
 
+		script(type='text/javascript', src='javascripts/vis/lockscreen.js')	
 		script(type='text/javascript', src='javascripts/vis/gantt.js')	
 		script(type='text/javascript', src='javascripts/vis/tiles.js')
 		script(type='text/javascript', src='javascripts/vis/timeline.js')
 		script(type='text/javascript', src='javascripts/vis/past_view.js')
 		script(type='text/javascript', src='javascripts/vis/present_view.js')
+		script(type='text/javascript', src='javascripts/vis/future_view.js')
 
 		//- Angular app
 		script(type='text/javascript', src='javascripts/app/index.js')
@@ -40,23 +47,115 @@ html(ng-app="sh")
 		//- Meta tags
 		meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
 		meta(name="apple-mobile-web-app-capable", content="yes")
-		meta(name="apple-mobile-web-app-status-bar-style", content="black")
+		meta(name="apple-mobile-web-app-status-bar-style", content="default")
 
 	body(ng-controller="MainCtrl")
+		//- This is the modal for the controls overlay... not totally sure what should go here yet.
+		div#controls.modal.fade
+				div.modal-dialog
+					div.modal-content
+						div.modal-header
+							button(type="button", data-dismiss="modal").close &times;
+							h4.modal-title Controls
+						div.modal-body
+							div.row
+								div.col-md-3
+									div.list-group
+										a.list-group-item All off
+										a.list-group-item Movie night
+										a.list-group-item Dinner party
+										a.list-group-item All off
+										a.list-group-item Movie night
+										a.list-group-item Dinner party
+										a.list-group-item All off
+										a.list-group-item Movie night
+										a.list-group-item Dinner party
+										a.list-group-item All off
+										a.list-group-item Movie night
+										a.list-group-item Dinner party
+										a.list-group-item All off
+										a.list-group-item Movie night
+										a.list-group-item Dinner party
+						div.modal-footer
+							button(type="button", data-dismiss="modal").btn.btn-default Close
+							button(type="button").btn.btn-primary Save changes
+
+		//- This is the lockscreen. It should house the ring view and everything that belongs there.
+		div.lockscreen
+			div.full-row
+				div.col-md-12
+					current-time
+						h1 {{ moment(time).format('h:mm a') }}
+			figure#ring
+			div.bottom-bar
+				div.center.text-lighter
+					span.icon.icon-chevron-up
+					p lift to unlock
+
+
 		div.pane-container
-			div.past-view
+			div.pane.past-view
 				div.full-row
 					//- p.text-muted Release to update the visualization
 					figure#timeline.vis-timeline.block-segue
 
 				div.full-row
 					figure#tiles.vis-past-detail
+						svg
+						figure#mini-floorplan
+							svg(width="459px", height="307px", viewBox="0 0 459 307")
+								g(stroke="none")
+									rect(d="M156,155 L156,303 L306,303 L306,155 L156,155 Z M156,155", class="room", id="Great-room", x="156", y="155", width="150", height="148")
+									rect(d="M4,154 L4,303 L157,303 L157,154 L4,154 Z M4,154", class="room", id="Living-room", x="4", y="154", width="153", height="149")
+									rect(d="M157,67 L157,156 L303,156 L303,67 L157,67 Z M157,67", class="room", id="Bathroom", x="157", y="67", width="146", height="89")
+									rect(d="M340,6 L340,152 L455,152 L455,6 L340,6 Z M340,6", class="room", id="Bedroom", x="340", y="6", width="115", height="146")
+									rect(d="M340,152 L340,303 L455,303 L455,152 L340,152 Z M340,152", class="room", id="Studio", x="340", y="152", width="115", height="151")
+									rect(d="M304,108 L304,303 L341,303 L341,108 L304,108 Z M304,108", class="room", id="Hallway", x="304", y="108", width="37", height="195")
+								g(id="walls", transform="translate(4.000000, 4.000000)", fill="none", stroke="#000000", stroke-width="7")
+									path(d="M269.667,61.817 L269.667,110.935")
+									path(d="M269.667,88.333 L151.518,88.333")
+									path(d="M151.518,181.598 L151.518,61.817 L299.334,61.817 L299.334,181.598")
+									path(d="M151.518,150.323 L0,150.323 L0,298.922 L451.205,298.922 L451.205,0.362 L334.993,0.362 L334.993,104.604 L301.126,104.604")
+									path(d="M451.205,120.083 L373.082,120.083 L373.082,148")
+									path(d="M451.205,148 L335.565,148 L335.565,181.598")
+									path(d="M335.835,298.922 L335.835,276")
+									path(d="M335.565,172.104 L361.285,172.104")
+									path(d="M422.388,172.104 L451.205,172.104")
+									path(d="M151.518,144.75 L186,144.75 L186,151.5 L299.334,151.5")
 					figure#gantt.vis-past-detail
 
-						
+				//- div.filter-bar
+				//- 	div.full-row
+				//- 		div.col-md-1
+				//- 			h5.text-muted Rooms
+				//- 		div.col-md-11
+				//- 			div#rooms-list.btn-group.btn-group-justified(data-toggle="buttons")
+				//- 				//- label.btn.btn-dark
+				//- 				//- 	input(type="checkbox")
+				//- 				//- 	| All
+				//- 				//- label.btn.btn-dark
+				//- 				//- 	input(type="checkbox")
+				//- 				//- 	| Living room
+				//- 				//- label.btn.btn-dark
+				//- 				//- 	input(type="checkbox")
+				//- 				//- 	| Studio
+				//- 	div.full-row
+				//- 		div.col-md-1
+				//- 			h5.text-muted Sources
+				//- 		div.col-md-11
+				//- 			div#sources-list.btn-group.btn-group-justified(data-toggle="buttons")
+				//- 				//- label.btn.btn-dark
+				//- 				//- 	input(type="checkbox")
+				//- 				//- 	| All
+				//- 				//- label.btn.btn-dark
+				//- 				//- 	input(type="checkbox")
+				//- 				//- 	| Living room
+				//- 				//- label.btn.btn-dark
+				//- 				//- 	input(type="checkbox")
+				//- 				//- 	| Studio
 
 				div.bottom-bar.full-row
-					div.col-md-4
+					div.col-md-5
 						div.btn-group.btn-group-justified(data-toggle="buttons")
 							label.btn.btn-default.btn-lg.active
 								input(type="radio", name="active-vis", value="tiles") 
@@ -76,145 +175,141 @@ html(ng-app="sh")
 								input(type="radio", name="active-data-type", value="electric")
 								span.icon.icon-flash
 
-					div.col-md-3
-						a.filter-toggle.btn.btn-lg.btn-default.btn-block.popover-link(data-toggle="button")
-							span.icon.icon-filter
+					div.col-md-2
+						h4 Tile view
 
-				div.filter-content.hide
-					div.full-row
-						div.col-md-6
-							h5 Rooms
-							div.list-group
-								a(href="#").active.list-group-item All
-								a(href="#").list-group-item Living Room
-								a(href="#").list-group-item Kitchen
-								a(href="#").active.list-group-item Hallway
-								a(href="#").list-group-item Studio
-								a(href="#").list-group-item Bedroom
-								a(href="#").active.list-group-item Bathroom
-								a(href="#").list-group-item Exterior
-						div.col-md-6
-							h5 Sources
-							div.list-group
-								a(href="#").active.list-group-item All
-								a(href="#").list-group-item Outlets
-								a(href="#").list-group-item Appliances
-								a(href="#").list-group-item Lights
+					//- div.col-md-3
+					//- 	a.filter-toggle.btn.btn-lg.btn-default.btn-block.popover-link(data-toggle="button")
+					//- 		span.icon.icon-filter
 
-			div.pane.present-view
+				//- div.filter-content.hide
+				//- 	div.full-row
+				//- 		div.col-md-6
+				//- 			h5 Rooms
+				//- 			div#rooms-list.list-group
+				//- 				a(href="#", data-room="All").active.list-group-item All
+				//- 		div.col-md-6
+				//- 			h5 Sources
+				//- 			div#sources-list.list-group
+				//- 				a(href="#").active.list-group-item All
+
+			div.pane.present-view(ng-controller="PresentCtrl")
 				div.full-row
-					div.jumbotron.clearfix.overview
+					figure#three
+
+				div.row#main-vis
+					div.col-md-8
+						figure#main-floorplan
+							svg(width="800px", height="400px", viewBox="0 0 459 307")
+								g(stroke="none")
+									rect(d="M156,155 L156,303 L306,303 L306,155 L156,155 Z M156,155", class="room", id="Great-room", x="156", y="155", width="150", height="148")
+									rect(d="M4,154 L4,303 L157,303 L157,154 L4,154 Z M4,154", class="room", id="Living-room", x="4", y="154", width="153", height="149")
+									rect(d="M157,67 L157,156 L303,156 L303,67 L157,67 Z M157,67", class="room", id="Bathroom", x="157", y="67", width="146", height="89")
+									rect(d="M340,6 L340,152 L455,152 L455,6 L340,6 Z M340,6", class="room", id="Bedroom", x="340", y="6", width="115", height="146")
+									rect(d="M340,152 L340,303 L455,303 L455,152 L340,152 Z M340,152", class="room", id="Studio", x="340", y="152", width="115", height="151")
+									rect(d="M304,108 L304,303 L341,303 L341,108 L304,108 Z M304,108", class="room", id="Hallway", x="304", y="108", width="37", height="195")
+								g(id="walls", transform="translate(4.000000, 4.000000)", fill="none", stroke="#000000", stroke-width="7")
+									path(d="M269.667,61.817 L269.667,110.935")
+									path(d="M269.667,88.333 L151.518,88.333")
+									path(d="M151.518,181.598 L151.518,61.817 L299.334,61.817 L299.334,181.598")
+									path(d="M151.518,150.323 L0,150.323 L0,298.922 L451.205,298.922 L451.205,0.362 L334.993,0.362 L334.993,104.604 L301.126,104.604")
+									path(d="M451.205,120.083 L373.082,120.083 L373.082,148")
+									path(d="M451.205,148 L335.565,148 L335.565,181.598")
+									path(d="M335.835,298.922 L335.835,276")
+									path(d="M335.565,172.104 L361.285,172.104")
+									path(d="M422.388,172.104 L451.205,172.104")
+									path(d="M151.518,144.75 L186,144.75 L186,151.5 L299.334,151.5")
+					div.col-md-4.pull-right
+						br
+						h4 Electric 
+							small.pull-right top 3 energy consumers
+						ul.list-group#electric-consumers
+						h4 Water 
+							small.pull-right top 3 water consumers
+						ul.list-group#water-consumers
+
+
+				div.bottom-bar.full-row
+
+					div.col-md-2
+						div.btn-group.btn-group-justified
+							a.btn.btn-dark.btn-lg(href="#controls", data-toggle="modal"): span.icon.icon-cog
+
+					div.col-md-3.col-md-offset-6.current-time
 						current-time
-							div.col-md-4.center
-								h1 {{ moment(time).format('h:mm a') }}
-								p 72° indoors, 83° outdoors
-						figure#three
-						
+							h4.right {{ moment(time).format('h:mm a') }}
+								br
+								small inside {{ climate.inside.temperature }}°, outside {{ climate.outside.temperature }}°
 
-				div.col-md-4
-					svg
-						rect#living-room(width="140px", fill="none", stroke="#39474C", stroke-width="4px", height="140px", y="140px").room
-						rect#kitchen(width="140px", fill="none", stroke="#39474C", stroke-width="4px", height="140px", x="140px", y="140px").room
-						rect#studio(width="140px", fill="none", stroke="#39474C", stroke-width="4px", height="140px", x="280px", y="140px").room
-						rect#bedroom(width="140px", fill="none", stroke="#39474C", stroke-width="4px", height="140px", x="280px").room
-				div.col-md-8
-						div.col-md-4
-							h1 $15.00
-							h3.thin bill this month
-						div.col-md-4
-							h1.yellow-text 13 kW
-							h3.thin current demand
-						div.col-md-4
-							h1.blue-text 10 gal
-							h3.thin last 10 minutes
+					//- This button should return us to the ring view
+					div.col-md-1
+						div.btn-group.btn-group-justified
+							a.btn.btn-default.btn-lg(href="#", data-toggle="lock"): span.icon.icon-off
 
-			div.pane.future-view
-				figure.vis-goal-setting
-					p This is where the goal setting vis should go
+
+			div.pane.future-view(ng-controller="FutureCtrl")
+				figure.vis-goal-setting#future
 				div.sidebar
 					div.panel.panel-default
 						div.unflexible
 							ul.nav.nav-pills.nav-justified
-								li.active: a(href="#") Electric
-								li: a(href="#") Water
+								li.active: a(href="#electric", data-toggle="pill", data-metric="electric") Electric
+								li: a(href="#water", data-toggle="pill", data-metric="water") Water
 
-							table.table
-								tr
-									td: strong Goal
-									td: strong 3.00 kW
-								tr
-									td Projection
-									td {{ (temperature - 60) / 10 + 2 }} kW
+						div.tab-content
+							div#water.tab-pane
+								p.text-muted: small Set your water consumption goals for the next month by dragging the dot on the left.
+								table.table
+									tr
+										td: strong Goal
+										td: strong {{ round(present.goals.water)  }} gal
+									tr
+										td Projection
+										td {{ round(projection.water) }} gal
 
-							div.hvac-control
 								div.panel-subheading
-									| Temperature
-									span.temp.pull-right {{ temperature }}° F
+									| Commitments
 
-								div.panel-body.block-segue
-									input(type="range", ng-model="temperature", min="60", max="80").block-segue
+								div.panel-body.panel-body-full
+									div.list-group
+										a.list-group-item(href="#", ng-repeat="commitment in present.commitments.water", ng-click="toggleCommitment(commitment)")
+											span.icon(ng-class="{true: 'icon-check', false: 'icon-unchecked'}[commitment.selected]")
+											| {{ commitment.text }}
+											span.badge {{ commitment.impact }} gal
+							div#electric.tab-pane.active
+								p.text-muted: small Set your electricity consumption goals for the next month by dragging the dot on the left.
+								table.table
+									tr
+										td: strong Goal
+										td: strong {{ round(present.goals.electric) }} kWh
+									tr
+										td Projection
+										td {{ round(projection.electric) }} kWh
 
-							div.panel-subheading
-								| Commitments
+								div.hvac-control
+									div.panel-subheading
+										| Temperature
+										span.temp.pull-right {{ present.temperature }}° F
 
-						div.flexible
-							ul.list-group
-								li.list-group-item 
-									span.icon.icon-check
-									| Watch less TV
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Turn lights off earlier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-unchecked
-									| Eat healthier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Watch less TV
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Turn lights off earlier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-unchecked
-									| Eat healthier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Watch less TV
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Turn lights off earlier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-unchecked
-									| Eat healthier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Watch less TV
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-check
-									| Turn lights off earlier
-									span.badge 3 kWh
-								li.list-group-item 
-									span.icon.icon-unchecked
-									| Eat healthier
-									span.badge 3 kWh
-								a(href="#").list-group-item.center
-									span.icon.icon-refresh
-									| Load more ideas
+									div.panel-body.block-segue
+										input(type="range", ng-model="present.temperature", min="60", max="80")
+
+								div.panel-subheading
+									| Commitments
+
+								div.panel-body.panel-body-full
+									div.list-group
+										a.list-group-item(href="#", ng-repeat="commitment in present.commitments.electric", ng-click="toggleCommitment(commitment)")
+											span.icon(ng-class="{true: 'icon-check', false: 'icon-unchecked'}[commitment.selected]")
+											| {{ commitment.text }}
+											span.badge {{ commitment.impact }} kWh
 
 						div.unflexible
-							div.panel-footer
-								a.btn.btn-danger Cancel
-								a.btn.btn-primary.pull-right Save
+							div.panel-footer(ng-class="{true: 'hidden', false: ''}[equals(present, old_present)]")
+								a.btn.btn-default(ng-click="resetGoals()") Reset
+								a.btn.btn-primary.pull-right(ng-click="saveGoals()") Save
+							div.panel-footer.text-muted(ng-class="{false: 'hidden', true: ''}[equals(present, old_present)]")
+								| Changes synced
 
 
 

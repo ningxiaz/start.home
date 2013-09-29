@@ -43,7 +43,9 @@ function pastView() {
 		start,       // start date for data query
 		end,         // end date for data query
 		data_type,   // 'electric' or 'water'
-		data_metric; // 'average' or 'total'
+		data_metric, // 'average' or 'total'
+		room_filters,
+		source_filters;
 
 	function init() {
 		console.log("Initializing past view")
@@ -57,11 +59,16 @@ function pastView() {
 			'gantt': gantt(),
 		};
 
+		$(vis['gantt'].selector).hide()
+
 		active_vis  = 'tiles';
 		data_type   = 'electric';
 		data_metric = 'total';
+		room_filters = [];
+		source_filters = [];
 
 		// keep the timeline up-to-date
+		// TODO: consider switching this to just use snapshots/all...
 		fb.child('snapshots/hourly').on('value', function(snapshot) {
 			snapshot = snapshot.val();
 
@@ -73,7 +80,8 @@ function pastView() {
 
         // Firebase keeps all data with an `on` handler attached to it in
         // memory, so this loads it all and cuts down on costly requests when
-        // updating the visualization.
+        // updating the visualization. Comment/uncomment these lines to adjust
+        // performance when loading:
 		fb.child('snapshots/all').on('value', noop)
 		function noop() {}
 
@@ -96,6 +104,28 @@ function pastView() {
 			data_type = new_type;
 			updateVisAccesors();
 		})
+
+		// $('[name="room-filters[]"]').on('change', function() {
+		// 	var f = [];
+		// 	$('#rooms-list input[type=checkbox]:checked').each(function(e) {
+		// 		f.push($(this).val())
+		// 	})
+
+		// 	room_filters = f;
+
+		// 	updateVisAccesors()
+		// })
+
+		// $('[name="source-filters[]"]').on('change', function() {
+		// 	var f = []
+		// 	$('#rooms-list input[type=checkbox]:checked').each(function(e) {
+		// 		f.push($(this).val())
+		// 	})
+
+		// 	source_filters = f;
+
+		// 	updateVisAccesors()
+		// })
 	}
 
 	// timeline brushing callback

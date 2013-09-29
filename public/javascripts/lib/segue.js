@@ -17,16 +17,22 @@ function Segue(element, options) {
     initial_state = options.initial_state || 0,
     elastic = (options.elastic != undefined) ? options.elastic : true,
     elasticity = (options.elasticity != undefined) ? 1 - options.elasticity : .8, // default is (1-.2) = .8 here
-    reverse = (options.reverse != undefined) ? options.reverse : false;
+    reverse = (options.reverse != undefined) ? options.reverse : false,
+    num_touches = options.num_touches || 1,
+    stop_scroll = (options.stop_scroll != undefined) ? options.stop_scroll : true;
 
   var state = initial_state,
       percent = 0;
 
   function handleDrag(ev) {
-    ev.gesture.preventDefault();
-    ev.gesture.stopPropagation();
-
     if ($(ev.target).hasClass('block-segue') || $(ev.target).parents().hasClass('block-segue')) return;
+
+    if (stop_scroll) {
+      ev.gesture.stopPropagation();
+      ev.gesture.preventDefault();
+    }
+
+    if (ev.gesture.touches.length != num_touches) return;
 
     var delta;
 
@@ -94,6 +100,8 @@ function Segue(element, options) {
     if (ev) {
       switch(ev.type) {
         case 'swipe':
+          if (ev.gesture.touches.length != num_touches) return;
+
           if (orientation == 'vertical') {
             if (ev.gesture.direction == 'up') prevState();
             if (ev.gesture.direction == 'down') nextState();
@@ -107,6 +115,7 @@ function Segue(element, options) {
           break
 
         case 'release':
+          if (ev.gesture.touches.length != num_touches) return;
           var percent = ev.gesture.distance / (max - min);
 
           if (percent >= .5) {
@@ -156,7 +165,11 @@ function Segue(element, options) {
   }
 
   function setup() {
-    Hammer(element).on('drag', handleDrag);
+    Hammer(element, {
+      drag_max_touches: 2,
+      drag_lock_to_axis: true,
+      swipe_max_touches: 2
+    }).on('drag', handleDrag);
 
     if (complete) Hammer(element).on('swipe release', handleComplete);
     if (!complete) Hammer(element).on('release', softComplete);

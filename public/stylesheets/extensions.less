@@ -28,12 +28,24 @@
 	text-align: center;
 }
 
+.right {
+	text-align: right;
+}
+
+.text-lighter {
+	color: @gray-light;
+}
+
 .btn-yellow {
 	.button-variant(#fff; #CFA62D; darken(#CFA62D, 10%));
 }
 
 .btn-dark {
     .button-variant(#fff; @gray; darken(@gray, 10%));
+}
+
+.btn-blue {
+    .button-variant(@gray-dark; @gray-light; @gray-light);
 }
 
 .list-group-item .icon {

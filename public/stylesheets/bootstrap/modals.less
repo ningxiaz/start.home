@@ -34,8 +34,8 @@
 
   // When fading in the modal, animate it to slide down
   &.fade .modal-dialog {
-    .translate(0, -25%);
-    .transition-transform(~"0.3s ease-out");
+    .translate(0, -30%);
+    .transition-transform(~"0.1s ease-out");
   }
   &.in .modal-dialog { .translate(0, 0)}
 }
@@ -56,7 +56,7 @@
   border: 1px solid @modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
   border: 1px solid @modal-content-border-color;
   border-radius: @border-radius-large;
-  .box-shadow(0 3px 9px rgba(0,0,0,.5));
+  // .box-shadow(0 3px 9px rgba(0,0,0,.5));
   background-clip: padding-box;
   // Remove focus outline from opened modal
   outline: none;
@@ -130,12 +130,12 @@
   .modal-dialog {
     left: 50%;
     right: auto;
-    width: 600px;
+    width: 1024px - @grid-gutter-width;
     padding-top: 30px;
     padding-bottom: 30px;
   }
   .modal-content {
-    .box-shadow(0 5px 15px rgba(0,0,0,.5));
+    // .box-shadow(0 5px 15px rgba(0,0,0,.5));
   }
 
 }

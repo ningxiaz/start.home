@@ -1,1 +1,1 @@
-var sh = angular.module('sh',[]);
+var sh = angular.module('sh',['firebase']);

@@ -1,6 +1,9 @@
 function gantt() {
 	var selector = '#gantt';
 
+	var monitors = config['monitors']['list'],
+		controls = config['controls']['list'];
+
 	// dimensions
 	var width  = $(selector).width(),
 		height = $(selector).height();
@@ -23,21 +26,23 @@ function gantt() {
 
 	// scales
 	var row = d3.scale.linear()
-				.domain([0, 7])
+				.domain([0, monitors.length])
 				.range([0, gridSize * 6]),
 		y = d3.scale.linear()
 				.range([gutter, gridSize - gutter]),
 		x = d3.time.scale()
 				.range([0, vis_width]);
 		color = d3.scale.ordinal()
-				.domain([0,1,2,3,4,5,6,7])
+				.domain(monitors.map(function(m) { return m.slug; }))
 				.range(colorbrewer.Set2[8])
 
 	// data
 	var data = [],
 		unprocessed_data = [],
 		data_type = 'electric',
-		data_metric = 'average';
+		data_metric = 'average',
+		room_filters = [],
+		source_filters = [];
 
 	// graphics
 	var svg = d3.select(selector).append('svg');
@@ -77,6 +82,14 @@ function gantt() {
 				}
 			});
 		}))
+
+		// .filter(function(d, i) {
+		// 	if (room_filters) {
+		// 		return room_filters.indexOf(controls[i].room) >= 0;
+		// 	}
+
+		// 	return true;
+		// })
 	}
 
 	// draws the graph!
@@ -101,7 +114,7 @@ function gantt() {
 			labels.enter().append('text')
 				.attr('class', 'label')
 				.attr('transform', function(d,i) { return 'translate('+margin.left+', '+(row(i) + margin.top + gridSize)+')' })
-				.text(function(d, i) { return monitors[i] })
+				.text(function(d, i) { return controls[i].title })
 				.style('fill', function(d,i) { return color(i) })
 
 		// 	streak
@@ -120,6 +133,8 @@ function gantt() {
 
 		data_type = type;
 		data_metric = metric;
+		room_filters = r_filters;
+		source_filters = s_filters;
 
 		// update the visualization!
 		if (redraw) {
@@ -130,8 +145,8 @@ function gantt() {
 
 	// helper function to get the right type of data
 	function getDatum(d, i) {
-		if (i) return d['monitors'][i];
-		return d['monitors'];
+		if (i) return d['controls'][i];
+		return d['controls'];
 	}
 
 	return {

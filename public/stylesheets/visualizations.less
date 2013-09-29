@@ -24,16 +24,16 @@
 }
 
 .area {
-	fill: @gray-light;
+	// fill: @gray-light;
 
 	&.electric {
 		fill: lighten(@yellow, 20%);
-		opacity: .5;
+		opacity: 1;
 	}
 
 	&.water {
 		fill: lighten(@blue, 20%);
-		opacity: .2;
+		opacity: .7;
 	}
 }
 
@@ -49,6 +49,8 @@
 .axis {
 	text {
 		.axis-text;
+		// stroke: rgba(255,255,255,.3);
+		// stroke-width: 4px;
 	}
 
 	.domain {
@@ -71,16 +73,86 @@
 }
 // Specific visualizations
 
+#tiles {
+	.legend {
+		fill: #D2E0E5;
+	}
+
+	.legend-text {
+		.axis-text;
+	}
+
+	.detail-title {
+		font-size: 20px;
+		font-weight: bold;
+		font-family: @headings-font-family;
+		fill: @gray-base;
+	}
+}
+
 #three {
-	// height: 100px;
 	position: absolute;
-	top: 0;
+	top: @grid-gutter-width;
 	left: 0;
-	height: 228px;
-	width: 100%;
+	right: 0;
+
+	height: 200px;
+
+	border-radius: @border-radius-large;
 
 	svg {
-		border-radius: @border-radius-large;
+
+		.line {
+			stroke: rgba(255,255,255,.8);
+			stroke-width: 2px;
+			fill: none;
+		}
+
+		.axis text {
+			fill: @gray-lighter;
+			// font-weight: bold;
+			// stroke: rgba(255,255,255,.2);
+			// stroke-width: 3px;
+		}
+
+		rect.axis {
+			fill: @gray;
+		}
+
+		rect.box {
+			fill: @gray-lighter;
+		}
+
+		.info-node {
+			-webkit-transition: opacity 0.1s;
+			opacity: 0;
+		}
+
+		.info-rect {
+			fill: @gray;
+			// stroke: @gray;
+			stroke-width: 2px;
+		}
+
+		.info-text {
+			fill: #fff;
+			font-size: 10px;
+			font-weight: bold;
+		}
+
+		.max rect {
+			fill: @brand-danger;
+		}
+
+		.min rect {
+			fill: @brand-success;
+		}
+	}
+
+	&.focused svg {
+		.info-node {
+			opacity: 1;
+		}
 	}
 }
 
@@ -92,4 +164,110 @@
 	svg {
 		border-radius: @border-radius-small;
 	}
+}
+
+#main-vis {
+	position: absolute;
+	top: 200px + @grid-gutter-width * 2;
+	left: @grid-gutter-width;
+	right: @grid-gutter-width;
+	bottom: 45px + @grid-gutter-width * 2;
+}
+
+#main-floorplan, #mini-floorplan {
+	#walls path {
+		stroke: @gray-light;
+	}
+
+	.node {
+		stroke-width: 4px;
+	}
+
+	.node.electric {
+		fill: @yellow;
+	}
+
+	.node.water {
+		fill: @blue;
+	}
+
+	.room {
+		opacity: 0;
+		fill: @gray;
+	}
+}
+
+#main-floorplan {
+	position: relative;
+	left: -100px;
+	.monitor-label {
+		fill: @gray;
+		font-size: 9px;
+	}
+}
+
+#mini-floorplan svg {
+	position: absolute;
+	bottom: -5px;
+	height: 140px;
+	left: 29%;
+}
+
+#future {
+	.gutter {
+		stroke: @gray;
+	}
+
+	.end-point {
+		fill: #fff;
+		stroke: @gray-dark;
+		stroke-width: 2px;
+	}
+
+	.main-line {
+		stroke: @gray-dark;
+	}
+
+	.projection {
+		stroke: @gray;
+		stroke-width: 2px;
+		stroke-dasharray: 10px;
+	}
+
+	.projection-circle {
+		fill: @gray-darker;
+	}
+
+	.goal {
+		stroke: @gray-light;
+		stroke-width: 2px;
+		stroke-dasharray: 10px;
+	}
+
+	.goal-circle {
+		fill: @gray-light;
+	}
+
+	.goal-label {
+		fill: @gray-light;
+	}
+}
+
+#ring {
+	position: absolute;
+	top: @grid-gutter-width * 2;
+	left: @grid-gutter-width * 2;
+	bottom: @grid-gutter-width * 2;
+	right: @grid-gutter-width * 2;
+
+	svg {
+		.line {
+			stroke: rgba(255,255,255,.8);
+			stroke-width: 2px;
+			fill: none;
+		}
+	}
+
+
+	// background: @gray-light;
 }

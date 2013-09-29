@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="459px" height="307px" viewBox="0 0 459 307" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>Slice 1</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Walls" sketch:type="MSLayerGroup" transform="translate(4.000000, 4.000000)" stroke="#000000" stroke-width="7">
+            <path d="M269.667,61.817 L269.667,110.935" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M269.667,88.333 L151.518,88.333" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M151.518,181.598 L151.518,61.817 L299.334,61.817 L299.334,181.598" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M151.518,150.323 L0,150.323 L0,298.922 L451.205,298.922 L451.205,0.362 L334.993,0.362 L334.993,104.604 L301.126,104.604" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M451.205,120.083 L373.082,120.083 L373.082,148" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M451.205,148 L335.565,148 L335.565,181.598" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M335.835,298.922 L335.835,276" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M335.565,172.104 L361.285,172.104" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M422.388,172.104 L451.205,172.104" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M151.518,144.75 L186,144.75 L186,151.5 L299.334,151.5" id="Shape" sketch:type="MSShapeGroup"></path>
+        </g>
+        <rect d="M156,155 L156,303 L306,303 L306,155 L156,155 Z M156,155" id="Great-room" sketch:type="MSShapeGroup" x="156" y="155" width="150" height="148"></rect>
+        <rect d="M4,154 L4,303 L157,303 L157,154 L4,154 Z M4,154" id="Living-room" sketch:type="MSShapeGroup" x="4" y="154" width="153" height="149"></rect>
+        <rect d="M157,67 L157,156 L303,156 L303,67 L157,67 Z M157,67" id="Bathroom" sketch:type="MSShapeGroup" x="157" y="67" width="146" height="89"></rect>
+        <rect d="M340,6 L340,152 L455,152 L455,6 L340,6 Z M340,6" id="Bedroom" sketch:type="MSShapeGroup" x="340" y="6" width="115" height="146"></rect>
+        <rect d="M340,152 L340,303 L455,303 L455,152 L340,152 Z M340,152" id="Studio" sketch:type="MSShapeGroup" x="340" y="152" width="115" height="151"></rect>
+        <rect d="M304,108 L304,303 L341,303 L341,108 L304,108 Z M304,108" id="Hallway" sketch:type="MSShapeGroup" x="304" y="108" width="37" height="195"></rect>
+    </g>
+</svg>
