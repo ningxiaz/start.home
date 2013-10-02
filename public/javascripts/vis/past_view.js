@@ -27,7 +27,7 @@
 $(function() {
 	var view = pastView();
 
-	// view.init();
+	view.init();
 
 	// $('.pane-container').on('segue', function(e, state) {
 	// 	if (state == 1) view.activate();
