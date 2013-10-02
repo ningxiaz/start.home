@@ -18,7 +18,7 @@ function futureView() {
 	function init(goalFunc) {
 		console.log("Initializing future view")
 
-		fb = new Firebase('https://start-home.firebaseio.com');
+		fb = new Firebase(config['firebase_url']);
 
 		vis = {
 			'future': future(goalFunc),

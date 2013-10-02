@@ -1,11 +1,10 @@
 var Firebase = require('firebase'),
-    moment = require('moment'),
-    request = require('request'),
-    async = require('async'),
-    pj = require('prettyjson');
+    moment   = require('moment'),
+    request  = require('request'),
+    async    = require('async'),
+    pj       = require('prettyjson'),
+    config   = require('../config');
 
-var base_url = 'http://localhost',
-    port = 5000;
 
 var time_format = 'h:mm a';
 
@@ -129,7 +128,7 @@ function getConfig(callback) {
 }
 
 function getUrl(endpoint) {
-    return url.resolve(base_url + ':' + port, endpoint)
+    return url.resolve(config.API_URL + ':' + config.API_PORT, endpoint)
 }
 
 module.exports.bootstrapFirebase = bootstrapFirebase;

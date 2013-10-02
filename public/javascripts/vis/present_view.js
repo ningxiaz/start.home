@@ -21,7 +21,7 @@ function presentView() {
 		console.log("Initializing present view")
 
 		active = false;
-		fb = new Firebase('https://start-home.firebaseio.com');
+		fb = new Firebase(config['firebase_url']);
 
 		vis = {
 			three: three(),
@@ -342,16 +342,18 @@ function mainFloorplan() {
 		var monitor_circles = svg.selectAll('.monitor')
 			.data(monitor_data);
 
-		svg.on('mouseup', hideLabel)
-		svg.on('touchend', hideLabel)
-
 		// var controls = svg.selectAll('.control')
 		// 	.data(control_data);
 
 		monitor_circles.enter().append('circle')
+			.attr('id', function(d) { return 'monitor-' + d.slug; })
 			.attr('class', function(d) { return 'monitor node ' + d.type + ' ' + d.metric; })
+			.attr('stroke', 'rgba(0,0,0,0)')
+			.style('stroke-width', 10)
 			.on('mousedown', showLabel)
 			.on('touchstart', showLabel)
+			.on('mouseup', hideLabel)
+			.on('touchend', hideLabel)
 			// .attr('stroke', function(d) { return color(d.type) })
 
 		monitor_circles
@@ -418,20 +420,14 @@ function mainFloorplan() {
 	}
 
 	function showLabel(d,i) {
-		console.log()
-		svg.append('text')
-			.attr('id', 'label-' + d.slug)
-			.attr('class', 'monitor-label')
-			.text(d.title)
-			.attr('x', d.x + 30)
-			.attr('y', d.y)
-			.transition()
-			.duration(5000)
-			.remove()
+		$('#monitor-' + d.slug).tooltip({
+			title: d.title,
+			container: '.pane-container'
+		}).tooltip('show')
 	}
 
 	function hideLabel(d,i) {
-		svg.selectAll('.monitor-label').remove()
+		$('#monitor-' + d.slug).tooltip('destroy')
 	}
 
 	return {

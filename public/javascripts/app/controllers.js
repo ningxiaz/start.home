@@ -2,14 +2,53 @@ sh.controller('MainCtrl', ['$scope', function($scope) {
     $scope.moment = moment;
 }]);
 
+sh.controller('ControlCtrl', ['$scope', 'angularFire', function($scope, angularFire) {
+	var fb = new Firebase(config['firebase_url'])
+	var promise = angularFire(fb.child('controls/list'), $scope, 'controls')
+
+	var rooms = config['controls']['list'].reduce(function(prev, curr) {
+		if (!prev[curr['room']]) prev[curr['room']] = [curr];
+
+		if (prev[curr['room']]) prev[curr['room']].push(curr)
+
+		return prev;
+	}, {})
+
+	// promise.then(function() {
+	// 	$scope.current_room = $scope.controls.$filter(function(d) { return d.room == 'Kitchen' })
+	// })
+
+	$scope.room_names = d3.keys(rooms)
+	$scope.current_room = 'Kitchen';
+
+	$scope.switchRoom = function(room) {
+		$scope.current_room = room;
+	}
+
+	$scope.toggleControl = function(control) {
+		if (control.max != 1) return;
+		if (control.value == 0) control.value = 1;
+		else control.value = 0; 
+	}
+}]);
+
 sh.controller('PresentCtrl', ['$scope', 'angularFire', function($scope, angularFire) {
-	var fb = new Firebase('https://start-home.firebaseio.com')
+	var fb = new Firebase(config['firebase_url'])
 	angularFire(fb.child('climate'), $scope, 'climate')
 
+	var rooms = config['controls']['list'].reduce(function(prev, curr) {
+		if (!prev[curr['room']]) prev[curr['room']] = [curr];
+
+		if (prev[curr['room']]) prev[curr['room']].push(curr)
+
+		return prev;
+	}, {})
+
+	$scope.room_names = d3.keys(rooms)
 }]);
 
 sh.controller('FutureCtrl', ['$scope', 'angularFireCollection', 'angularFire', function($scope, angularFireCollection, angularFire) {
-	var fb = new Firebase('https://start-home.firebaseio.com')
+	var fb = new Firebase(config['firebase_url'])
 
 	var future = fb.child('future')
 	angularFire(fb.child('snapshots/all').limit(200), $scope, 'snapshots')

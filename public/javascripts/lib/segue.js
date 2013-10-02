@@ -70,6 +70,12 @@ function Segue(element, options) {
       } else if (percent + state < 0) {
         percent = percent - (percent)*elasticity;
       }
+    } else {
+      if (percent + state > 1) {
+        percent = 1 - state
+      } else if (percent + state < 0) {
+        percent = 0 - state;
+      }
     }
 
     manipulator(percent, state, false, element)
@@ -189,7 +195,9 @@ function Segue(element, options) {
     prev: function() {
       prevState();
       handleComplete();
-    }
+    },
+
+    toggle: handleToggle
   }
 }
 

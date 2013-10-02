@@ -2,7 +2,8 @@ var random   = require('./random_data'),
 	moment   = require('moment'),
 	Firebase = require('firebase'),
 	pj		 = require('prettyjson'),
-	api      = require('./api');
+	api      = require('./api'),
+	config   = require('../config');
 
 // This module should handle all the data management services on the backend
 // including:
@@ -34,7 +35,7 @@ module.exports.clearFirebase      = clearFirebase;
 
 // careful with this!
 function clearFirebase() {
-	var fb = new Firebase('https://start-home.firebaseio.com/');
+	var fb = new Firebase(config.FIREBASE_URL);
 	fb.set({});
 }
 
@@ -42,7 +43,7 @@ function clearFirebase() {
 // when a snapshot is added to snapshots/all, figure out which
 // day it belongs to and update the day summary for it
 function processSnapshots(processPrevious) {
-	var fb = new Firebase('https://start-home.firebaseio.com/');
+	var fb = new Firebase(config.FIREBASE_URL);
 
 	var timer = moment();
 

@@ -27,7 +27,7 @@
 $(function() {
 	var view = pastView();
 
-	view.init();
+	// view.init();
 
 	// $('.pane-container').on('segue', function(e, state) {
 	// 	if (state == 1) view.activate();
@@ -51,7 +51,7 @@ function pastView() {
 		console.log("Initializing past view")
 		NProgress.start()
 
-		fb = new Firebase('https://start-home.firebaseio.com');
+		fb = new Firebase(config['firebase_url']);
 
 		vis = {
 			'timeline': timeline(updateFocus),
@@ -82,8 +82,8 @@ function pastView() {
         // memory, so this loads it all and cuts down on costly requests when
         // updating the visualization. Comment/uncomment these lines to adjust
         // performance when loading:
-		fb.child('snapshots/all').on('value', noop)
-		function noop() {}
+		// fb.child('snapshots/all').on('value', noop)
+		// function noop() {}
 
 		$('[name="active-vis"]').on('change', function() {
 			var new_vis = $(this).val();

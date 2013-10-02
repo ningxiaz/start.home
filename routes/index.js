@@ -5,7 +5,8 @@
 
 var request = require('request'),
 	url     = require('url'),
-	async   = require('async');
+	async   = require('async'),
+	config  = require('../config');
 
 var port     = 5000,
 	base_url = "http://localhost";
@@ -41,7 +42,8 @@ function getConfig(callback) {
 	}, function(err, results) {
 		response = {
 			controls: results.controls,
-			monitors: results.monitors
+			monitors: results.monitors,
+			firebase_url: config.FIREBASE_URL
 		}
 
 		callback(response)

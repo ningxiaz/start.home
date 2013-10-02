@@ -11,7 +11,8 @@ html(ng-app="sh")
 		script(type='text/javascript', src='javascripts/lib/d3.v3.min.js')
 		script(type='text/javascript', src='javascripts/lib/colorbrewer.js')
 		script(type='text/javascript', src='javascripts/lib/jquery.min.js')
-		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')	
+		script(type='text/javascript', src='javascripts/lib/jquery.hammer.js')
+		//- TODO: host these locally
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js')	
 		script(type='text/javascript', src='https://cdn.firebase.com/v0/firebase.js')
 		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js')
@@ -19,6 +20,8 @@ html(ng-app="sh")
 		script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
 		script(type='text/javascript', src='http://ricostacruz.com/nprogress/nprogress.js')
 		script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js')
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js')
+		script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js')
 
 		//- Our Javascript (there's a lot of it...)
 		script(type='text/javascript', src='javascripts/lib/segue.js')
@@ -50,37 +53,17 @@ html(ng-app="sh")
 		meta(name="apple-mobile-web-app-status-bar-style", content="default")
 
 	body(ng-controller="MainCtrl")
-		//- This is the modal for the controls overlay... not totally sure what should go here yet.
-		div#controls.modal.fade
-				div.modal-dialog
-					div.modal-content
-						div.modal-header
-							button(type="button", data-dismiss="modal").close &times;
-							h4.modal-title Controls
-						div.modal-body
-							div.row
-								div.col-md-3
-									div.list-group
-										a.list-group-item All off
-										a.list-group-item Movie night
-										a.list-group-item Dinner party
-										a.list-group-item All off
-										a.list-group-item Movie night
-										a.list-group-item Dinner party
-										a.list-group-item All off
-										a.list-group-item Movie night
-										a.list-group-item Dinner party
-										a.list-group-item All off
-										a.list-group-item Movie night
-										a.list-group-item Dinner party
-										a.list-group-item All off
-										a.list-group-item Movie night
-										a.list-group-item Dinner party
-						div.modal-footer
-							button(type="button", data-dismiss="modal").btn.btn-default Close
-							button(type="button").btn.btn-primary Save changes
+		div#kitchen-modal.modal.fade
+			div.modal-dialog
+				div.modal-content
+					div.modal-header
+						button(type="button", data-dismiss="modal").close &times;
+						h4.modal-title Controls
+					div.modal-body
+						div.row
+							div.col-md-6
+								div.list-group
 
-		//- This is the lockscreen. It should house the ring view and everything that belongs there.
 		div.lockscreen
 			div.full-row
 				div.col-md-12
@@ -91,6 +74,32 @@ html(ng-app="sh")
 				div.center.text-lighter
 					span.icon.icon-chevron-up
 					p lift to unlock
+
+		div.controls-rack(ng-controller="ControlCtrl")
+			div.center.text-lighter.handle
+				img(src="images/params.svg", height="20px").params-icon
+
+			div.row
+				div.col-md-2
+					h4 Scenes
+					div.list-group
+						a(href="#").list-group-item Movie night
+						a(href="#").list-group-item Dinner night
+						a(href="#").list-group-item Breakfast
+					div.list-group
+						a(href="#").list-group-item All on
+						a(href="#").list-group-item All off
+				div.col-md-4
+					h4 Rooms
+					div.list-group
+						a.list-group-item(ng-repeat="room in room_names", ng-click="switchRoom(room)") {{ room }}
+				div.col-md-6
+					h4 {{ current_room }}
+					ul.list-group.block-segue
+						li.list-group-item(ng-repeat="control in controls | filter:{room:current_room}", ng-click="toggleControl(control)") {{ control.title }}
+							input(type="range", ng-model="control.value", min="{{ control.min }}", max="{{ control.max }}", ng-if="control.max != 1").block-segue.pull-right
+							span.pull-right(ng-if="control.max == 1", ng-class="{false: 'text-success', true: 'text-danger'}[control.value == 0]") {{ {true: 'Off', false: 'On'}[control.value == 0] }}
+
 
 
 		div.pane-container
@@ -124,49 +133,19 @@ html(ng-app="sh")
 									path(d="M151.518,144.75 L186,144.75 L186,151.5 L299.334,151.5")
 					figure#gantt.vis-past-detail
 
-				//- div.filter-bar
-				//- 	div.full-row
-				//- 		div.col-md-1
-				//- 			h5.text-muted Rooms
-				//- 		div.col-md-11
-				//- 			div#rooms-list.btn-group.btn-group-justified(data-toggle="buttons")
-				//- 				//- label.btn.btn-dark
-				//- 				//- 	input(type="checkbox")
-				//- 				//- 	| All
-				//- 				//- label.btn.btn-dark
-				//- 				//- 	input(type="checkbox")
-				//- 				//- 	| Living room
-				//- 				//- label.btn.btn-dark
-				//- 				//- 	input(type="checkbox")
-				//- 				//- 	| Studio
-				//- 	div.full-row
-				//- 		div.col-md-1
-				//- 			h5.text-muted Sources
-				//- 		div.col-md-11
-				//- 			div#sources-list.btn-group.btn-group-justified(data-toggle="buttons")
-				//- 				//- label.btn.btn-dark
-				//- 				//- 	input(type="checkbox")
-				//- 				//- 	| All
-				//- 				//- label.btn.btn-dark
-				//- 				//- 	input(type="checkbox")
-				//- 				//- 	| Living room
-				//- 				//- label.btn.btn-dark
-				//- 				//- 	input(type="checkbox")
-				//- 				//- 	| Studio
-
 				div.bottom-bar.full-row
-					div.col-md-5
-						div.btn-group.btn-group-justified(data-toggle="buttons")
-							label.btn.btn-default.btn-lg.active
-								input(type="radio", name="active-vis", value="tiles") 
-								span.icon.icon-th
-							//- label.btn.btn-default.btn-lg 
-							//- 	input(type="radio", name="active-vis", value="not-sure") 
-							//- 	span.icon-entypo-line-graph
-							label.btn.btn-default.btn-lg 
-								input(type="radio", name="active-vis", value="gantt") 
-								span.icon.icon-tasks
-					div.col-md-5
+					//- div.col-md-5
+					//- 	div.btn-group.btn-group-justified(data-toggle="buttons")
+					//- 		label.btn.btn-default.btn-lg.active
+					//- 			input(type="radio", name="active-vis", value="tiles") 
+					//- 			span.icon.icon-th
+					//- 		//- label.btn.btn-default.btn-lg 
+					//- 		//- 	input(type="radio", name="active-vis", value="not-sure") 
+					//- 		//- 	span.icon-entypo-line-graph
+					//- 		label.btn.btn-default.btn-lg 
+					//- 			input(type="radio", name="active-vis", value="gantt") 
+					//- 			span.icon.icon-tasks
+					div.col-md-4.col-md-offset-4
 						div.btn-group.btn-group-justified(data-toggle="buttons")
 							label.btn.btn-dark.btn-lg
 								input(type="radio", name="active-data-type", value="water")
@@ -174,9 +153,6 @@ html(ng-app="sh")
 							label.btn.btn-dark.btn-lg.active
 								input(type="radio", name="active-data-type", value="electric")
 								span.icon.icon-flash
-
-					div.col-md-2
-						h4 Tile view
 
 					//- div.col-md-3
 					//- 	a.filter-toggle.btn.btn-lg.btn-default.btn-block.popover-link(data-toggle="button")
@@ -231,11 +207,16 @@ html(ng-app="sh")
 
 				div.bottom-bar.full-row
 
-					div.col-md-2
-						div.btn-group.btn-group-justified
-							a.btn.btn-dark.btn-lg(href="#controls", data-toggle="modal"): span.icon.icon-cog
+					//- div.col-md-2
+					//- 	a.scene-toggle.btn.btn-lg.btn-dark.btn-block.popover-link(data-toggle="button")
+					//- 		span.icon.icon-align-justify
+					//- div.col-md-2
+					//- 	button.control-toggle.btn.btn-lg.btn-dark.btn-block.popover-link
 
-					div.col-md-3.col-md-offset-6.current-time
+					//- div.col-md-1.col-md-offset-4
+					//- 	img(src="images/params.svg", height="20px").params-icon
+
+					div.col-md-3.current-time.col-md-offset-8
 						current-time
 							h4.right {{ moment(time).format('h:mm a') }}
 								br
@@ -245,6 +226,16 @@ html(ng-app="sh")
 					div.col-md-1
 						div.btn-group.btn-group-justified
 							a.btn.btn-default.btn-lg(href="#", data-toggle="lock"): span.icon.icon-off
+
+					div.scene-content.hidden
+						div.full-row
+							div.list-group
+								a(href="#").list-group-item Movie night
+								a(href="#").list-group-item Dinner night
+								a(href="#").list-group-item Breakfast
+								hr
+								a(href="#").list-group-item All on
+								a(href="#").list-group-item All off
 
 
 			div.pane.future-view(ng-controller="FutureCtrl")

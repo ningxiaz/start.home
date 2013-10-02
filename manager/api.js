@@ -3,18 +3,16 @@ var Firebase = require('firebase'),
 	request  = require('request'),
 	url      = require('url'),
 	pj		 = require('prettyjson'),
-	async    = require('async');
+	async    = require('async'),
+	config   = require('../config');
 
 module.exports.startInterface  = startInterface;
 
-var port, base_url, control_list, monitor_list;
+var control_list, monitor_list;
 
-base_url = 'http://localhost';
+function startInterface() {
 
-function startInterface(PORT_NUMBER) {
-	port = 5000;
-
-	var fb = new Firebase("https://start-home.firebaseio.com");
+	var fb = new Firebase(config.FIREBASE_URL);
 
 	// get the initial configuration for the controls and monitors
 	async.parallel({
@@ -76,7 +74,7 @@ function startInterface(PORT_NUMBER) {
 			fb.child('monitors').update(results.monitors)
 			fb.child('climate').update(results.climate)
 		})
-	}, 5000)
+	}, config.API_POLLING_INTERVAL)
 
 
 
@@ -138,27 +136,21 @@ function pushSnapshot() {
 		results.controls.list.forEach(function(control) {
 			snapshot['controls'][control.slug] = control.value;
 		})
-
-
-
-		console.log(pj.render(snapshot))
-		console.log(pj.render(control_list))
-		console.log(pj.render(monitor_list))
 	})
 }
 
 function getMonitorPoints(callback) {
-	request(getUrl('/monitors/?values_only=True'), function(error, response, body) {
+	request(getUrl('/monitors/'), function(error, response, body) {
 		callback(null, JSON.parse(body));
 	})
 }
 
 function getControlPoints(callback) {
-	request(getUrl('/controls/?values_only=True'), function(error, response, body) {
+	request(getUrl('/controls/'), function(error, response, body) {
 		callback(null, JSON.parse(body));
 	})
 }
 
 function getUrl(endpoint) {
-	return url.resolve(base_url + ':' + port, endpoint)
+	return url.resolve(config.API_URL + ':' + config.API_PORT, endpoint)
 }

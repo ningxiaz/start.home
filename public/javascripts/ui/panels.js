@@ -1,4 +1,3 @@
-
 // Pane container
 $(function() {
 	var container = $('.pane-container')
@@ -92,6 +91,30 @@ $(function() {
 
 // Present view
 $(function() {
+	var controlsRack = $('.controls-rack')
+
+	var controls = Segue(controlsRack, {
+		max: controlsRack.height(),
+		states: 2,
+		initial_state: 0,
+		reverse: true,
+		orientation: 'vertical',
+		elastic: false,
+		manipulator: controlDrag,
+		// stop_scroll: true
+	})
+
+	function controlDrag(percent, offset, animate, element) {
+
+		controlsRack.removeClass('animate');
+		if (animate) controlsRack.addClass('animate');
+
+		controlsRack.css('-webkit-transform', 'translate3d(0,'+ -1*(percent+offset)*100 +'%,0)')
+	}
+
+	$('.controls-rack .handle').on('click', function() {
+		controls.toggle()
+	})
 })
 
 $(function() {
@@ -133,15 +156,16 @@ $(function() {
 		if (animate) lockContainer.addClass('animate');
 
 		lockContainer.css('-webkit-transform', 'translate3d(0,'+ -1*(percent+offset)*100 +'%,0)')
+		lockContainer.css('opacity', 1-(percent+offset) + .5)
 	}
 })
 
-// $('*').on('click', function (e) {
-//     $('.popover-link').each(function () {
-//         //the 'is' for buttons that trigger popups
-//         //the 'has' for icons within a button that triggers a popup
-//         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-//             $(this).popover('hide');
-//         }
-//     });
-// });
+$('*').on('click', function (e) {
+    $('.popover-link').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});

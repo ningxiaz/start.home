@@ -12,10 +12,9 @@ var express    = require('express')
     , Firebase = require('firebase')
     , moment   = require('moment')
     , manager  = require('./manager')
+    , config   = require('./config');
 
 var app = express();
-
-var API_PORT = 5000;
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
@@ -45,5 +44,3 @@ app.get('/config', routes.config);
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
 });
-
-// manager.startAPIInterface(API_PORT)

@@ -1,0 +1,12 @@
+past view filter :(
+stats in tile view :)
+labels on gantt view :)
+floorplan stats :)
+
+clean up ring view
+
+
+three hour hover
+fix two finger swipe
+notifications on ring view
+better random data
