@@ -331,7 +331,7 @@ function tiles() {
 			return d.device.metric == data_type;
 		})
 
-		console.log(aggregate)
+		// console.log(aggregate)
 
 		var control_scale = d3.scale.linear()
 			.range([0, vis_width])
@@ -520,11 +520,11 @@ function miniFloorplan() {
 			.duration(500)
 			.attr('r', function(d) { 
 				// funky syntax, I know...
-				// return d3.scale.linear()
-				// 	.range([min_radius,max_radius])
-				// 	.domain([d.device.min, d.device.max])
-				// 	(d.value) * 5
-				return d.value * 50
+				return d3.scale.linear()
+					.range([min_radius,max_radius])
+					.domain([d.device.min, d.device.max])
+					(d.value);
+				// return d.value;
 			})
 
 		monitors.exit()

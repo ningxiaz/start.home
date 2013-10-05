@@ -64,12 +64,12 @@ html(ng-app="sh")
 							div.col-md-6
 								div.list-group
 
-		div.lockscreen
-			div.full-row
-				div.col-md-12
+		div.lockscreen(ng-controller="RingCtrl")
+			div.ring
+				div.inner-ring
 					current-time
 						h1 {{ moment(time).format('h:mm a') }}
-			figure#ring
+					h4: small inside {{ climate.inside.temperature }}°, outside {{ climate.outside.temperature }}°
 			div.bottom-bar
 				div.center.text-lighter
 					span.icon.icon-chevron-up

@@ -1,7 +1,13 @@
 $(function() {
-	var view = lockscreenView();
+	// var view = lockscreenView();
 
-	view.init();
+	// view.init();
+
+	$('.inner-ring').on('mouseover touchstart', function() {
+		$(this).addClass('active')
+	}).on('mouseout touchend', function() {
+		$(this).removeClass('active')
+	})
 })
 
 function lockscreenView() {

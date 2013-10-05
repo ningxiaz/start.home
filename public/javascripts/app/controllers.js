@@ -2,6 +2,12 @@ sh.controller('MainCtrl', ['$scope', function($scope) {
     $scope.moment = moment;
 }]);
 
+sh.controller('RingCtrl', ['$scope', 'angularFire', function($scope, angularFire) {
+	var fb = new Firebase(config['firebase_url'])
+	angularFire(fb.child('climate'), $scope, 'climate')
+
+}]);
+
 sh.controller('ControlCtrl', ['$scope', 'angularFire', function($scope, angularFire) {
 	var fb = new Firebase(config['firebase_url'])
 	var promise = angularFire(fb.child('controls/list'), $scope, 'controls')
@@ -53,6 +59,8 @@ sh.controller('FutureCtrl', ['$scope', 'angularFireCollection', 'angularFire', f
 	var future = fb.child('future')
 	angularFire(fb.child('snapshots/all').limit(200), $scope, 'snapshots')
 	future.once('value', linkFutureView)
+
+	var promise = angularFire(fb.child('future/commitments'), $scope, 'commitments')
 
 	// initialize the future view
 	var view = futureView();

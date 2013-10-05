@@ -246,3 +246,28 @@
 	 	border-radius: 50%;
 	}
 }
+
+.ring {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -200px;
+	display: block;
+	text-align: center;
+
+	.inner-ring {
+		.animate;
+		display: table-cell;
+		width: 400px;
+		height: 400px;
+		border: 2px solid @gray;
+		border-radius: 100%;
+		vertical-align: middle;
+		position: relative;
+		left: -200px;
+
+		&.active {
+			border-color: @green;
+		}
+	}
+}

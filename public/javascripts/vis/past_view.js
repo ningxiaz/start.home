@@ -69,7 +69,7 @@ function pastView() {
 
 		// keep the timeline up-to-date
 		// TODO: consider switching this to just use snapshots/all...
-		fb.child('snapshots/hourly').on('value', function(snapshot) {
+		fb.child('snapshots/all').on('value', function(snapshot) {
 			snapshot = snapshot.val();
 
 			var data = d3.values(snapshot)
